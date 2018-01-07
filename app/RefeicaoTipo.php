@@ -7,7 +7,6 @@ use Illuminate\Notifications\Notifiable;
 
 class RefeicaoTipo extends Model
 {
-    use Notifiable;
 
     protected $table = 'refeicao_tipos';
 

@@ -33,4 +33,5 @@ Route::group(['middleware' => 'guest:api'], function () {
 });
 
 Route::resource('/refeicaotipo', 'Api\RefeicaoTipoController');
+Route::resource('/balanca', 'Api\BalancaController');
 Route::get('translations/{locale}', 'TranslationController@show');
