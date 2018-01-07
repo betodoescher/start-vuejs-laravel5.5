@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 trait ApiControllerTrait
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +17,7 @@ trait ApiControllerTrait
      */
     public function index(Request $request)
     {
+
         $limit = $request->all()['limit'] ?? 20;
 
         $order = $request->all()['order'] ?? null;
@@ -52,6 +57,7 @@ trait ApiControllerTrait
      */
     public function store(Request $request)
     {
+        $request->validate($this->validators);
         $result = $this->model->create($request->all());
         return response()->json($result);
     }
