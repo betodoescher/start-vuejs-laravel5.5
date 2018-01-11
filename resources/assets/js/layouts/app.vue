@@ -19,3 +19,12 @@ export default {
   }
 }
 </script>
+<style>
+  .container {
+    max-width: 95%;
+  }
+  .required:before {
+    content: " *";
+    color: #f00;
+  }
+</style>

@@ -1,14 +1,15 @@
-import api from '../api'
+import api from "../api";
 
 export default {
-  get (id) {
+  url: "/api/refeicaotipo/",
+  get(id) {
     if (id) {
-      return api.request('get', '/api/refeicaotipo/' + id)
+      return api.request("get", this.url + id);
     } else {
-      return api.request('get', '/api/refeicaotipo')
+      return api.request("get", this.url);
     }
   },
-  put (dados) {
-    return api.request('post', '/api/refeicaotipo/', dados)
+  del(param) {
+    return api.request("delete", this.url, param);
   }
-}
+};

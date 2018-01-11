@@ -5,19 +5,22 @@
         {{ appName }}
       </router-link>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
         data-target="#navbarToggler" aria-controls="navbarToggler"
         aria-expanded="false" :aria-label="$t('toggle_navigation')"
       >
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
 
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <locale-dropdown/>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
+            <li class="nav-item" v-if="user">
+              <!-- <a class="nav-link" href="#">Link</a> -->
+              <router-link :to="{ name: 'refeicaotipo' }" class="nav-link">
+                Tipo refeição
+              </router-link>
+            </li>
         </ul>
 
         <ul class="navbar-nav">
