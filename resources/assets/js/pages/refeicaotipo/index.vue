@@ -41,7 +41,7 @@
            <v-button type="success" :loading="form.busy">Salvar</v-button> 
         </div>
       </div>
-      
+
     </form>
   </card>
   <br>
@@ -63,9 +63,6 @@ import Grid from "../../components/global/grid"
 export default {
   scrollToTop: false,
   name: "app-refeicaotipo",
-  metaInfo() {
-    return { title: this.$t("settings") }
-  },
   data: () => ({
     tiporefeicao,
     form: new Form({
@@ -96,26 +93,20 @@ export default {
       },
       {
         label: "Tipo",
-        field: "codigo_tipo_refeicao",
-        type: "number",
-        html: false,
+        field: "codigo_tipo_descricao",
         filterable: true,
         placeholder: "Filtro",
-        thClass: "text-center",
-        tdClass: "text-center",
         width: "20%"
       },
       {
         label: "Hora inicial",
         field: "hora_inicio_refeicao",
-        thClass: "text-center",
         tdClass: "text-center",
         width: "10%"
       },
       {
         label: "Hora final",
         field: "hora_final_refeicao",
-        thClass: "text-center",
         tdClass: "text-center",
         width: "10%"
       },
@@ -124,6 +115,7 @@ export default {
         field: "",
         type: "name",
         html: true,
+        tdClass: "text-center",
         width: "35%"
       }
     ],
@@ -167,7 +159,16 @@ export default {
     },
     gridRefresh() {
       Service.get().then(response => {
-        this.rows = response.data.data
+        // temporário
+        var dados = response.data.data
+          for (var key in dados) {
+            for (var keyTipo in this.tiporefeicao) {
+              if(this.tiporefeicao[keyTipo].value == dados[key].codigo_tipo_refeicao){
+                  dados[key].codigo_tipo_descricao = this.tiporefeicao[keyTipo].text
+              }
+            }
+          }
+         this.rows = dados
       })
     }
   }

@@ -21,6 +21,12 @@
                 Tipo refeição
               </router-link>
             </li>
+            <li class="nav-item" v-if="user">
+              <!-- <a class="nav-link" href="#">Link</a> -->
+              <router-link :to="{ name: 'balanca' }" class="nav-link">
+                Balança
+              </router-link>
+            </li>
         </ul>
 
         <ul class="navbar-nav">
