@@ -24,61 +24,47 @@
 
         <div class="form-group col-md-6">
           <label class="required">Início</label>
-          <the-mask masked="true" mask="##:##" name="inicio" v-model.trim="form.hora_inicio_refeicao" v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('inicio') }"  type="text"/>
+          <the-mask :masked="true" mask="##:##" name="inicio" v-model.trim="form.hora_inicio_refeicao" v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('inicio') }"  type="text"/>
           <div class="help-block invalid-feedback"  v-if="errors.has('inicio')">{{errors.first('inicio')}}</div>
         </div>
 
         <div class="form-group col-md-6">
           <label class="required">Fim</label>
-          <the-mask masked="true" mask="##:##" name="inicio" v-model.trim="form.hora_final_refeicao" v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('inicio') }"  type="text"/>
+          <the-mask :masked="true" mask="##:##" name="inicio" v-model.trim="form.hora_final_refeicao" v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('inicio') }"  type="text"/>
           <div class="help-block invalid-feedback"  v-if="errors.has('fim')">{{errors.first('fim')}}</div>
         </div>
+
       </div>
+
       <div class="form-group row">
         <div class="col-md-12 ml-md-auto">
            <v-button type="success" :loading="form.busy">Salvar</v-button> 
         </div>
       </div>
+      
     </form>
   </card>
   <br>
   <card>
     <div>
-     <vue-good-table
-      :columns="columns"
-      :rows="rows"
-      nextText="Próximo"
-      prevText="Anterior"
-      width="50%"
-      globalSearchPlaceholder="Filtro"
-      rowsPerPageText="Linhas por página"
-      :paginate="true">
-
-      <template slot="table-row-after" slot-scope="props">
-        <td>
-         <button class="btn btn-default" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> Editar</button>
-         <button class="btn btn-danger" @click="onClick('delete-item', props.row)"><i class="fa fa-trash"></i> Excluir</button>
-        </td>
-      </template>
-     </vue-good-table>
+     <app-grid :columns="columns" :rows="rows" @populate="popular" @delete="excluir" />
     </div>
   </card>
 </div>
 </template>
 
 <script>
-import Vue from "vue";
-import Form from "vform";
-import Service from "../../services/RefeicaoTipoService";
-import VueGoodTable from "vue-good-table";
+import Vue from "vue"
+import Form from "vform"
+import Service from "../../services/RefeicaoTipoService"
 import { tiporefeicao } from '../../services/store/tiporefeicao'
-Vue.use(VueGoodTable);
+import Grid from "../../components/global/grid"
 
 export default {
   scrollToTop: false,
   name: "app-refeicaotipo",
   metaInfo() {
-    return { title: this.$t("settings") };
+    return { title: this.$t("settings") }
   },
   data: () => ({
     tiporefeicao,
@@ -144,55 +130,47 @@ export default {
     rows: []
   }),
   created() {
-    this.gridRefresh();
+    this.gridRefresh()
   },
   methods: {
     async validateBeforeSubmit() {
-      if (
         this.$validator.validateAll().then(result => {
-          return result;
+          if (result){
+            var retorno = false
+            if (this.form.id) {
+              retorno = this.form.put(Service.url + this.form.id)
+            } else {
+              retorno = this.form.post(Service.url)
+            }
+            const { data } = retorno
+            this.form.reset()
+            this.$validator.reset()
+            this.gridRefresh()
+            this.$refs["alert"].showAlertSuccess()
+          }
+          return 
         })
-      ) {
-        var retorno = false;
-        if (this.form.id) {
-          retorno = await this.form.put(Service.url + this.form.id);
-        } else {
-          retorno = await this.form.post(Service.url);
-        }
-        const { data } = retorno;
-        this.form.reset();
-        this.$validator.reset();
-        this.gridRefresh();
-        this.$refs["alert"].showAlertSuccess();
-      }
     },
-    onClick(action, param) {
-      if (action === "edit-item") {
-        Service.get(param.id).then(response => {
-          this.form = new Form(Object.assign({}, this.form, response.data));
-        });
-      } else if (action === "delete-item") {
-        this.$dialog
-          .confirm("Deseja excluir esse registro?", {
-            okText: "Fechar",
-            cancelText: "Ok"
-          })
-          .then(function() {
-            var res = Service.del(param).then(response => {
-              return response.data;
-            });
-            if (res) this.$refs["alert"].showAlertDelete();
+    popular (id) {
+      Service.get(id).then(response => {
+        this.form = new Form(Object.assign({}, this.form, response.data))
+      })
+    },
+    excluir (id) {
+      // var res = Service.del(param).then(response => {
+      //   return response.data
+      // })
 
-            this.gridRefresh();
-          });
-      }
+      // if (res) this.$refs["alert"].showAlertDelete()
+
+      this.gridRefresh()
     },
     gridRefresh() {
       Service.get().then(response => {
-        this.rows = response.data.data;
-      });
+        this.rows = response.data.data
+      })
     }
   }
-};
+}
 </script>
 
