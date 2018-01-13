@@ -11,6 +11,8 @@ class RefeicaoTipoController extends Controller
 
     protected $model;
 
+    protected $relationships = 'refeicaoClassificacao';
+
     protected $validators = [
         'descricao' => 'required|max:20'
     ];

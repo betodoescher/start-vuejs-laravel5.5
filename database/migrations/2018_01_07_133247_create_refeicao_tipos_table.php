@@ -16,7 +16,8 @@ class CreateRefeicaoTiposTable extends Migration
         Schema::create('refeicao_tipos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao',20);
-            $table->addColumn('integer', 'codigo_tipo_refeicao', ['unsigned' => true, 'length' => 1])->nullable(false);
+            $table->integer('refeicao_classificacao_id')->unsigned();
+            $table->foreign('refeicao_classificacao_id')->references('id')->on('refeicao_classificacoes');
             $table->time('hora_inicio_refeicao');
             $table->time('hora_final_refeicao');
             $table->timestamps();

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+
 
 class RefeicaoTipo extends Model
 {
@@ -13,8 +13,12 @@ class RefeicaoTipo extends Model
     protected $fillable = [
         'id',
         'descricao',
-        'codigo_tipo_refeicao',
+        'refeicao_classificacao_id',
         'hora_inicio_refeicao',
         'hora_final_refeicao'
     ];
+
+    public function refeicaoClassificacao() {
+       return $this->belongsTo(RefeicaoClassificacao::class);
+    }
 }
