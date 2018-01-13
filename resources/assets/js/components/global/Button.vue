@@ -1,8 +1,6 @@
 <template>
   <button :type="nativeType" :disabled="loading" class="btn" :class="{
     [`btn-${type}`]: true,
-    'btn-block': block,
-    'btn-lg': large,
     'btn-loading': loading
   }">
     <slot></slot>

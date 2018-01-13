@@ -101,12 +101,14 @@ export default {
       {
         label: "Hora inicial",
         field: "hora_inicio_refeicao",
+        filterable: true,
         tdClass: "text-center",
         width: "10%"
       },
       {
         label: "Hora final",
         field: "hora_final_refeicao",
+        filterable: true,
         tdClass: "text-center",
         width: "10%"
       },

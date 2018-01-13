@@ -7,6 +7,7 @@
   <title>{{ config('app.name') }}</title>
 
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 </head>
 <body>
   <div id="app"></div>

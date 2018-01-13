@@ -5,7 +5,7 @@
   "error_alert_text": "Algo deu errado! Por favor, tente novamente.",
   "token_expired_alert_title": "Sessão Expriou!",
   "token_expired_alert_text": "Faça login novamente para continuar.",
-  "login": "Logar",
+  "login": "Acessar",
   "register": "Registrar",
   "page_not_found": "Página não encontrada!",
   "go_home": "Home",

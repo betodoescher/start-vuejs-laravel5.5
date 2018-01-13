@@ -1,26 +1,35 @@
 <template>
   <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
+    <div class="col-lg-6 m-auto">
+      <card>
+        <div class="col-md-10 offset-md-1 d-flex" style="margin-top: -15px">
+          <img src="/images/logo.png" width="55%" alt="">	
+          <!-- <img src="/images/dashboard.png" class="sistema" width="170px" style="margin:0 0 0 30px" alt=""> -->
+        </div>
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+          <p></p>
+          <p></p>
+          <h2 class="text-info dotted">Acessar sua conta</h2>
+          <p>Digite seu nome de usuário e senha para acessar o sistema.</p>
           <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" type="email" name="email" class="form-control"
-                :class="{ 'is-invalid': form.errors.has('email') }">
-              <has-error :form="form" field="email"></has-error>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><span class="fa fa-user"></span></span>
             </div>
+            <input v-model="form.email" type="email" name="email" class="form-control"
+              :class="{ 'is-invalid': form.errors.has('email') }">
+            <has-error :form="form" field="email"></has-error>
           </div>
 
+
           <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" type="password" name="password" class="form-control"
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><span class="fa fa-asterisk"></span></span>
+            </div>
+            <input v-model="form.password" type="password" name="password" class="form-control"
                 :class="{ 'is-invalid': form.errors.has('password') }">
               <has-error :form="form" field="password"></has-error>
-            </div>
           </div>
 
           <!-- Remember Me -->
@@ -31,20 +40,20 @@
                 {{ $t('forgot_password') }}
               </router-link>
 
-              <checkbox v-model="remember">{{ $t('remember_me') }}</checkbox>
+              <!-- <checkbox v-model="remember">{{ $t('remember_me') }}</checkbox> -->
             </div>
           </div>
 
           <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
+            <div class="col-md-7 offset-md-10 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
 
               <!-- GitHub Login Button -->
-              <a v-if="githubAuth" href="/oauth/github" class="btn btn-dark ml-auto">
-                {{ $t('login_with') }}
+              <a v-if="githubAuth" href="/oauth/github" class="btn btn-primary pull-right">
+                 {{ $t('login_with') }}
                 <fa :icon="['fab', 'github']"/>
               </a>
             </div>
@@ -95,3 +104,11 @@ export default {
   }
 }
 </script>
+<style>
+    .dotted {
+      border: 2px dotted #F7F9FB; 
+      border-style: none none dotted; 
+      color: #fff; 
+      background-color: #fff; 
+      }
+</style>
