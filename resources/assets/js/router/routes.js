@@ -1,5 +1,6 @@
 export default [
-    { path: '/', name: 'login', component: require('~/pages/auth/login') },
+  { path: '/', name: 'welcome', component: require('~/pages/welcome') },
+    // { path: '/', name: 'login', component: require('~/pages/auth/login') },
 
   // Authenticated routes.
   ...middleware('auth', [

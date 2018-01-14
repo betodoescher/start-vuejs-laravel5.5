@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+  <!-- <link rel="stylesheet" href="/css/sb-admin-2.min.css"> -->
 </head>
 <body>
   <div id="app"></div>
