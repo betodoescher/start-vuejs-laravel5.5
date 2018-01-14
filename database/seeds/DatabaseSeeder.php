@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(RefeicaoClassificacaoSeeder::class);
         $this->call(RefeicaoTipoSeeder::class);
         $this->call(BalancaSeeder::class);
     }

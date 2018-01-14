@@ -39,6 +39,7 @@ Route::group(['middleware' => 'jwt'], function () {
     // Protected routes
     Route::resource('balanca', 'Api\BalancaController');
     Route::resource('refeicaotipo', 'Api\RefeicaoTipoController');
+    Route::resource('refeicaoclassificacao', 'Api\RefeicaoClassificacaoController');
  });
 
 
