@@ -48,16 +48,25 @@ export default {
   name: 'app-alert',
   data () {
     return {
-      dismissSecs: 10,
+      // dismissSecs: 10,
       dismissCountDown: 0,
       showDismissibleAlert: false,
       msg: '',
       tipo: 'warning'
     }
   },
+  props: {
+    dismissSecs: {
+      type: Number,
+      default: 10
+    }
+  },
   methods: {
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
+      if (dismissCountDown === 0) {
+        this.$emit("endCountDown")
+      }
     },
     showAlert () {
       this.dismissCountDown = this.dismissSecs

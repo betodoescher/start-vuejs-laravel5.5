@@ -12,7 +12,7 @@
 
         <template slot="table-row-after" slot-scope="props">
             <td>
-            <button class="btn btn-default" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> Editar</button>
+            <button class="btn btn-info" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> Editar</button>
             <button class="btn btn-danger" @click="onClick('delete-item', props.row)"><i class="fa fa-trash"></i> Excluir</button>
             </td>
         </template>

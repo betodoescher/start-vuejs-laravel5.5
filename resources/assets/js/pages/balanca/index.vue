@@ -14,7 +14,7 @@
 
         <div class="form-group col-md-6">
           <label class="required">Porta</label>
-          <input name="porta" v-model="form.porta" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('descricao') }" type="number">
+          <input name="porta" v-model="form.porta" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('descricao') }" type="text">
           <div class="help-block invalid-feedback"  v-if="errors.has('porta')">{{errors.first('porta')}}</div>
         </div>
 

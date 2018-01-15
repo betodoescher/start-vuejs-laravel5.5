@@ -14,7 +14,7 @@
 
         <div class="form-group col-md-6">
           <label class="required">Tipo</label>
-              <select v-model="form.codigo_tipo_refeicao" v-validate="'required'" name="tipo" :class="{'form-control': true }">
+              <select v-model="form.refeicao_classificacao_id" v-validate="'required'" name="tipo" :class="{'form-control': true }">
                   <option v-for="option in tiporefeicao" v-bind:value="option.value" v-bind:key="option.value">
                       {{ option.text }}
                   </option>
@@ -68,7 +68,7 @@ export default {
     form: new Form({
       id: null,
       descricao: "",
-      codigo_tipo_refeicao: "",
+      refeicao_classificacao_id: "",
       hora_inicio_refeicao: "",
       hora_final_refeicao: ""
     }),
@@ -93,7 +93,7 @@ export default {
       },
       {
         label: "Tipo",
-        field: "codigo_tipo_descricao",
+        field: "refeicao_classificacao.descricao",
         filterable: true,
         placeholder: "Filtro",
         width: "20%"
