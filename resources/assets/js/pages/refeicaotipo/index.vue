@@ -54,11 +54,15 @@
 </template>
 
 <script>
-import Vue from "vue"
-import Form from "vform"
-import Service from "../../services/RefeicaoTipoService"
-import { tiporefeicao } from '../../services/store/tiporefeicao'
-import Grid from "../../components/global/grid"
+import Vue from "vue";
+import Form from "vform";
+import Service from "../../services/RefeicaoTipoService";
+import { tiporefeicao } from "../../services/store/tiporefeicao";
+import Grid from "../../components/global/grid";
+import moment from "moment";
+import VueMomentJS from "vue-momentjs";
+
+Vue.use(VueMomentJS, moment);
 
 export default {
   scrollToTop: false,
@@ -124,56 +128,95 @@ export default {
     rows: []
   }),
   created() {
-    this.gridRefresh()
+    this.gridRefresh();
   },
   methods: {
     async validateBeforeSubmit() {
-        this.$validator.validateAll().then(result => {
-          if (result){
-            var retorno = false
-            if (this.form.id) {
-              retorno = this.form.put(Service.url + this.form.id)
-            } else {
-              retorno = this.form.post(Service.url)
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          var ini = moment("2018/01/01 " + this.form.hora_inicio_refeicao);
+          var fim = moment("2018/01/01 " + this.form.hora_final_refeicao);
+
+          if (!ini.isSameOrAfter(fim)) {
+            if (this.validaPeriodo(ini, fim)) {
+              var retorno = false;
+              if (this.form.id) {
+                retorno = this.form.put(Service.url + this.form.id);
+              } else {
+                retorno = this.form.post(Service.url);
+              }
+              const { data } = retorno;
+              this.form.reset();
+              this.$validator.reset();
+              this.gridRefresh();
+              this.$refs["alert"].showAlertSuccess();
             }
-            const { data } = retorno
-            this.form.reset()
-            this.$validator.reset()
-            this.gridRefresh()
-            this.$refs["alert"].showAlertSuccess()
+          } else {
+            this.$refs["alert"].showAlertErrorMsg(
+              "Hora inicial não pode ser menor ou igual a hora final!"
+            );
           }
-          return 
-        })
+        }
+        return;
+      });
     },
-    popular (id) {
+    popular(id) {
       Service.get(id).then(response => {
-        this.form = new Form(Object.assign({}, this.form, response.data))
-      })
+        this.form = new Form(Object.assign({}, this.form, response.data));
+      });
     },
-    excluir (id) {
+    excluir(id) {
       // var res = Service.del(param).then(response => {
       //   return response.data
       // })
 
       // if (res) this.$refs["alert"].showAlertDelete()
 
-      this.gridRefresh()
+      this.gridRefresh();
     },
     gridRefresh() {
       Service.get().then(response => {
+        this.rows = response.data.data;
         // temporário
-        var dados = response.data.data
-          for (var key in dados) {
-            for (var keyTipo in this.tiporefeicao) {
-              if(this.tiporefeicao[keyTipo].value == dados[key].codigo_tipo_refeicao){
-                  dados[key].codigo_tipo_descricao = this.tiporefeicao[keyTipo].text
-              }
-            }
+        // var dados = response.data.data;
+        // for (var key in dados) {
+        //   for (var keyTipo in this.tiporefeicao) {
+        //     if (
+        //       this.tiporefeicao[keyTipo].value ==
+        //       dados[key].codigo_tipo_refeicao
+        //     ) {
+        //       dados[key].codigo_tipo_descricao = this.tiporefeicao[
+        //         keyTipo
+        //       ].text;
+        //     }
+        //   }
+        // }
+        // this.rows = dados;
+      });
+    },
+    validaPeriodo(ini, fim) {
+      var dados = this.rows;
+      var retorno = true;
+      for (var key in dados) {
+        var gridIni = moment("2018/01/01 " + dados[key].hora_inicio_refeicao);
+        var gridFim = moment("2018/01/01 " + dados[key].hora_final_refeicao);
+
+        console.log(fim.isBetween(gridIni, gridFim));
+        if (this.form.id !== dados[key].id) {
+          if (
+            ini.isBetween(gridIni, gridFim) ||
+            fim.isBetween(gridIni, gridFim)
+          ) {
+            this.$refs["alert"].showAlertErrorMsg(
+              "Período já registrado no sistema!"
+            );
+            retorno = false;
+            continue;
           }
-         this.rows = dados
-      })
+        }
+      }
+      return retorno;
     }
   }
-}
+};
 </script>
-

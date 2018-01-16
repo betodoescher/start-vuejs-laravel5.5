@@ -18,6 +18,11 @@ Vue.use(VuejsDialog)
 import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask)
 
+import moment from "moment";
+import VueMomentJS from "vue-momentjs";
+ 
+Vue.use(VueMomentJS, moment);
+
 
 import '~/plugins'
 import '~/components'

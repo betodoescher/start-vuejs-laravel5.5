@@ -77,7 +77,7 @@ export default {
       this.dismissCountDown = this.dismissSecs
     },
     showAlertError () {
-      this.tipo = 'error'
+      this.tipo = 'danger'
       this.msg = 'Ocorreu um erro!'
       this.dismissCountDown = this.dismissSecs
     },
@@ -87,6 +87,11 @@ export default {
       this.dismissCountDown = this.dismissSecs
     },
     showAlertWarning (msg) {
+      this.msg = msg
+      this.dismissCountDown = this.dismissSecs
+    },
+    showAlertErrorMsg (msg) {
+      this.tipo = 'danger'
       this.msg = msg
       this.dismissCountDown = this.dismissSecs
     },
