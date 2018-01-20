@@ -1,11 +1,15 @@
 <template>
   <div class="row">
-    <div class="col-lg-6 m-auto">
-      <card>
-        <div class="col-md-10 offset-md-1 d-flex" style="margin-top: -15px">
-          <img src="/images/logo.png" width="55%" alt="">	
-          <!-- <img src="/images/dashboard.png" class="sistema" width="170px" style="margin:0 0 0 30px" alt=""> -->
-        </div>
+    <div class="col-lg-6 m-auto ">
+      <card id="loginWraper">
+          <div class="text-center row" style="width: 100%">
+            <div class="form-group col-md-6 col-xs-6">
+                  <img src="/images/logo-cssj.png" width="100%" alt="" style="margin:-5px 0  0 0" >
+            </div>
+            <div class="form-group col-md-6 col-xs-6">
+                  <img src="/images/restaurante-96.png" width="45%" class="sistema" alt="">
+            </div>
+          </div>
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <p></p>
           <p></p>
@@ -65,50 +69,60 @@
 </template>
 
 <script>
-import Form from 'vform'
+import Form from "vform";
 
 export default {
-  metaInfo () {
-    return { title: this.$t('login') }
+  metaInfo() {
+    return { title: this.$t("login") };
   },
 
   data: () => ({
     form: new Form({
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     }),
     remember: false
   }),
 
   methods: {
-    async login () {
+    async login() {
       // Submit the form.
-      const { data } = await this.form.post('/api/login')
+      const { data } = await this.form.post("/api/login");
 
       // Save the token.
-      this.$store.dispatch('auth/saveToken', {
+      this.$store.dispatch("auth/saveToken", {
         token: data.token,
         remember: this.remember
-      })
+      });
 
       // Fetch the user.
-      await this.$store.dispatch('auth/fetchUser')
+      await this.$store.dispatch("auth/fetchUser");
 
       // Redirect home.
-      this.$router.push({ name: 'home' })
+      this.$router.push({ name: "home" });
     }
   },
 
   computed: {
     githubAuth: () => window.config.githubAuth
   }
-}
+};
 </script>
-<style>
-    .dotted {
-      border: 2px dotted #F7F9FB; 
-      border-style: none none dotted; 
-      color: #fff; 
-      background-color: #fff; 
-      }
+<style scope>
+ .dotted {
+  border: 2px dotted #f7f9fb;
+  border-style: none none dotted;
+  color: #fff;
+  background-color: #fff;
+} 
+body {
+  background: url("/images/bg.png") center -30px;
+}
+#loginWraper {
+    background: #fff url("/images/cores.gif") no-repeat;
+    border: 1px solid #efefef;
+    border-top: 0px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 25px 3px #ccc;
+}
 </style>

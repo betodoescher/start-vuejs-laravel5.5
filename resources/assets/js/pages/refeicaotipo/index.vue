@@ -177,21 +177,6 @@ export default {
     gridRefresh() {
       Service.get().then(response => {
         this.rows = response.data.data;
-        // temporário
-        // var dados = response.data.data;
-        // for (var key in dados) {
-        //   for (var keyTipo in this.tiporefeicao) {
-        //     if (
-        //       this.tiporefeicao[keyTipo].value ==
-        //       dados[key].codigo_tipo_refeicao
-        //     ) {
-        //       dados[key].codigo_tipo_descricao = this.tiporefeicao[
-        //         keyTipo
-        //       ].text;
-        //     }
-        //   }
-        // }
-        // this.rows = dados;
       });
     },
     validaPeriodo(ini, fim) {
