@@ -93,7 +93,7 @@ export default {
         field: "descricao",
         filterable: true,
         placeholder: "Filtro",
-        width: "40%"
+        width: "35%"
       },
       {
         label: "Tipo",
@@ -122,7 +122,7 @@ export default {
         type: "name",
         html: true,
         tdClass: "text-center",
-        width: "35%"
+        width: "20%"
       }
     ],
     rows: []

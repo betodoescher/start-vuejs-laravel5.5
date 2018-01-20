@@ -2,29 +2,30 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
       <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
-        {{ appName }}
+        <!-- {{ appName }} -->
+        <!-- <img src="/images/restaurante-96.png" width="20%" class="sistema" alt="">  -->
+        Refeitório
       </router-link>
-
-      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarToggler" aria-controls="navbarToggler"
-        aria-expanded="false" :aria-label="$t('toggle_navigation')"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <locale-dropdown/>
             <li class="nav-item" v-if="user">
-              <!-- <a class="nav-link" href="#">Link</a> -->
               <router-link :to="{ name: 'refeicaotipo' }" class="nav-link">
-                Tipo refeição
+                Refeição
               </router-link>
             </li>
             <li class="nav-item" v-if="user">
-              <!-- <a class="nav-link" href="#">Link</a> -->
               <router-link :to="{ name: 'balanca' }" class="nav-link">
                 Balança
+              </router-link>
+            </li>
+            <li class="nav-item" v-if="user">
+              <router-link :to="{ name: 'pesagem' }" class="nav-link">
+                Pesagem
+              </router-link>
+            </li>
+            <li class="nav-item" v-if="user">
+              <router-link :to="{ name: 'fechamento' }" class="nav-link">
+                Fechamento
               </router-link>
             </li>
         </ul>

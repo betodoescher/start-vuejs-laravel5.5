@@ -113,7 +113,7 @@ export default {
         field: "porta",
         filterable: true,
         placeholder: "Filtro",
-        width: "10%"
+        width: "5%"
       },
       {
         label: "Velocidade",
@@ -141,21 +141,21 @@ export default {
         field: "paridade",
         filterable: true,
         placeholder: "Filtro",
-        width: "10%"
+        width: "5%"
       },
       {
         label: "Bloqueada",
         field: "bloqueada_desc",
         filterable: true,
         placeholder: "Filtro",
-        width: "10%"
+        width: "5%"
       },
       {
         label: "",
         field: "",
         type: "name",
         html: true,
-        width: "35%"
+        width: "20%"
       }
     ],
     rows: []

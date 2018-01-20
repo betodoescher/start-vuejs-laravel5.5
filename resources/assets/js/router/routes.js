@@ -7,6 +7,8 @@ export default [
     { path: '/home', name: 'home', component: require('~/pages/home') },
     { path: '/refeicaotipo', name: 'refeicaotipo', component: require('~/pages/refeicaotipo') },
     { path: '/balanca', name: 'balanca', component: require('~/pages/balanca') },
+    { path: '/pesagem', name: 'pesagem', component: require('~/pages/pesagem') },
+    { path: '/fechamento', name: 'fechamento', component: require('~/pages/fechamento') },
     { path: '/settings', component: require('~/pages/settings/index'), children: [
       { path: '', redirect: { name: 'settings.profile' }},
       { path: 'profile', name: 'settings.profile', component: require('~/pages/settings/profile') },
