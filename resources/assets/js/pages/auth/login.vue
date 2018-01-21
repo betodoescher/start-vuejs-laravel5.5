@@ -15,14 +15,14 @@
           <p></p>
           <h2 class="text-info dotted">Acessar sua conta</h2>
           <p>Digite seu nome de usuário e senha para acessar o sistema.</p>
-          <!-- Email -->
+          <!-- Usuário -->
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><span class="fa fa-user"></span></span>
             </div>
-            <input v-model="form.email" type="email" name="email" class="form-control"
-              :class="{ 'is-invalid': form.errors.has('email') }">
-            <has-error :form="form" field="email"></has-error>
+            <input v-model="form.usuario" type="text" name="usuario" class="form-control"
+              :class="{ 'is-invalid': form.errors.has('usuario') }">
+            <has-error :form="form" field="usuario"></has-error>
           </div>
 
 
@@ -78,7 +78,7 @@ export default {
 
   data: () => ({
     form: new Form({
-      email: "",
+      usuario: "",
       password: ""
     }),
     remember: false

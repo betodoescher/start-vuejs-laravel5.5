@@ -9,7 +9,7 @@ export default {
       return api.request("get", this.url);
     }
   },
-  del(param) {
-    return api.request("delete", this.url, param);
+  del(id) {
+    return api.request("delete", this.url + id);
   }
 };

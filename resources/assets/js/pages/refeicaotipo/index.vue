@@ -166,9 +166,9 @@ export default {
       });
     },
     excluir(id) {
-      // var res = Service.del(param).then(response => {
-      //   return response.data
-      // })
+       var res = Service.del(id).then(response => {
+        console.log(response.data)
+       })
 
       // if (res) this.$refs["alert"].showAlertDelete()
 

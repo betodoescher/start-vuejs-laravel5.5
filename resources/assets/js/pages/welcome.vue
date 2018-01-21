@@ -36,7 +36,7 @@
         <p><h2>Colaborador: <b>José da Silva</b></h2></p>
         <p><h2>Peso registrado: <b>{{peso}}</b></h2></p>
         <card class="text-center">
-          <img src="/images/success.png" width="20%" alt="">
+          <img src="/images/success.png" width="15%" alt="">
           <p><h2><b>Obrigado!!!</b></h2></p>
         </card>
       </div>
