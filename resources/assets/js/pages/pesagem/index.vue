@@ -1,10 +1,10 @@
 <template>
 <div>
-  <pre>
+  <!-- <pre>
     {{rows}}
     {{inicio}}
     {{fim}}
-  </pre>
+  </pre> -->
   <card>
     <div class="row"> 
       <div class="form-group col-md-5">
