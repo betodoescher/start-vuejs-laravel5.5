@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -28,7 +30,19 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        $token = $this->guard()->attempt($this->credentials($request));
+        $credentials = $this->credentials($request);
+
+        if(!$this->validateLoginOracle($credentials))
+            return false;
+
+        $credentials['username'] = 'ROBERTO.CORREA';
+
+        $user = $this->getUser($credentials['username']);
+
+        if(!count($user))
+            return false;
+
+        $token = $this->guard()->login($user);
 
         if ($token) {
             $this->guard()->setToken($token);
@@ -37,6 +51,28 @@ class LoginController extends Controller
         }
 
         return false;
+    }
+
+    protected function validateLoginOracle($crendentials)
+    {
+        $user = DB::connection("oracle")->table("DG_USUARIOS")->where([['username','ROBERTO.CORREA'],['password','UTIN]a^?Vdik`^afwtgl~y|~']])->first();
+        if(count($user))
+            return true;
+
+        return false;
+    }
+
+    protected function getUser($username) {
+        $user = User::where('username', $username)->first();
+        if(count($user))
+            return $user;
+
+        return User::create(['username' => $username]);
+    }
+
+    public function hash($crendentials)
+    {
+       // TODO generate hash to select password from oracle
     }
 
     /**
