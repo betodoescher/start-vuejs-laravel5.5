@@ -2,6 +2,8 @@
 <div>
   <pre>
     {{rows}}
+    {{inicio}}
+    {{fim}}
   </pre>
   <card>
     <div class="row"> 
@@ -12,8 +14,8 @@
         Período final: <the-mask :masked="true" mask="##/##/#### ##:##" name="fim" v-model.trim="fim" class="form-control"  placeholder="__/__/____ __:__" type="text"/>
       </div>
       <div class="form-group col-md-2" style="margin-top: 23px">
-        <v-button type="info" @click="filtrar">Filtrar</v-button> 
-        <v-button type="success">Enviar</v-button> 
+        <button type="button" class="btn btn-info" v-on:click="filtrar">Filtrar</button>
+        <button type="button" class="btn btn-success">Enviar</button>
       </div>
     
     </div>
@@ -50,12 +52,12 @@
 </template>
 
 <script>
-import Vue from "vue"
-import VueGoodTable from "vue-good-table"
-Vue.use(VueGoodTable)
-import moment from "moment"
-import VueMomentJS from "vue-momentjs"
-Vue.use(VueMomentJS, moment)
+import Vue from "vue";
+import VueGoodTable from "vue-good-table";
+Vue.use(VueGoodTable);
+import moment from "moment";
+import VueMomentJS from "vue-momentjs";
+Vue.use(VueMomentJS, moment);
 
 export default {
   scrollToTop: false,
@@ -96,10 +98,10 @@ export default {
       {
         label: "Data/Hora",
         field: "data",
-        type: "date",
+        // type: "date",
         tdClass: "text-left",
-        inputFormat: "YYYY-MM-DD HH:MM",
-        outputFormat: "DD/MM/YYYY HH:MM"
+        // inputFormat: "YYYY-MM-DD HH:MM",
+        // outputFormat: "DD/MM/YYYY HH:MM"
       }
     ],
     rows: [
@@ -109,7 +111,7 @@ export default {
         cc: "Centro de custo 1",
         nome: "Fulano",
         tipo: "Café da manhã",
-        data: "2017-01-01 14:00"
+        data: "2016-01-01 14:00"
       },
       {
         selected: false,
@@ -123,25 +125,45 @@ export default {
   }),
   methods: {
     toggleSelectAll() {
-      this.allSelected = !this.allSelected
+      this.allSelected = !this.allSelected;
       this.rows.forEach(row => {
         if (this.allSelected) {
-          row.selected = true
+          row.selected = true;
         } else {
-          row.selected = false
+          row.selected = false;
         }
-      })
+      });
     },
     filtrar() {
+      var filtroIni = moment(this.inicio, "DD/MM/YYYY H:mm");
+      var filtroFim = moment(this.fim, "DD/MM/YYYY H:mm");
       if (this.inicio && this.fim) {
         this.rows = this.rows.filter(function(row) {
-          var filtroIni = moment(this.inicio)
-          var iltroFim = moment(this.fim)
+          return moment(row.data, "YYYY-MM-DD H:mm").isBetween(filtroIni, filtroFim);
+        });
+      } else {
+        console.log('aki')
+         this.rows = [
+                      {
+                        selected: false,
+                        id: "1",
+                        cc: "Centro de custo 1",
+                        nome: "Fulano",
+                        tipo: "Café da manhã",
+                        data: "2016-01-01 14:00"
+                      },
+                      {
+                        selected: false,
+                        id: "2",
+                        cc: "Centro de custo 1",
+                        nome: "Ciclano",
+                        tipo: "Almoço",
+                        data: "2017-02-05 15:00"
+                      }
+                    ]
 
-          return row.data.isBetween(filtroIni, iltroFim)
-        })
       }
     }
   }
-}
+};
 </script>
