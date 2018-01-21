@@ -20,7 +20,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><span class="fa fa-user"></span></span>
             </div>
-            <input v-model="form.usuario" type="text" name="usuario" class="form-control"
+            <input v-model="form.username" type="text" name="usuario" class="form-control"
               :class="{ 'is-invalid': form.errors.has('usuario') }">
             <has-error :form="form" field="usuario"></has-error>
           </div>
@@ -78,7 +78,7 @@ export default {
 
   data: () => ({
     form: new Form({
-      usuario: "",
+      username: "",
       password: ""
     }),
     remember: false
