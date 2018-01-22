@@ -121,6 +121,7 @@ body {
 #loginWraper {
     background: #fff url("/images/cores.gif") no-repeat;
     border: 1px solid #efefef;
+    background-size: 100% auto;
     border-top: 0px;
     margin-top: 50px;
     box-shadow: 0px 0px 25px 3px #ccc;
