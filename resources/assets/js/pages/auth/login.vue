@@ -20,9 +20,9 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><span class="fa fa-user"></span></span>
             </div>
-            <input v-model="form.username" type="text" name="usuario" class="form-control"
-              :class="{ 'is-invalid': form.errors.has('usuario') }">
-            <has-error :form="form" field="usuario"></has-error>
+            <input v-model="form.email" type="text" name="email" class="form-control"
+              :class="{ 'is-invalid': form.errors.has('email') }">
+            <has-error :form="form" field="email"></has-error>
           </div>
 
 
