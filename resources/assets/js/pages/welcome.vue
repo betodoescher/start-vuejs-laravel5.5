@@ -23,8 +23,20 @@
             <app-escolha ref="app-escolha" @on-validate="mergePartialModels" />
           </div>
 
-          <div slot="page3">
-            
+          <div slot="app-profissionais">
+            <app-profissionais ref="app-profissionais" @on-validate="mergePartialModels" />
+          </div>
+
+          <div slot="app-atendimento">
+            <app-atendimento ref="app-atendimento" @on-validate="mergePartialModels" />
+          </div>
+
+          <div slot="app-instalacoes">
+            <app-instalacoes ref="app-instalacoes" @on-validate="mergePartialModels" />
+          </div>
+
+          <div slot="app-conclusao">
+            <app-conclusao ref="app-conclusao" @on-validate="mergePartialModels" />
           </div>
 
       </vue-good-wizard>
@@ -40,6 +52,10 @@ import VueGoodWizard from "vue-good-wizard"
 import Form from "vform"
 import Identificacao from "./steps/identificacao"
 import Escolha from "./steps/escolha"
+import Profissionais from "./steps/profissionais"
+import Atendimento from "./steps/atendimento"
+import Instalacoes from "./steps/instalacoes"
+import Conclusao from "./steps/conclusao"
 
 Vue.use(VueGoodWizard)
 
@@ -64,8 +80,20 @@ export default {
         slot: "app-escolha"
       },
       {
+        label: "Atenção e interesse dos profissionais",
+        slot: "app-profissionais"
+      },
+      {
+        label: "Tempo de atendimento",
+        slot: "app-atendimento"
+      },
+      {
+        label: "Instalações físicas",
+        slot: "app-instalacoes"
+      },
+      {
         label: "Fim",
-        slot: "page3"
+        slot: "app-conclusao"
       }
     ]
   }),
@@ -97,7 +125,11 @@ export default {
   },
   components: {
     "app-identificacao": Identificacao,
-    "app-escolha": Escolha
+    "app-escolha": Escolha,
+    "app-profissionais": Profissionais,
+    "app-atendimento": Atendimento,
+    "app-instalacoes": Instalacoes,
+    "app-conclusao": Conclusao
   }
 }
 </script>
