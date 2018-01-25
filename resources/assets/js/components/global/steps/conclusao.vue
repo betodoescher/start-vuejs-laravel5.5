@@ -9,7 +9,7 @@
 
     <div class="form-group col-md-12">
       <b-form-group label="Oferecemos a você um atendimento humanizzado e acolhedor?">
-        <b-form-radio-group v-model="form.conc_atendimento"
+        <b-form-radio-group v-model="form.atendimento_humanizado"
                                 :options="questionario"
                                 plain
                                 />
@@ -18,7 +18,7 @@
 
     <div class="form-group col-md-12">
       <b-form-group label="De maneira geral, você está satisfeito com os serviçoes?">
-        <b-form-radio-group v-model="form.conc_servico"
+        <b-form-radio-group v-model="form.satisfeito"
                                 :options="questionario"
                                 plain
                                 />
@@ -27,7 +27,16 @@
 
     <div class="form-group col-md-12">
       <b-form-group label="Recomendaria nossso hospital a um familiar ou amigo?">
-        <b-form-radio-group v-model="form.conc_recomendacao"
+        <b-form-radio-group v-model="form.recomendacao"
+                                :options="questionario"
+                                plain
+                                />
+      </b-form-group>
+    </div>
+
+    <div v-if="tipo == 2" class="form-group col-md-12">
+      <b-form-group label="Desde a sua última internação na casa de Saúde São José a mesma se manteve?">
+        <b-form-radio-group v-model="form.desde_ultima_visita"
                                 :options="questionario"
                                 plain
                                 />
@@ -47,7 +56,7 @@ import { FormGroup } from "bootstrap-vue/es/components";
 Vue.use(FormRadio);
 Vue.use(FormGroup);
 
-import { questionario } from "../../store/quetionario";
+import { questionario } from "../../../services/store/quetionario";
 
 export default {
   name: "app-conclusao",
@@ -55,8 +64,17 @@ export default {
     return {
       questionario,
       form: new Form({
+        atendimento_humanizado: null,
+        satisfeito: null,
+        recomendacao: null,
+        desde_ultima_visita: null
       })
     };
+  },
+  props: {
+    tipo: {
+      type: Number
+    }
   },
   methods: {
     validate() {

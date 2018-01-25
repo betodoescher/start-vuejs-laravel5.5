@@ -4,7 +4,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 Vue.component('fa', FontAwesomeIcon)
 
-// import { } from '@fortawesome/fontawesome-free-regular'
+ import { } from '@fortawesome/fontawesome-free-regular'
 
 import {
   faUser, faLock, faSignOutAlt, faCog

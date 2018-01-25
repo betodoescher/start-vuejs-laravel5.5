@@ -1,41 +1,41 @@
 <template>
   <div class="col-md-12 row">
       <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'refeicaotipo' }" class="wraper">
+        <router-link :to="{ name: 'exames' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
-              <i class="fa fa-utensils iconMenuItem"></i>
-              <p class="titleMenuItem text-center">Refeição</p>
+              <i class="fa fa-stethoscope iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Exames</p>
             </div>
           </div>
         </router-link>
       </div>
       <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'balanca' }" class="wraper">
+        <router-link :to="{ name: 'internacao' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
-              <i class="fa fa-balance-scale iconMenuItem"></i>
-              <p class="titleMenuItem text-center">Balança</p>
+              <i class="fa fa-bed iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Internação</p>
             </div>
           </div>
         </router-link>
       </div>
       <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'pesagem' }" class="wraper">
+        <router-link :to="{ name: 'prontoatendimento' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
-              <i class="fa fa-list-ol iconMenuItem"></i>
-              <p class="titleMenuItem text-center">Pesagem</p>
+              <i class="fa fa-ambulance iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Pronto Atendimento</p>
             </div>
           </div>
         </router-link>
       </div>
       <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'fechamento' }" class="wraper">
+        <router-link :to="{ name: 'dashboard' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
-              <i class="fa fa-cogs iconMenuItem"></i>
-              <p class="titleMenuItem text-center">Fechamento</p>
+              <i class="fa fa-th iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Dashboard</p>
             </div>
           </div>
         </router-link>

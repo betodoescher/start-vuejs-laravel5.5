@@ -9,22 +9,25 @@
 </template>
 
 <script>
-import Navbar from '~/components/Navbar'
+import Navbar from "~/components/Navbar";
 
 export default {
-  name: 'app-layout',
+  name: "app-layout",
 
   components: {
     Navbar
   }
-}
+};
 </script>
 <style>
-  .container {
-    max-width: 95%;
-  }
-  .required:before {
-    content: " *";
-    color: #f00;
-  }
+.container {
+  max-width: 95%;
+}
+.required:before {
+  content: " *";
+  color: #f00;
+}
+body {
+  background: url("/images/bg.png") center -30px;
+}
 </style>

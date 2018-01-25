@@ -9,16 +9,23 @@
     </ul>
     <span class="wizard__arrow" :style="{ left: arrowPosition }"></span>
     <div class="wizard__body">
-      <div class="wizard__body__step"><slot :name="currentSlot"></slot></div>
+      <div class="wizard__body__step">
+         <keep-alive>
+        <slot :name="currentSlot"></slot>
+         </keep-alive>
+        </div>
       <div class="wizard__body__actions clearfix">
         <a v-if="backEnabled" class="wizard__back pull-left" @click="goBack()"> <img src="/images/back.png" alt="next icon"> <span>Anterior</span> 
         </a>
-        <a v-if="currentStep != steps.length - 1" class="wizard__next pull-right" @click="goNext()">
+        <a v-if="currentStep != steps.length - 2 && currentStep != steps.length - 1" class="wizard__next pull-right" @click="goNext()">
           <span>Próximo</span> <img src="/images/next.png" alt="next icon">
         </a>
-        <a v-if="currentStep == steps.length - 1" class="wizard__next pull-right final-step" @click="goSave()">
+        <a v-if="currentStep == steps.length - 2" :class="{'wizard__next pull-right final-step': true,'btn-loading': loading}" @click="goSave()">
           {{finalStepLabel}}
         </a>
+        <a v-if="currentStep == steps.length - 1" class="wizard__next pull-right final-step" @click="goFirstStep()">
+          Novo
+        </a> 
       </div>
     </div>
   </div>
@@ -27,12 +34,15 @@
 <script>
 export default {
   name: "vue-good-wizard",
-
   props: {
     steps: {},
     finalStepLabel: { default: "Salvar" },
     onNext: {},
-    onBack: {}
+    onBack: {},
+    loading: {
+      type: Boolean,
+      default: false
+    },
   },
 
   data() {
@@ -48,7 +58,11 @@ export default {
       return "calc(" + currentStepMiddle + "% - 14px)";
     },
     currentSlot() {
-      return this.steps[this.currentStep].slot;
+      if (this.currentStep != "-1") {
+        return this.steps[this.currentStep].slot;
+      } else {
+        return false;
+      }
     },
     backEnabled() {
       return this.currentStep != 0;
@@ -79,6 +93,11 @@ export default {
     },
     goSave() {
       this.$emit("stepFinal");
+      this.goNext();
+    },
+    goFirstStep() {
+      this.currentStep = -1;
+      this.goNext();
     }
   }
 };

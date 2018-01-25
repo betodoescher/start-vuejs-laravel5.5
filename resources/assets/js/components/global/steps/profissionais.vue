@@ -7,9 +7,18 @@
   </div>
   <div class="row">
 
+    <div v-if="tipo == 1" class="form-group col-md-3">
+      <b-form-group label="Central de agendamento">
+        <b-form-radio-group v-model="form.atp_central_agendamento"
+                                :options="questionario"
+                                plain
+                                stacked/>
+      </b-form-group>
+    </div>
+
     <div class="form-group col-md-2">
       <b-form-group label="Recepcionista">
-        <b-form-radio-group v-model="form.recepcionista"
+        <b-form-radio-group v-model="form.atp_recepcionista"
                                 :options="questionario"
                                 plain
                                 stacked/>
@@ -18,7 +27,7 @@
 
     <div class="form-group col-md-2">
       <b-form-group label="Segurança">
-        <b-form-radio-group v-model="form.seguranca"
+        <b-form-radio-group v-model="form.atp_seguranca"
                                 :options="questionario"
                                 plain
                                 stacked/>
@@ -27,7 +36,7 @@
 
     <div class="form-group col-md-2">
       <b-form-group label="Enfermagem">
-        <b-form-radio-group v-model="form.enfermagem"
+        <b-form-radio-group v-model="form.atp_enfermagem"
                                 :options="questionario"
                                 plain
                                 stacked/>
@@ -36,16 +45,36 @@
 
     <div class="form-group col-md-2">
       <b-form-group label="Equipe médica">
-        <b-form-radio-group v-model="form.equipe"
+        <b-form-radio-group v-model="form.atp_equipe_medica"
                                 :options="questionario"
                                 plain
                                 stacked/>
       </b-form-group>
     </div>
 
-    <div class="form-group col-md-4">
+    
+
+    <div v-if="tipo == 3" class="form-group col-md-3">
       <b-form-group label="Técnico em imobilização">
-        <b-form-radio-group v-model="form.imobilizacao"
+        <b-form-radio-group v-model="form.atp_tec_imobilizacao"
+                                :options="questionario"
+                                plain
+                                stacked/>
+      </b-form-group>
+    </div>
+
+    <div v-if="tipo == 1" class="form-group col-md-4">
+      <b-form-group label="Téc. Em RX, tomografia, ressonância, laboratório">
+        <b-form-radio-group v-model="form.atp_laboratorio"
+                                :options="questionario"
+                                plain
+                                stacked/>
+      </b-form-group>
+    </div>
+
+    <div v-if="tipo == 1" class="form-group col-md-8">
+      <b-form-group label="No agendamento foram repassadas todas as orientações sobre preparo e convênio?">
+        <b-form-radio-group v-model="form.agendamento_orientacao"
                                 :options="questionario"
                                 plain
                                 stacked/>
@@ -65,7 +94,7 @@ import { FormGroup } from "bootstrap-vue/es/components";
 Vue.use(FormRadio);
 Vue.use(FormGroup);
 
-import { questionario } from "../../store/quetionario";
+import { questionario } from "../../../services/store/quetionario";
 
 export default {
   name: "app-profissionais",
@@ -73,9 +102,21 @@ export default {
     return {
       questionario,
       form: new Form({
-        recepcionista: null
+        atp_central_agendamento: null,
+        atp_recepcionista: null,
+        atp_seguranca: null,
+        atp_enfermagem: null,
+        atp_equipe_medica: null,
+        atp_laboratorio: null,
+        atp_tec_imobilizacao: null,
+        agendamento_orientacao: null
       })
     };
+  },
+  props: {
+    tipo: {
+      type: Number
+    }
   },
   methods: {
     validate() {

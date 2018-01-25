@@ -1,31 +1,35 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
+      <router-link :to="{ name: user ? 'home' : 'login' }" class="navbar-brand">
         <!-- {{ appName }} -->
         <!-- <img src="/images/restaurante-96.png" width="20%" class="sistema" alt="">  -->
-        Refeitório
+        Ouvidoria
       </router-link>
       <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown" v-if="user">
+              <a class="nav-link dropdown-toggle" href="#" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Pesquisas
+              </a>
+              <div class="dropdown-menu">
+                <router-link :to="{ name: 'exames' }" class="nav-link">
+                  Exame
+                </router-link>
+                <router-link :to="{ name: 'internacao' }" class="nav-link">
+                  Internação
+                </router-link>
+                <router-link :to="{ name: 'prontoatendimento' }" class="nav-link">
+                  Pronto atendimento
+                </router-link>
+              </div>
+            </li>
+        </ul>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item" v-if="user">
-              <router-link :to="{ name: 'refeicaotipo' }" class="nav-link">
-                Refeição
-              </router-link>
-            </li>
-            <li class="nav-item" v-if="user">
-              <router-link :to="{ name: 'balanca' }" class="nav-link">
-                Balança
-              </router-link>
-            </li>
-            <li class="nav-item" v-if="user">
-              <router-link :to="{ name: 'pesagem' }" class="nav-link">
-                Pesagem
-              </router-link>
-            </li>
-            <li class="nav-item" v-if="user">
-              <router-link :to="{ name: 'fechamento' }" class="nav-link">
-                Fechamento
+              <router-link :to="{ name: 'dashboard' }" class="nav-link">
+                Dashboard
               </router-link>
             </li>
         </ul>
@@ -53,11 +57,11 @@
           </li>
           <!-- Guest -->
           <template v-else>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
                 {{ $t('login') }}
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
               <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
                 {{ $t('register') }}
@@ -71,8 +75,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import LocaleDropdown from './LocaleDropdown'
+import { mapGetters } from "vuex";
+import LocaleDropdown from "./LocaleDropdown";
 
 export default {
   data: () => ({
@@ -80,7 +84,7 @@ export default {
   }),
 
   computed: mapGetters({
-    user: 'auth/user'
+    user: "auth/user"
   }),
 
   components: {
@@ -88,15 +92,15 @@ export default {
   },
 
   methods: {
-    async logout () {
+    async logout() {
       // Log out the user.
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch("auth/logout");
 
       // Redirect to login.
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: "login" });
     }
   }
-}
+};
 </script>
 
 <style scoped>
