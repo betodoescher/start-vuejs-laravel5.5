@@ -92,7 +92,7 @@ export default {
         slot: "app-instalacoes"
       },
       {
-        label: "Fim",
+        label: "Conclusão",
         slot: "app-conclusao"
       }
     ]

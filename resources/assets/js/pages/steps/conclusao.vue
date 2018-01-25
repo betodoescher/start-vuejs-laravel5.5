@@ -7,30 +7,30 @@
   </div>
   <div class="row">
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-12">
       <b-form-group label="Oferecemos a você um atendimento humanizzado e acolhedor?">
         <b-form-radio-group v-model="form.conc_atendimento"
                                 :options="questionario"
                                 plain
-                                stacked/>
+                                />
       </b-form-group>
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-12">
       <b-form-group label="De maneira geral, você está satisfeito com os serviçoes?">
         <b-form-radio-group v-model="form.conc_servico"
                                 :options="questionario"
                                 plain
-                                stacked/>
+                                />
       </b-form-group>
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-12">
       <b-form-group label="Recomendaria nossso hospital a um familiar ou amigo?">
         <b-form-radio-group v-model="form.conc_recomendacao"
                                 :options="questionario"
                                 plain
-                                stacked/>
+                                />
       </b-form-group>
     </div>
 
