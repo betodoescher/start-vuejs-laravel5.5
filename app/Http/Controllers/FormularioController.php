@@ -11,5 +11,8 @@ class FormularioController extends Controller
     public function __construct(\App\Formulario $model)
     {
         $this->model = $model;
+
     }
+    protected $validators = [];
+
 }
