@@ -7,78 +7,36 @@
   </div>
   <div class="row">
 
-    <div v-if="tipo == 1" class="form-group col-md-3">
-      <b-form-group label="Central de agendamento">
-        <b-form-radio-group v-model="form.atp_central_agendamento"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 1" class="form-group col-md-12">
+      <app-radio label="Central de agendamento" :selected="form.atp_central_agendamento" field="atp_central_agendamento" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Recepcionista">
-        <b-form-radio-group v-model="form.atp_recepcionista"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Recepcionista" :selected="form.atp_recepcionista" field="atp_recepcionista" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Segurança">
-        <b-form-radio-group v-model="form.atp_seguranca"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Segurança" :selected="form.atp_seguranca" field="atp_seguranca" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Enfermagem">
-        <b-form-radio-group v-model="form.atp_enfermagem"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Enfermagem" :selected="form.atp_enfermagem" field="atp_enfermagem" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Equipe médica">
-        <b-form-radio-group v-model="form.atp_equipe_medica"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Equipe médica" :selected="form.atp_equipe_medica" field="atp_equipe_medica" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    
-
-    <div v-if="tipo == 3" class="form-group col-md-3">
-      <b-form-group label="Técnico em imobilização">
-        <b-form-radio-group v-model="form.atp_tec_imobilizacao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 3" class="form-group col-md-12">
+      <app-radio label="Técnico em imobilização" :selected="form.atp_tec_imobilizacao" field="atp_tec_imobilizacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 1" class="form-group col-md-4">
-      <b-form-group label="Téc. Em RX, tomografia, ressonância, laboratório">
-        <b-form-radio-group v-model="form.atp_laboratorio"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 1" class="form-group col-md-12">
+      <app-radio label="Téc. Em RX, tomografia, ressonância, laboratório" :selected="form.atp_laboratorio" field="atp_laboratorio" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 1" class="form-group col-md-8">
-      <b-form-group label="No agendamento foram repassadas todas as orientações sobre preparo e convênio?">
-        <b-form-radio-group v-model="form.agendamento_orientacao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 1" class="form-group col-md-12">
+      <app-radio label="No agendamento foram repassadas todas as orientações sobre preparo e convênio?" :selected="form.agendamento_orientacao" field="agendamento_orientacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
      
@@ -88,11 +46,7 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-import BootstrapVue from "bootstrap-vue";
-import { FormRadio } from "bootstrap-vue/es/components";
-import { FormGroup } from "bootstrap-vue/es/components";
-Vue.use(FormRadio);
-Vue.use(FormGroup);
+import Radio from "../../global/Radio"
 
 import { questionario } from "../../../services/store/quetionario";
 
@@ -122,6 +76,35 @@ export default {
     validate() {
       this.$emit("on-validate", this.$data, true);
       return true;
+    },
+    setValueButton(key, field) {
+
+      switch (field) {
+        case "atp_central_agendamento":
+          this.form.atp_central_agendamento = key.value;
+          break;
+        case "atp_recepcionista":
+          this.form.atp_recepcionista = key.value;
+          break;
+        case "atp_seguranca":
+          this.form.atp_seguranca = key.value;
+          break;
+        case "atp_enfermagem":
+          this.form.atp_enfermagem = key.value;
+          break;
+        case "atp_equipe_medica":
+          this.form.atp_equipe_medica = key.value;
+          break;
+        case "atp_laboratorio":
+          this.form.atp_laboratorio = key.value;
+          break;
+        case "atp_tec_imobilizacao":
+          this.form.atp_tec_imobilizacao = key.value;
+          break;
+        case "agendamento_orientacao":
+          this.form.agendamento_orientacao = key.value;
+          break;
+      }
     }
   }
 };

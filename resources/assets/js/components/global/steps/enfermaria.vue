@@ -7,49 +7,24 @@
   </div>
   <div class="row">
 
-    <div class="form-group col-md-4">
-      <b-form-group label="Clareza na transmissão da informação?">
-        <b-form-radio-group v-model="form.enf_clareza"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Clareza na transmissão da informação?" :selected="form.enf_clareza" field="enf_clareza" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Atendimento">
-        <b-form-radio-group v-model="form.enf_atendimento"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Atendimento" :selected="form.enf_atendimento" field="enf_atendimento" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Atenção">
-        <b-form-radio-group v-model="form.enf_atencao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Atenção" :selected="form.enf_atencao" field="enf_atencao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Simpatia">
-        <b-form-radio-group v-model="form.enf_simpatia"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Simpatia" :selected="form.enf_simpatia" field="enf_simpatia" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Grau de ruído">
-        <b-form-radio-group v-model="form.enf_grau_ruido"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Grau de ruído" :selected="form.enf_grau_ruido" field="enf_grau_ruido" :options="questionario" @setValue="setValueButton" />
     </div>
 
      <div v-if="tipo == 2" class="form-group col-md-12">
@@ -63,11 +38,7 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-import BootstrapVue from "bootstrap-vue";
-import { FormRadio } from "bootstrap-vue/es/components";
-import { FormGroup } from "bootstrap-vue/es/components";
-Vue.use(FormRadio);
-Vue.use(FormGroup);
+import Radio from "../../global/Radio"
 
 import { questionario } from "../../../services/store/quetionario";
 
@@ -95,6 +66,26 @@ export default {
     validate() {
       this.$emit("on-validate", this.$data, true);
       return true;
+    },
+    setValueButton(key, field) {
+
+      switch (field) {
+        case "enf_clareza":
+          this.form.enf_clareza = key.value;
+          break;
+        case "enf_atendimento":
+          this.form.enf_atendimento = key.value;
+          break;
+        case "enf_atencao":
+          this.form.enf_atencao = key.value;
+          break;
+        case "enf_simpatia":
+          this.form.enf_simpatia = key.value;
+          break;
+        case "enf_grau_ruido":
+          this.form.enf_grau_ruido = key.value;
+          break;
+      }
     }
   }
 };

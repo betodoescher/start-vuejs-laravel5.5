@@ -1,62 +1,54 @@
 <template>
-  <div>
+<div>
+<card>
     <app-alert ref="alert" @endCountDown="goFirstStep" :dismissSecs="dismissSecs"></app-alert>
-
     <form @submit.prevent="validateBeforeSubmit">
+     <form-wizard ref="wizard" @on-complete="onComplete" shape="circle" v-bind:title="title" v-bind:subtitle="subtitle" nextButtonText="Próximo"
+                                backButtonText="Voltar" finishButtonText="Concluir" color="#3498db">
 
-      <!-- <pre>
-        {{form}}
-      </pre> -->
+          <tab-content title="Informações adicionais" :before-change="()=>validateStep('app-identificacao')">
+              <app-identificacao ref="app-identificacao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-identificacao>
+          </tab-content>
 
-      <vue-good-wizard 
-        :steps="steps"
-        :onNext="nextClicked" backClicked
-        :onBack="backClicked"
-        @stepFinal="validateBeforeSubmit"
-        ref="wizard">
+          <tab-content title="Sua escolha" :before-change="()=>validateStep('app-escolha')">
+              <app-escolha ref="app-escolha" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-escolha>
+          </tab-content>
 
-          <div slot="app-identificacao">
-            <app-identificacao :tipo="form.tipo_pesquisa" ref="app-identificacao" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Tempo de atendimento" :before-change="()=>validateStep('app-atendimento')">
+              <app-atendimento ref="app-atendimento" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-atendimento>
+          </tab-content> 
 
-          <div slot="app-escolha">
-            <app-escolha :tipo="form.tipo_pesquisa" ref="app-escolha" @on-validate="mergePartialModels" />
-          </div>
+         <tab-content title="Instalações físicas" :before-change="()=>validateStep('app-instalacoes')">
+              <app-instalacoes ref="app-instalacoes" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-instalacoes>
+          </tab-content> 
+          
+          <tab-content title="Nutrição" :before-change="()=>validateStep('app-nutricao')">
+              <app-nutricao ref="app-nutricao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-nutricao>
+          </tab-content> 
 
-          <div slot="app-atendimento">
-            <app-atendimento :tipo="form.tipo_pesquisa" ref="app-atendimento" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Equipe médica" :before-change="()=>validateStep('app-equipe')">
+              <app-equipe ref="app-equipe" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-equipe>
+          </tab-content> 
+          
+          <tab-content title="Enfermaria" :before-change="()=>validateStep('app-enfermaria')">
+              <app-enfermaria ref="app-enfermaria" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-enfermaria>
+          </tab-content> 
 
-          <div slot="app-instalacoes">
-            <app-instalacoes :tipo="form.tipo_pesquisa" ref="app-instalacoes" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Conclusão" :before-change="()=>validateStep('app-conclusao')">
+              <app-conclusao ref="app-conclusao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-conclusao>
+          </tab-content> 
 
-          <div slot="app-nutricao">
-            <app-nutricao :tipo="form.tipo_pesquisa" ref="app-nutricao" @on-validate="mergePartialModels" />
-          </div>
 
-          <div slot="app-equipe">
-            <app-equipe :tipo="form.tipo_pesquisa" ref="app-equipe" @on-validate="mergePartialModels" />
-          </div>
-
-          <div slot="app-enfermaria">
-            <app-enfermaria :tipo="form.tipo_pesquisa" ref="app-enfermaria" @on-validate="mergePartialModels" />
-          </div>
-
-          <div slot="app-conclusao">
-            <app-conclusao :tipo="form.tipo_pesquisa" ref="app-conclusao" @on-validate="mergePartialModels" />
-          </div>
-
-      </vue-good-wizard>
-
+      </form-wizard>
     </form>
-  </div>
+  </card>
+</div>
 </template>
-
 <script>
-import { mapGetters } from "vuex"
-import Vue from "vue"
-import VueGoodWizard from "vue-good-wizard"
+import { mapGetters } from "vuex";
+import Vue from "vue";
+import VueFormWizard from "vue-form-wizard";
+
 import Form from "vform"
 import Identificacao from "../../components/global/steps/identificacao"
 import Escolha from "../../components/global/steps/escolha"
@@ -67,77 +59,59 @@ import Equipe from "../../components/global/steps/equipe"
 import Enfermaria from "../../components/global/steps/enfermaria"
 import Conclusao from "../../components/global/steps/conclusao"
 
-Vue.use(VueGoodWizard)
+import Service from "../../services/FormularioService";
+
+
+
+Vue.use(VueFormWizard);
 
 export default {
-  computed: mapGetters({
-    authenticated: "auth/check"
-  }),
+  name: "app-exames",
   data: () => ({
     dismissSecs: 5,
+    title: "Internação",
+    subtitle: "Pesquisa de satisfação",
     form: new Form({
-      id: null,
       tipo_pesquisa: 2
-    }),
-    steps: [
-      {
-        label: "Informações adicionais",
-        slot: "app-identificacao"
-      },
-      {
-        label: "Sua escolha",
-        slot: "app-escolha"
-      },
-      {
-        label: "Tempo de atendimento",
-        slot: "app-atendimento"
-      },
-      {
-        label: "Instalações físicas",
-        slot: "app-instalacoes"
-      },
-      {
-        label: "Nutrição",
-        slot: "app-nutricao"
-      },
-      {
-        label: "Equipe médica",
-        slot: "app-equipe"
-      },
-      {
-        label: "Enfermaria",
-        slot: "app-enfermaria"
-      },
-      {
-        label: "Conclusão",
-        slot: "app-conclusao"
-      }
-    ]
+    })
   }),
   methods: {
-    async validateBeforeSubmit() {
-      console.log(this.form)
-      this.$refs["alert"].showAlertSuccess()
-    },
-    nextClicked(currentPage) {
-      var name = this.$refs["wizard"].currentSlot
-      var refToValidate = this.$refs[name]
+    onComplete() {
 
-      return refToValidate.validate()
+      this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
+
+      Service.post(this.form)
+        .then(response => {
+          this.$refs["alert"].showAlertSuccess();
+        })
+        .catch(e => {
+          console.log(e);
+          this.$refs["alert"].showAlertErrorMsg("Erro ao salvar formulário!");
+        });
+
+console.log(this.form)
+       this.form.reset();
+    },
+    validateStep(name) {
+      var refToValidate = this.$refs[name];
+      return refToValidate.validate();
     },
     mergePartialModels(model, isValid) {
       if (isValid) {
         // merging each step model into the final model
-        this.form = Object.assign({}, this.form, model.form)
+        this.form = Object.assign({}, this.form, model.form);
       }
     },
-    backClicked(currentPage) {
-      return true
-    },
     goFirstStep() {
-      this.$refs.wizard.currentStep = -1
-      this.$refs.wizard.goNext()
-      this.credencial = null
+      this.$refs.wizard.reset();
+      this.$refs["app-identificacao"].form.reset();
+      this.$refs["app-escolha"].form.reset();
+      this.$refs["app-atendimento"].form.reset();
+      this.$refs["app-instalacoes"].form.reset();
+      this.$refs["app-nutricao"].form.reset();
+      this.$refs["app-equipe"].form.reset();
+      this.$refs["app-enfermaria"].form.reset();
+      this.$refs["app-conclusao"].form.reset();
     }
   },
   components: {
@@ -150,5 +124,5 @@ export default {
     "app-enfermaria": Enfermaria,
     "app-conclusao": Conclusao
   }
-}
+};
 </script>

@@ -7,7 +7,7 @@
                   <img src="/images/logo-cssj.png" width="100%" alt="" style="margin:-5px 0  0 0" >
             </div>
             <div class="form-group col-md-6 col-xs-6">
-                  <img src="/images/restaurante-96.png" width="45%" class="sistema" alt="">
+                  <img src="/images/Imagem1.png" width="35%" class="sistema" alt="">
             </div>
           </div>
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">

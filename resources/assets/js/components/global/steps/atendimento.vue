@@ -1,112 +1,55 @@
 <template>
-<div>
+  <div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h4>Você ficou satisfeito em relação aos itens abaixo?</h4>
+      </div>
+    </div>
+
   <div class="row">
-     <div class="form-group col-md-12">
-      <h4>Você ficou satisfeito em relação aos itens abaixo?</h4>
-     </div>
-  </div>
-  <div class="row">
 
-
-    <div v-if="tipo == 1" class="form-group col-md-3">
-      <b-form-group label="Central de atendimento">
-        <b-form-radio-group v-model="form.ta_central_agendamento"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 1" class="form-group col-md-12">
+      <app-radio label="Central de atendimento" :selected="form.ta_central_agendamento" field="ta_central_agendamento" :options="questionario" @setValue="setValueButton" />
+    </div>
+      
+    <div class="form-group col-md-12">
+      <app-radio label="Recepção" :selected="form.ta_recepcionista" field="ta_recepcionista" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Recepção">
-        <b-form-radio-group v-model="form.ta_recepcionista"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Enfermagem" :selected="form.ta_enfermagem" field="ta_enfermagem" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Enfermagem">
-        <b-form-radio-group v-model="form.ta_enfermagem"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Equipe médica" :selected="form.ta_equipe_medica" field="ta_equipe_medica" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Equipe médica">
-        <b-form-radio-group v-model="form.ta_equipe_medica"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 1" class="form-group col-md-12">
+      <app-radio label="Entrega de laudos" :selected="form.ta_entrega_laudo" field="ta_entrega_laudo" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 1" class="form-group col-md-2">
-      <b-form-group label="Entrega de laudos">
-        <b-form-radio-group v-model="form.ta_entrega_laudo"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
-    </div>
-    
-    
-
-    <div class="form-group col-md-3">
-      <b-form-group label="Administração da medicação">
-        <b-form-radio-group v-model="form.ta_administracao_medicacao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Administração da medicação" :selected="form.ta_administracao_medicacao" field="ta_administracao_medicacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-3">
-      <b-form-group label="Imobilizações e curativos">
-        <b-form-radio-group v-model="form.ta_imobilizacao_curativo"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Imobilizações e curativos" :selected="form.ta_imobilizacao_curativo" field="ta_imobilizacao_curativo" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 2" class="form-group col-md-2">
-      <b-form-group label="Emergência">
-        <b-form-radio-group v-model="form.ta_emergencia"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 2" class="form-group col-md-12">
+      <app-radio label="Emergência" :selected="form.ta_emergencia" field="ta_emergencia" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 2" class="form-group col-md-2">
-      <b-form-group label="Internação">
-        <b-form-radio-group v-model="form.ta_internacao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div v-if="tipo == 2" class="form-group col-md-12">
+      <app-radio label="Internação" :selected="form.ta_internacao" field="ta_internacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-3">
-      <b-form-group label="Realização de exames laboratoriais">
-        <b-form-radio-group v-model="form.ta_exames"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Realização de exames de laboratoriais" :selected="form.ta_exames" field="ta_exames" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-3">
-      <b-form-group label="Realização de exames de imagem">
-        <b-form-radio-group v-model="form.ta_realizacao_exame"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Realização de exames de image" :selected="form.ta_realizacao_exame" field="ta_realizacao_exame" :options="questionario" @setValue="setValueButton" />
     </div>
 
   </div>
@@ -115,18 +58,21 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-import BootstrapVue from "bootstrap-vue";
-import { FormRadio } from "bootstrap-vue/es/components";
-import { FormGroup } from "bootstrap-vue/es/components";
-Vue.use(FormRadio);
-Vue.use(FormGroup);
 
 import { questionario } from "../../../services/store/quetionario";
+import Radio from "../../global/Radio"
 
 export default {
   name: "app-atendimento",
   data() {
     return {
+      selected: 1,
+      options: [
+        { text: "Radio 1", value: "radio1" },
+        { text: "Radio 3", value: "radio2" },
+        { text: "Radio 3 (disabled)", value: "radio3", disabled: true },
+        { text: "Radio 4", value: "radio4" }
+      ],
       questionario,
       form: new Form({
         ta_central_agendamento: null,
@@ -149,6 +95,44 @@ export default {
     }
   },
   methods: {
+    setValueButton(key, field) {
+
+      switch (field) {
+        case "ta_central_agendamento":
+          this.form.ta_central_agendamento = key.value;
+          break;
+        case "ta_recepcionista":
+          this.form.ta_recepcionista = key.value;
+          break;
+        case "ta_enfermagem":
+          this.form.ta_enfermagem = key.value;
+          break;
+        case "ta_exames":
+          this.form.ta_exames = key.value;
+          break;
+        case "ta_entrega_laudo":
+          this.form.ta_entrega_laudo = key.value;
+          break;
+        case "ta_equipe_medica":
+          this.form.ta_equipe_medica = key.value;
+          break;
+        case "ta_realizacao_exame":
+          this.form.ta_realizacao_exame = key.value;
+          break;
+        case "ta_administracao_medicacao":
+          this.form.ta_administracao_medicacao = key.value;
+          break;
+        case "ta_imobilizacao_curativo":
+          this.form.ta_imobilizacao_curativo = key.value;
+          break;
+        case "ta_emergencia":
+          this.form.ta_emergencia = key.value;
+          break;
+        case "ta_internacao":
+          this.form.ta_internacao = key.value;
+          break;
+      }
+    },
     validate() {
       this.$emit("on-validate", this.$data, true);
       return true;

@@ -1,23 +1,6 @@
 <template>
   <div>
       <div class="row"> 
-<pre>{{form}}</pre>
-        <div class="form-group col-md-3">
-          <label>Você é?</label>
-            <b-form-radio-group v-model="form.idetificacao"
-                                    :options="tipo_pessoa"
-                                    plain/>
-            <input v-if="form.servico == 1"  name="qual_servico" v-model="form.qual_servico" class="form-control" type="text" placeholder="Qual amigo ou familiar?">
-        </div>
-
-        <div class="form-group col-md-3">
-          <label>Preenchido por?</label>
-            <b-form-radio-group v-model="form.prenchido_por"
-                                    :options="tipo_acompanhante"
-                                    plain/>
-            <input v-if="form.servico == 1"  name="qual_servico" v-model="form.qual_servico" class="form-control" type="text" placeholder="Qual amigo ou familiar?">
-          <input v-if="form.por == 3"  name="outros" v-model="form.outros" class="form-control" type="text" placeholder="Quem está preenchendo?">
-        </div>
 
         <div class="form-group col-md-6">
           <label>Nome do cliente paciente</label>
@@ -25,7 +8,7 @@
         </div>
 
         <div class="form-group col-md-2">
-          <label>Data de nascimento</label>
+          <label>Nascimento</label>
           <app-datepicker v-model="form.data_nascimento" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker>
         </div>
 
@@ -45,7 +28,7 @@
         </div>
 
         <div class="form-group col-md-3">
-          <label>Telefone para contato</label>
+          <label>Telefone</label>
            <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model.trim="form.telefone" class="form-control" placeholder="( )"  type="text"/>
         </div>
 
@@ -54,6 +37,8 @@
            <input  v-model.trim="form.email" class="form-control"  type="text"/>
         </div>
 
+
+        
         <div v-if="tipo == 2" class="form-group col-md-6">
           <label>Unidade de internação</label>
               <select v-model="form.unidade_internacao" class="form-control">
@@ -62,25 +47,32 @@
                   </option>
               </select>
         </div>
-        <div v-if="tipo == 2" class="form-group col-md-6">
-          <label>Unidade de internação</label>
-              <select v-model="form.unidade_internacao" class="form-control">
+        <div v-if="tipo == 2" class="form-group col-md-3">
+          <label>Andar</label>
+              <select v-model="form.andar" class="form-control">
                   <option v-for="option in andar" v-bind:value="option.value" v-bind:key="option.value">
                       {{ option.text }}
                   </option>
               </select>
         </div>
 
-        <div v-if="tipo == 2" class="form-group col-md-6">
+        <div v-if="tipo == 2" class="form-group col-md-3">
           <label>Quarto</label>
           <input name="quarto" v-model="form.quarto" class="form-control" type="integer">
         </div>
 
-        <div v-if="tipo == 2" class="form-group col-md-3">
-          <label>Impedimento</label>
-            <b-form-radio-group v-model="form.impedimentos"
-                                    :options="impedimento"
-                                    plain/>
+        <div class="form-group col-md-6">
+          <app-radio label="Você é?" :selected="form.idetificacao" field="idetificacao" :options="tipo_pessoa" @setValue="setValueButton" />
+        </div>
+
+        <div class="form-group col-md-6">
+          <app-radio label="Preenchido por?" :selected="form.prenchido_por" field="prenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
+          
+          <input v-if="form.prenchido_por == 3"  name="outros" v-model="form.outros" class="form-control" type="text" placeholder="Quem está preenchendo?">
+        </div>
+
+        <div v-if="tipo == 2" class="form-group col-md-12">
+          <app-radio label="Impedimento?" :selected="form.impedimentos" field="impedimentos" :options="impedimento" @setValue="setValueButton" />
         </div>
 
     </div>
@@ -90,11 +82,8 @@
 import Vue from "vue";
 import Form from "vform";
 import Datepicker from "vuejs-datepicker";
-import { FormRadio } from "bootstrap-vue/es/components";
-import { FormGroup } from "bootstrap-vue/es/components";
 
-Vue.use(FormRadio);
-Vue.use(FormGroup);
+import Radio from "../../global/Radio"
 
 import { unidade } from "../../../services/store/unidade";
 import { andar } from "../../../services/store/andar";
@@ -127,6 +116,7 @@ export default {
       form: new Form({
         idetificacao: null,
         prenchido_por: null,
+        outros: null,
         nome: null,
         data_nascimento: null,
         data_inicio_internacao: null,
@@ -166,7 +156,22 @@ export default {
 
       this.$emit("on-validate", this.$data, true);
       return true;
-    }
+    },
+    setValueButton(key, field) {
+
+      switch (field) {
+        case "idetificacao":
+          this.form.idetificacao = key.value;
+          break;
+        case "prenchido_por":
+          this.form.prenchido_por = key.value;
+          break;
+        case "impedimentos":
+          this.form.impedimentos = key.value;
+          break;
+       
+      }
+    },
   },
   components: {
     "app-datepicker": Datepicker

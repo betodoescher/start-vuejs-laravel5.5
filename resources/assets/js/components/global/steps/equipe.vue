@@ -7,40 +7,20 @@
   </div>
   <div class="row">
 
-    <div class="form-group col-md-4">
-      <b-form-group label="Todas as suas dúvidas foram esclarecidas?">
-        <b-form-radio-group v-model="form.em_duvidas_esclarecidas"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Todas as suas dúvidas foram esclarecidas?" :selected="form.em_duvidas_esclarecidas" field="em_duvidas_esclarecidas" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-4">
-      <b-form-group label="Segurança no diagnóstico">
-        <b-form-radio-group v-model="form.em_seguranca_diagnostico"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Segurança no diagnóstico" :selected="form.em_seguranca_diagnostico" field="em_seguranca_diagnostico" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Atenção">
-        <b-form-radio-group v-model="form.em_atencao"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Atenção" :selected="form.em_atencao" field="em_atencao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-2">
-      <b-form-group label="Simpatia">
-        <b-form-radio-group v-model="form.em_simpatia"
-                                :options="questionario"
-                                plain
-                                stacked/>
-      </b-form-group>
+    <div class="form-group col-md-12">
+      <app-radio label="Simpatia" :selected="form.em_simpatia" field="em_simpatia" :options="questionario" @setValue="setValueButton" />
     </div>
 
      <div v-if="tipo == 2" class="form-group col-md-12">
@@ -54,11 +34,7 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-import BootstrapVue from "bootstrap-vue";
-import { FormRadio } from "bootstrap-vue/es/components";
-import { FormGroup } from "bootstrap-vue/es/components";
-Vue.use(FormRadio);
-Vue.use(FormGroup);
+import Radio from "../../global/Radio"
 
 import { questionario } from "../../../services/store/quetionario";
 
@@ -85,6 +61,23 @@ export default {
     validate() {
       this.$emit("on-validate", this.$data, true);
       return true;
+    },
+    setValueButton(key, field) {
+
+      switch (field) {
+        case "em_duvidas_esclarecidas":
+          this.form.em_duvidas_esclarecidas = key.value;
+          break;
+        case "em_seguranca_diagnostico":
+          this.form.em_seguranca_diagnostico = key.value;
+          break;
+        case "em_atencao":
+          this.form.em_atencao = key.value;
+          break;
+        case "em_simpatia":
+          this.form.em_simpatia = key.value;
+          break;
+      }
     }
   }
 };

@@ -1,56 +1,44 @@
 <template>
-  <div>
+<div>
+<card>
     <app-alert ref="alert" @endCountDown="goFirstStep" :dismissSecs="dismissSecs"></app-alert>
     <form @submit.prevent="validateBeforeSubmit">
-      <vue-good-wizard 
-        :steps="steps"
-        :onNext="nextClicked" backClicked
-        :onBack="backClicked"
-        @stepFinal="validateBeforeSubmit"
-        ref="wizard">
+     <form-wizard ref="wizard" @on-complete="onComplete" shape="circle" v-bind:title="title" v-bind:subtitle="subtitle" nextButtonText="Próximo"
+                                backButtonText="Voltar" finishButtonText="Concluir" color="#3498db">
 
-          <div slot="app-identificacao">
-              <app-identificacao :tipo="form.tipo_pesquisa" ref="app-identificacao" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Informações adicionais" :before-change="()=>validateStep('app-identificacao')">
+              <app-identificacao ref="app-identificacao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-identificacao>
+          </tab-content>
 
-          <div slot="app-escolha">
-            <app-escolha :tipo="form.tipo_pesquisa" ref="app-escolha" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Sua escolha" :before-change="()=>validateStep('app-escolha')">
+              <app-escolha ref="app-escolha" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-escolha>
+          </tab-content>
 
-          <div slot="app-profissionais">
-            <app-profissionais :tipo="form.tipo_pesquisa" ref="app-profissionais" @on-validate="mergePartialModels" />
-          </div>
+           <tab-content title="Atenção e interesse dos profissionais" :before-change="()=>validateStep('app-profissionais')">
+              <app-profissionais ref="app-profissionais" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-profissionais>
+          </tab-content>
 
-          <div slot="app-atendimento">
-            <app-atendimento :tipo="form.tipo_pesquisa" ref="app-atendimento" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Tempo de atendimento" :before-change="()=>validateStep('app-atendimento')">
+              <app-atendimento ref="app-atendimento" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-atendimento>
+          </tab-content>
 
-          <div slot="app-instalacoes">
-            <app-instalacoes :tipo="form.tipo_pesquisa" ref="app-instalacoes" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Instalações físicas" :before-change="()=>validateStep('app-instalacoes')">
+              <app-instalacoes ref="app-instalacoes" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-instalacoes>
+          </tab-content>
 
-          <div slot="app-conclusao">
-            <app-conclusao :tipo="form.tipo_pesquisa" ref="app-conclusao" @on-validate="mergePartialModels" />
-          </div>
+          <tab-content title="Conclusão" :before-change="()=>validateStep('app-conclusao')">
+              <app-conclusao ref="app-conclusao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-conclusao>
+          </tab-content> 
 
-          <div slot="fim">
-             <card class="text-center">
-              <img src="/images/success.png" width="15%" alt="">
-              <p><h2><b>Obrigado!!!</b></h2></p>
-            </card>
-          </div>
-
-      </vue-good-wizard>
+      </form-wizard>
     </form>
-  </div>
+  </card>
+</div>
 </template>
-
 <script>
 import { mapGetters } from "vuex";
 import Vue from "vue";
-
-import VueGoodWizard from "vue-good-wizard";
-Vue.use(VueGoodWizard);
+import VueFormWizard from "vue-form-wizard";
 
 import Form from "vform";
 import Identificacao from "../../components/global/steps/identificacao";
@@ -62,81 +50,53 @@ import Conclusao from "../../components/global/steps/conclusao";
 
 import Service from "../../services/FormularioService";
 
+Vue.use(VueFormWizard);
+
 export default {
-  computed: mapGetters({
-    authenticated: "auth/check"
-  }),
+  name: "app-exames",
   data: () => ({
     dismissSecs: 5,
+    title: "Exames",
+    subtitle: "Pesquisa de satisfação",
+    originalData: null,
     form: new Form({
       tipo_pesquisa: 1
-    }),
-    steps: [
-      {
-        label: "Informações adicionais",
-        slot: "app-identificacao"
-      },
-      {
-        label: "Sua escolha",
-        slot: "app-escolha"
-      },
-      {
-        label: "Atenção e interesse dos profissionais",
-        slot: "app-profissionais"
-      },
-      {
-        label: "Tempo de atendimento",
-        slot: "app-atendimento"
-      },
-      {
-        label: "Instalações físicas",
-        slot: "app-instalacoes"
-      },
-      {
-        label: "Conclusão",
-        slot: "app-conclusao"
-      },
-      {
-        label: "Fim",
-        slot: "fim"
-      }
-    ]
+    })
   }),
   methods: {
-    async validateBeforeSubmit() {
+    onComplete() {
+
+      this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
+
       Service.post(this.form)
         .then(response => {
           this.$refs["alert"].showAlertSuccess();
-          this.form.reset();
         })
         .catch(e => {
           console.log(e);
           this.$refs["alert"].showAlertErrorMsg("Erro ao salvar formulário!");
         });
+
     },
-    created () {
-      alert('aki')
-    }, 
-    nextClicked(currentPage) {
-      if (this.$refs["wizard"].currentSlot) {
-        var name = this.$refs["wizard"].currentSlot;
-        var refToValidate = this.$refs[name];
-        return refToValidate.validate();
-      } else {
-        return true;
-      }
-    },
-    backClicked(currentPage) {
-      return true;
+    validateStep(name) {
+      var refToValidate = this.$refs[name];
+      return refToValidate.validate();
     },
     mergePartialModels(model, isValid) {
       if (isValid) {
+        // merging each step model into the final model
         this.form = Object.assign({}, this.form, model.form);
-      }
+        this.originalData = Object.assign({}, this.originalData, model.form.originalData);
+        }
     },
     goFirstStep() {
-      this.$refs.wizard.currentStep = -1;
-      this.$refs.wizard.goNext();
+      this.$refs.wizard.reset();
+      this.$refs["app-identificacao"].form.reset();
+      this.$refs["app-escolha"].form.reset();
+      this.$refs["app-profissionais"].form.reset();
+      this.$refs["app-atendimento"].form.reset();
+      this.$refs["app-instalacoes"].form.reset();
+      this.$refs["app-conclusao"].form.reset();
     }
   },
   components: {
