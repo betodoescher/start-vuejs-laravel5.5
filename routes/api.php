@@ -43,3 +43,4 @@ Route::group(['middleware' => 'jwt'], function () {
 
 
 Route::resource('formulario', 'FormularioController');
+Route::get('relatorio', 'RelatorioController@indexRelatorio');
