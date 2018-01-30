@@ -19,7 +19,8 @@ class Formulario extends Model
         'quarto',
         'impediemntos',
 
-        'prenchido_por',
+        'preenchido_por',
+        'preenchido_por_nome',
         'endereco',
         'telefone',
         'email',

@@ -26,11 +26,12 @@ class CreateFormularioTable extends Migration
             $table->string('quarto')->nullable()->nullable();
             $table->integer('impediemntos')->nullable();
 
-            $table->integer('prenchido_por')->nullable();
+            $table->integer('preenchido_por')->nullable();
+            $table->string('preenchido_por_nome')->nullable();
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();
-            $table->integer('fator_escolha')->nullable();
+            $table->string('fator_escolha')->nullable();
             $table->string('indicacao_qual_empresa')->nullable();
             $table->string('fator_escolha_outro')->nullable();
             $table->char('utilizou_servico_antes',1)->nullable();

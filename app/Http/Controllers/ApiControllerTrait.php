@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 trait ApiControllerTrait
@@ -17,13 +18,17 @@ trait ApiControllerTrait
      */
     public function index(Request $request)
     {
-
         $limit = $request->all()['limit'] ?? 20;
 
+        $fields = $request->all()['fields'] ?? '*';
+        $groupBy = isset($request->all()['group']) ? explode(',',$request->all()['group']) : null;
+
         $order = $request->all()['order'] ?? null;
+
         if ($order !== null) {
           $order = explode(',', $order);
         }
+
         $order[0] = $order[0] ?? 'id';
         $order[1] = $order[1] ?? 'asc';
 
@@ -35,7 +40,7 @@ trait ApiControllerTrait
           $like[1] = '%' . $like[1] . '%';
         }
 
-        $result = $this->model->orderBy($order[0], $order[1])
+        $result = $this->model->select(DB::raw($fields))
           ->where(function($query) use ($like) {
             if ($like) {
               return $query->where($like[0], 'like', $like[1]);
@@ -44,7 +49,12 @@ trait ApiControllerTrait
           })
           ->where($where)
           ->with($this->relationships())
-          ->paginate($limit);
+          ->orderBy($order[0], $order[1]);
+
+            if($groupBy)
+               $result = $result->groupBy($groupBy);
+
+            $result = $result->paginate($limit);
 
         return response()->json($result);
     }
