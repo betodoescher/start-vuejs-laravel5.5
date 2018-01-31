@@ -87,6 +87,9 @@ import Radio from "../../global/Radio"
 
 import { unidade } from "../../../services/store/unidade";
 import { andar } from "../../../services/store/andar";
+import { tipo_pessoa } from "../../../services/store/tipo_pessoa";
+import { tipo_acompanhante } from "../../../services/store/tipo_acompanhante";
+import { impedimento } from "../../../services/store/impedimento";
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
@@ -99,20 +102,9 @@ export default {
     return {
       unidade,
       andar,
-      tipo_pessoa: [
-        { text: "Paciente", value: 1 },
-        { text: "Visitante", value: 2 },
-        { text: "Acompanhante", value: 3 }
-      ],
-      tipo_acompanhante: [
-        { text: "Paciente", value: 1 },
-        { text: "Acompanhante", value: 2 },
-        { text: "Outros", value: 3 }
-      ],
-      impedimento: [
-        { text: "Restrição de visita", value: 1 },
-        { text: "Paciente de longa permanência", value: 2 }
-      ],
+      tipo_pessoa,
+      tipo_acompanhante,
+      impedimento,
       form: new Form({
         idetificacao: null,
         prenchido_por: null,

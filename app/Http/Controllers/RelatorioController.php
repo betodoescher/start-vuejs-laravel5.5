@@ -29,11 +29,16 @@ class RelatorioController extends Controller
 
         $group = $request->all()['group'] ?? null;
 
+        $notNull = $request->all()['notnull'] ?? null;
+
         $sql = $this->model
             ->select(DB::raw($fields))
             ->where($where)
             ->whereYear('created_at','=',date('Y'))
             ->whereMonth('created_at','=',date('m'));
+
+        if($notNull)
+            $sql->whereNotNull($notNull);
 
         if($group)
             $sql->groupBy($group);

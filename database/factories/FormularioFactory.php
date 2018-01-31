@@ -18,7 +18,7 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
         'endereco' => $faker->address,
         'telefone' => $faker->phoneNumber,
         'email' => $faker->email,
-        'fator_escolha' => '[1,2,4,6,7]',
+        'fator_escolha' => $faker->numberBetween(1,7),
         'indicacao_qual_empresa' => $faker->word,
         'fator_escolha_outro' => $faker->word,
         'utilizou_servico_antes' => $faker->numberBetween(1,2),
@@ -75,7 +75,7 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
         'atendimento_humanizado' => $faker->numberBetween(1,5),
         'satisfeito' => $faker->numberBetween(1,5),
         'recomendacao' => $faker->numberBetween(1,5),
-        'desde_ultima_visita' => $faker->numberBetween(1,5),
+        'desde_ultima_visita' => $faker->numberBetween(1,4),
         'tipo_pesquisa' => $faker->numberBetween(1,3)
     ];
 });

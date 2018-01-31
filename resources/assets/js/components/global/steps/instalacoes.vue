@@ -141,6 +141,9 @@ export default {
         case "if_conforto":
           this.form.if_conforto = key.value;
           break;
+        case "if_roupa_cama":
+          this.form.if_roupa_cama = key.value;
+          break;
         case "if_limpeza":
           this.form.if_limpeza = key.value;
           break;

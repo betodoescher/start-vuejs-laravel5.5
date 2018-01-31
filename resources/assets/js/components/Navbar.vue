@@ -28,7 +28,7 @@
         </ul>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item" v-if="user">
-              <router-link :to="{ name: 'dashboard' }" class="nav-link">
+              <router-link :to="{ name: 'dashboard.internacoes' }" class="nav-link">
                 Dashboard
               </router-link>
             </li>

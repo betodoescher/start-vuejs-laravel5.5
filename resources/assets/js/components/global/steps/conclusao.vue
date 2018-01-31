@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="tipo == 2" class="form-group col-md-12">
-      <app-radio label="Desde a sua última internação na casa de Saúde São José a mesma se manteve?" :selected="form.desde_ultima_visita" field="desde_ultima_visita" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Desde a sua última internação na casa de Saúde São José a mesma se manteve?" :selected="form.desde_ultima_visita" field="desde_ultima_visita" :options="ultima_internacao" @setValue="setValueButton" />
     </div>
 
      
@@ -33,12 +33,14 @@ import Form from "vform";
 import Radio from "../../global/Radio"
 
 import { questionario } from "../../../services/store/quetionario";
+import { ultima_internacao } from "../../../services/store/ultima_internacao";
 
 export default {
   name: "app-conclusao",
   data() {
     return {
       questionario,
+      ultima_internacao,
       form: new Form({
         atendimento_humanizado: null,
         satisfeito: null,

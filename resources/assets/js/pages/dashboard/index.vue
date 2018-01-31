@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <card title="Visões" class="settings-card">
         <ul class="nav flex-column nav-pills">
            <li v-for="tab in tabs" class="nav-item">
@@ -13,7 +13,7 @@
       </card>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-10">
       <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -29,14 +29,19 @@ export default {
     tabs() {
       return [
         {
-          icon: "user",
-          name: "Geral",
-          route: "dashboard.geral"
+          icon: "bed",
+          name: "Internações",
+          route: "dashboard.internacoes"
         },
         {
-          icon: "user",
-          name: "Influência",
-          route: "dashboard.influencia"
+          icon: "stethoscope",
+          name: "Exames",
+          route: "dashboard.exames"
+        },
+        {
+          icon: "ambulance",
+          name: "Pronto atendimentos",
+          route: "dashboard.prontoatendimentos"
         }
       ];
     }

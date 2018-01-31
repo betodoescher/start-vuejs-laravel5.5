@@ -31,7 +31,7 @@
         </router-link>
       </div>
       <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'dashboard' }" class="wraper">
+        <router-link :to="{ name: 'dashboard.internacoes' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
               <i class="fa fa-th iconMenuItem"></i>
