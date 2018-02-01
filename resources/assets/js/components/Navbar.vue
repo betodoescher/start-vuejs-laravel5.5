@@ -32,6 +32,11 @@
                 Dashboard
               </router-link>
             </li>
+            <li class="nav-item" v-if="user">
+              <router-link :to="{ name: 'usuarios' }" class="nav-link">
+                Usuários
+              </router-link>
+            </li>
         </ul>
 
         <ul class="navbar-nav">
@@ -62,11 +67,11 @@
                 {{ $t('login') }}
               </router-link>
             </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
                 {{ $t('register') }}
               </router-link>
-            </li>
+            </li> -->
           </template>
         </ul>
       </div>

@@ -8,7 +8,7 @@ export default [
     { path: '/exames', name: 'exames', component: require('~/pages/exames') },
     { path: '/internacao', name: 'internacao', component: require('~/pages/internacao') },
     { path: '/prontoatendimento', name: 'prontoatendimento', component: require('~/pages/prontoatendimento') },
-    // { path: '/usuarios', name: 'usuarios', component: require('~/pages/usuarios') },
+    { path: '/usuarios', name: 'usuarios', component: require('~/pages/usuarios') },
     { path: '/settings', component: require('~/pages/settings/index'), children: [
       { path: '', redirect: { name: 'settings.profile' }},
       { path: 'profile', name: 'settings.profile', component: require('~/pages/settings/profile') },

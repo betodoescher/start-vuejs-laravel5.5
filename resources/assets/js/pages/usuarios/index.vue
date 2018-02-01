@@ -8,25 +8,32 @@
 
         <div class="form-group col-md-6">
           <label class="required">Nome</label>
-          <input name="descricao" v-model="form.descricao" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('descricao') }" type="text">
-          <div class="help-block invalid-feedback"  v-if="errors.has('descricao')">{{errors.first('descricao')}}</div>
+          <input name="nome" v-model="form.name" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('nome') }" type="text">
+          <div class="help-block invalid-feedback"  v-if="errors.has('nome')">{{errors.first('nome')}}</div>
         </div>
 
          <div class="form-group col-md-6">
           <label class="required">Email</label>
-          <input name="email" v-model="form.descricao" v-validate="'required|email'"  :class="{'form-control': true, 'is-invalid': errors.has('email') }" type="text">
+          <input name="email" v-model="form.email" v-validate="'required|email'"  :class="{'form-control': true, 'is-invalid': errors.has('email') }" type="text">
           <div class="help-block invalid-feedback"  v-if="errors.has('email')">{{errors.first('email')}}</div>
         </div>
 
-         <div class="form-group col-md-6">
-          <label class="required">Senha</label>
-          <input name="email" v-model="form.password" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('password') }" type="text">
-          <div class="help-block invalid-feedback"  v-if="errors.has('password')">{{errors.first('password')}}</div>
+          <div class="form-group col-md-6">
+          <label class="required">CPF</label>
+          <the-mask :mask="['###.###.###-##']" name="cpf" v-model="form.cpf" v-validate="'required|cpf'"  :class="{'form-control': true, 'is-invalid': errors.has('cpf') }" />
+          <div class="help-block invalid-feedback"  v-if="errors.has('cpf')">{{errors.first('cpf')}}</div>
         </div>
 
          <div class="form-group col-md-6">
           <label class="required">Senha</label>
-          <input name="email" v-model="form.password_confirmation" v-validate="'required'"  :class="{'form-control': true}" type="text">
+          <input name="senha" v-model="form.password" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('senha') }" type="text">
+          <div class="help-block invalid-feedback"  v-if="errors.has('senha')">{{errors.first('senha')}}</div>
+        </div>
+
+         <div class="form-group col-md-6">
+          <label class="required">Confirme a senha</label>
+          <input name="confirmacao_senha" v-model="form.password_confirmation" v-validate="'confirmacao_senha'"  :class="{'form-control': true}" type="text">
+          <div class="help-block invalid-feedback"  v-if="errors.has('confirmacao_senha')">{{errors.first('confirmacao_senha')}}</div>
         </div>
 
         <div class="form-group col-md-6">
@@ -60,29 +67,26 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-import Service from "../../services/RefeicaoTipoService";
+// import Service from "../../services/RefeicaoTipoService";
 import Grid from "../../components/global/grid";
-import moment from "moment";
-import VueMomentJS from "vue-momentjs";
-
-Vue.use(VueMomentJS, moment);
 
 export default {
   scrollToTop: false,
   name: "app-usuarios",
   data: () => ({
     tipo_acessos: [
-        { text: "Adminstrador", value: 1 },
-        { text: "Pesquisa", value: 2 },
-        { text: "Dashboard", value: 3 }
-      ],
+      { text: "Adminstrador", value: 1 },
+      { text: "Pesquisa", value: 2 },
+      { text: "Dashboard", value: 3 }
+    ],
     form: new Form({
       id: null,
       nome: null,
       email: null,
+      cpf: null,
       password: null,
       password_confirmation: null,
-      tipo_acesso: null
+      tipo_acesso: 1
     }),
     columns: [
       {
@@ -105,6 +109,12 @@ export default {
       {
         label: "Email",
         field: "email",
+        filterable: true,
+        placeholder: "Filtro"
+      },
+      {
+        label: "CPF",
+        field: "cpf",
         filterable: true,
         placeholder: "Filtro"
       },
@@ -132,30 +142,18 @@ export default {
     async validateBeforeSubmit() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          var ini = moment("2018/01/01 " + this.form.hora_inicio_refeicao);
-          var fim = moment("2018/01/01 " + this.form.hora_final_refeicao);
-
-          if (!ini.isSameOrAfter(fim)) {
-            if (this.validaPeriodo(ini, fim)) {
-              var retorno = false;
-              if (this.form.id) {
-                retorno = this.form.put(Service.url + this.form.id);
-              } else {
-                retorno = this.form.post(Service.url);
-              }
-              const { data } = retorno;
-              this.form.reset();
-              this.$validator.reset();
-              this.gridRefresh();
-              this.$refs["alert"].showAlertSuccess();
-            }
+          var retorno = false;
+          if (this.form.id) {
+            // retorno = this.form.put(Service.url + this.form.id);
           } else {
-            this.$refs["alert"].showAlertErrorMsg(
-              "Hora inicial não pode ser menor ou igual a hora final!"
-            );
+            // retorno = this.form.post(Service.url);
           }
+          const { data } = retorno;
+          this.form.reset();
+          this.$validator.reset();
+          this.gridRefresh();
+          this.$refs["alert"].showAlertSuccess();
         }
-        return;
       });
     },
     popular(id) {
@@ -171,32 +169,9 @@ export default {
       this.gridRefresh();
     },
     gridRefresh() {
-      Service.get().then(response => {
-        this.rows = response.data.data;
-      });
-    },
-    validaPeriodo(ini, fim) {
-      var dados = this.rows;
-      var retorno = true;
-      for (var key in dados) {
-        var gridIni = moment("2018/01/01 " + dados[key].hora_inicio_refeicao);
-        var gridFim = moment("2018/01/01 " + dados[key].hora_final_refeicao);
-
-        console.log(fim.isBetween(gridIni, gridFim));
-        if (this.form.id !== dados[key].id) {
-          if (
-            ini.isBetween(gridIni, gridFim) ||
-            fim.isBetween(gridIni, gridFim)
-          ) {
-            this.$refs["alert"].showAlertErrorMsg(
-              "Período já registrado no sistema!"
-            );
-            retorno = false;
-            continue;
-          }
-        }
-      }
-      return retorno;
+      // Service.get().then(response => {
+      //   this.rows = response.data.data;
+      // });
     }
   }
 };
