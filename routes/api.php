@@ -37,10 +37,10 @@ Route::get('translations/{locale}', 'TranslationController@show');
 
 Route::group(['middleware' => 'jwt'], function () {
     // Protected routes
+    Route::resource('formulario', 'FormularioController');
+    Route::get('relatorio', 'RelatorioController@indexRelatorio');
 
 
  });
 
 
-Route::resource('formulario', 'FormularioController');
-Route::get('relatorio', 'RelatorioController@indexRelatorio');

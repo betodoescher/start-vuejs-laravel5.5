@@ -40,7 +40,7 @@ export default {
         },
         {
           icon: "ambulance",
-          name: "Pronto atendimentos",
+          name: "P.A.",
           route: "dashboard.prontoatendimentos"
         }
       ];

@@ -68,7 +68,7 @@
         <div class="form-group col-md-6">
           <app-radio label="Preenchido por?" :selected="form.prenchido_por" field="prenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
           
-          <input v-if="form.prenchido_por == 3"  name="outros" v-model="form.outros" class="form-control" type="text" placeholder="Quem está preenchendo?">
+          <input v-if="form.prenchido_por == 3"  name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="Quem está preenchendo?">
         </div>
 
         <div v-if="tipo == 2" class="form-group col-md-12">
@@ -108,7 +108,7 @@ export default {
       form: new Form({
         idetificacao: null,
         prenchido_por: null,
-        outros: null,
+        preenchido_por_nome: null,
         nome: null,
         data_nascimento: null,
         data_inicio_internacao: null,
