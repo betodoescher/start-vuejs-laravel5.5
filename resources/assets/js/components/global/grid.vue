@@ -14,20 +14,21 @@
             <td>
               <button class="btn btn-info" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> {{txtEditar}}</button>
               <button class="btn btn-danger" @click="onClick('delete-item', props.row)"><i class="fa fa-trash"></i> {{txtExcluir}}</button>
+              <!-- <button v-confirm="{ok: makeAdmin, cancel: doNothing, message: 'Deseja excluir esse registro?'}">Make Admin</button> -->
             </td>
         </template>
         </vue-good-table>
     </div>
 </template>
 <script>
-import Vue from "vue"
-import VueGoodTable from "vue-good-table"
-Vue.use(VueGoodTable)
+import Vue from "vue";
+import VueGoodTable from "vue-good-table";
+Vue.use(VueGoodTable);
 export default {
   name: "app-grid",
+  excluir: false,
   data() {
-    return {
-    }
+    return {};
   },
   props: {
     columns: {
@@ -38,31 +39,40 @@ export default {
     },
     txtEditar: {
       type: String,
-      default: 'Editar'
+      default: "Editar"
     },
     txtExcluir: {
       type: String,
-      default: 'Excluir'
+      default: "Excluir"
     }
   },
   methods: {
+    makeAdmin: function() {
+      console.log("makeAdmin");
+    },
+    doNothing: function() {
+      console.log("doNothing");
+      // Do nothing or some other stuffs
+    },
     onClick(action, param) {
       if (action === "edit-item") {
-          this.$emit("populate", param.id)
+        this.$emit("populate", param.id);
       } else if (action === "delete-item") {
-          
         this.$dialog
           .confirm("Deseja excluir esse registro?", {
-            okText: "Fechar",
-            cancelText: "Ok"
+            loader: true,
+            okText: "Ok",
+            cancelText: "Fechar"
           })
-          .then(function() {
-              this.$emit("delete", param.id)
+          .then(dialog => {
+            this.$emit("delete", param.id);
+            dialog.close();
           })
+          .catch(() => {});
       }
     }
   }
-}
+};
 </script>
 <style>
 

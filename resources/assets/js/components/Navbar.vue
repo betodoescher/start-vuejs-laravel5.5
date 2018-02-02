@@ -8,7 +8,7 @@
       </router-link>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav">
-            <li class="nav-item dropdown" v-if="user">
+            <li class="nav-item dropdown" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
               <a class="nav-link dropdown-toggle" href="#" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Pesquisas
@@ -27,12 +27,12 @@
             </li>
         </ul>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item" v-if="user">
+            <li class="nav-item" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
               <router-link :to="{ name: 'dashboard.internacoes' }" class="nav-link">
                 Dashboard
               </router-link>
             </li>
-            <li class="nav-item" v-if="user">
+            <li class="nav-item" v-if="user.tipo_usuario == 1">
               <router-link :to="{ name: 'usuarios' }" class="nav-link">
                 Usuários
               </router-link>
@@ -82,6 +82,7 @@
 <script>
 import { mapGetters } from "vuex";
 import LocaleDropdown from "./LocaleDropdown";
+import Service from "../services/UsuarioService";
 
 export default {
   data: () => ({

@@ -32,13 +32,13 @@
 
          <div class="form-group col-md-6">
           <label class="required">Confirme a senha</label>
-          <input name="confirmacao_senha" v-model="form.password_confirmation" v-validate="'confirmacao_senha'"  :class="{'form-control': true}" type="text">
-          <div class="help-block invalid-feedback"  v-if="errors.has('confirmacao_senha')">{{errors.first('confirmacao_senha')}}</div>
+          <input name="password_confirmation" v-model="form.password_confirmation" v-validate="'required'"  :class="{'form-control': true}" type="text">
+          <div class="help-block invalid-feedback"  v-if="errors.has('password_confirmation')">{{errors.first('password_confirmation')}}</div>
         </div>
 
         <div class="form-group col-md-6">
           <label class="required">Tipo</label>
-              <select v-model="form.tipo_acesso" v-validate="'required'" name="tipo" :class="{'form-control': true }">
+              <select v-model="form.tipo_usuario" v-validate="'required'" name="tipo" :class="{'form-control': true }">
                   <option v-for="option in tipo_acessos" v-bind:value="option.value" v-bind:key="option.value">
                       {{ option.text }}
                   </option>
@@ -67,7 +67,7 @@
 <script>
 import Vue from "vue";
 import Form from "vform";
-// import Service from "../../services/RefeicaoTipoService";
+import Service from "../../services/UsuarioService";
 import Grid from "../../components/global/grid";
 
 export default {
@@ -86,7 +86,7 @@ export default {
       cpf: null,
       password: null,
       password_confirmation: null,
-      tipo_acesso: 1
+      tipo_usuario: 1
     }),
     columns: [
       {
@@ -102,7 +102,7 @@ export default {
       },
       {
         label: "Nome",
-        field: "nome",
+        field: "name",
         filterable: true,
         placeholder: "Filtro"
       },
@@ -120,7 +120,7 @@ export default {
       },
       {
         label: "Tipo",
-        field: "refeicao_classificacao.descricao",
+        field: "tipo_descricao",
         filterable: true,
         placeholder: "Filtro"
       },
@@ -144,9 +144,9 @@ export default {
         if (result) {
           var retorno = false;
           if (this.form.id) {
-            // retorno = this.form.put(Service.url + this.form.id);
+            retorno = this.form.put(Service.url + this.form.id);
           } else {
-            // retorno = this.form.post(Service.url);
+            retorno = this.form.post(Service.url);
           }
           const { data } = retorno;
           this.form.reset();
@@ -169,9 +169,16 @@ export default {
       this.gridRefresh();
     },
     gridRefresh() {
-      // Service.get().then(response => {
-      //   this.rows = response.data.data;
-      // });
+      Service.get().then(response => {
+        this.rows = response.data.data;
+        for (var key in this.rows) {
+          for (var opt in this.tipo_acessos) {
+            if (this.tipo_acessos[opt].value == this.rows[key].tipo_usuario) {
+              this.rows[key].tipo_descricao = this.tipo_acessos[opt].text;
+            }
+          }
+        }
+      });
     }
   }
 };

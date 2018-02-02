@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12 row">
-      <div  class="col-md-2" style="display:block;">
+      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
         <router-link :to="{ name: 'exames' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -10,7 +10,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;">
+      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
         <router-link :to="{ name: 'internacao' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -20,8 +20,8 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;">
-        <router-link :to="{ name: 'prontoatendimento' }" class="wraper">
+      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
+        <router-link :to="{ name: 'prontoatendimento' }" class="wraper" >
           <div class="menuItem">
             <div class="innerItem">
               <i class="fa fa-ambulance iconMenuItem"></i>
@@ -30,7 +30,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;">
+      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
         <router-link :to="{ name: 'dashboard.internacoes' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -40,14 +40,28 @@
           </div>
         </router-link>
       </div>
+      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1">
+        <router-link :to="{ name: 'usuarios' }" class="wraper">
+          <div class="menuItem">
+            <div class="innerItem">
+              <i class="fa fa-user iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Usuários</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   metaInfo() {
     return { title: this.$t("home") };
-  }
+  },
+  computed: mapGetters({
+    user: "auth/user"
+  })
 };
 </script>
 <style scoped>
