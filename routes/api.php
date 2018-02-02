@@ -39,8 +39,6 @@ Route::group(['middleware' => 'jwt'], function () {
     // Protected routes
     Route::resource('formulario', 'FormularioController');
     Route::get('relatorio', 'RelatorioController@indexRelatorio');
-
-
  });
 
-
+Route::resource('usuario', 'UserController');
