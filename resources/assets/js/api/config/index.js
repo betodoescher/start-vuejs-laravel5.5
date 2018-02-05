@@ -1,5 +1,5 @@
 export default {
-    serverURI: 'http://ouvidoria-cssj',
+    serverURI: window.location.protocol+'//'+window.location.host,
     fixedLayout: false,
     hideLogoOnMobile: false
   }
