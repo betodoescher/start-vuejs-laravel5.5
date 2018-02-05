@@ -40,4 +40,28 @@ class UserController extends Controller
 
         return response()->json($result);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+     
+     //   $request->validate($this->validators);
+
+        $result = $this->model->findOrFail($id);
+        $result->update([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'tipo_usuario' => request('tipo_usuario'),
+            'cpf' => request('cpf')
+        ]);
+        return response()->json($result);
+    }
 }

@@ -6,7 +6,7 @@
         <!-- <img src="/images/restaurante-96.png" width="20%" class="sistema" alt="">  -->
         Ouvidoria
       </router-link>
-      <div class="collapse navbar-collapse" id="navbarToggler">
+      <div class="collapse navbar-collapse" id="navbarToggler" v-if="user">
         <ul class="navbar-nav">
             <li class="nav-item dropdown" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
               <a class="nav-link dropdown-toggle" href="#" role="button"
