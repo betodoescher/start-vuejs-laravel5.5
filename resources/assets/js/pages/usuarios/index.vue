@@ -26,13 +26,13 @@
 
          <div class="form-group col-md-6">
           <label class="required">Senha</label>
-          <input name="senha" v-model="form.password" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('senha') }" type="text">
+          <input name="senha" v-model="form.password" v-validate="'required'"  :class="{'form-control': true, 'is-invalid': errors.has('senha') }" type="password">
           <div class="help-block invalid-feedback"  v-if="errors.has('senha')">{{errors.first('senha')}}</div>
         </div>
 
          <div class="form-group col-md-6">
           <label class="required">Confirme a senha</label>
-          <input name="password_confirmation" v-model="form.password_confirmation" v-validate="'required'"  :class="{'form-control': true}" type="text">
+          <input name="password_confirmation" v-model="form.password_confirmation" v-validate="'required'"  :class="{'form-control': true}" type="password">
           <div class="help-block invalid-feedback"  v-if="errors.has('password_confirmation')">{{errors.first('password_confirmation')}}</div>
         </div>
 
