@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-lg-3 col-sm-12">
       <card title="Visões" class="settings-card">
         <ul class="nav flex-column nav-pills">
            <li v-for="tab in tabs" class="nav-item">
@@ -12,8 +12,8 @@
         </ul>
       </card>
     </div>
-
-    <div class="col-md-10">
+<br>
+    <div class="col-lg-9 col-sm-12">
       <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>

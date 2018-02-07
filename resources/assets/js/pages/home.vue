@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12 row">
-      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
         <router-link :to="{ name: 'exames' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -10,7 +10,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
         <router-link :to="{ name: 'internacao' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -20,7 +20,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 2">
         <router-link :to="{ name: 'prontoatendimento' }" class="wraper" >
           <div class="menuItem">
             <div class="innerItem">
@@ -30,7 +30,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
         <router-link :to="{ name: 'dashboard.internacoes' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">
@@ -40,7 +40,7 @@
           </div>
         </router-link>
       </div>
-      <div  class="col-md-2" style="display:block;" v-if="user.tipo_usuario == 1">
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1">
         <router-link :to="{ name: 'usuarios' }" class="wraper">
           <div class="menuItem">
             <div class="innerItem">

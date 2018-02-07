@@ -48,8 +48,8 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-10 d-flex">
+          <div class="form-group row" style="float: right">
+            <div class="col-md-7 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
                 {{ $t('login') }}
