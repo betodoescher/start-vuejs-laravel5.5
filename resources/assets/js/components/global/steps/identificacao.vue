@@ -9,17 +9,20 @@
 
         <div class="form-group col-md-2">
           <label>Nascimento</label>
-          <app-datepicker v-model="form.data_nascimento" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker>
+          <the-mask :mask="['##/##/####']" v-model.trim="form.data_nascimento" class="form-control" placeholder="__/__/____"  type="text"/>
+          <!-- <app-datepicker v-model="form.data_nascimento" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker> -->
         </div>
 
         <div class="form-group col-md-2">
           <label>Internação inicío</label>
-          <app-datepicker v-model="form.data_inicio_internacao" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker>
+          <the-mask :mask="['##/##/####']" v-model.trim="form.data_inicio_internacao" class="form-control" placeholder="__/__/____"  type="text"/>
+          <!-- <app-datepicker v-model="form.data_inicio_internacao" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker> -->
         </div>
 
         <div class="form-group col-md-2">
           <label>Internação fim</label>
-          <app-datepicker v-model="form.data_fim_internacao" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker>
+          <the-mask :mask="['##/##/####']" v-model.trim="form.data_fim_internacao" class="form-control" placeholder="__/__/____"  type="text"/>
+          <!-- <app-datepicker v-model="form.data_fim_internacao" language="pt-br" input-class="form-control" format="dd/MM/yyyy" placeholder="__/__/____"></app-datepicker> -->
         </div>
 
         <div class="form-group col-md-6">

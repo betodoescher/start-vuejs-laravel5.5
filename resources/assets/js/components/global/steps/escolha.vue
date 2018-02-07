@@ -13,10 +13,10 @@
             <input v-if="form.fator_escolha == 7"  name="outros" v-model="form.fator_escolha_outro" class="form-control" type="text" placeholder="Outros quais?">
         </div>
 
-        <div class="form-group col-md-12">
+        <!-- <div class="form-group col-md-12">
           <app-radio label="Recomendaria nosso hospital a um familiar ou amigo?" :selected="form.utilizou_servico_antes" field="utilizou_servico_antes" :options="simnao" @setValue="setValueButton" />
           <input v-if="form.utilizou_servico_antes == 1"  name="qual_servico" v-model="form.utilizou_servico_antes_qual" class="form-control" type="text" placeholder="Qual amigo ou familiar?">
-        </div>
+        </div> -->
 
 
       </div>

@@ -9,7 +9,7 @@
   <div class="row">
 
     <div v-if="tipo == 1" class="form-group col-md-12">
-      <app-radio label="Central de atendimento" :selected="form.ta_central_agendamento" field="ta_central_agendamento" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Central de agendamento" :selected="form.ta_central_agendamento" field="ta_central_agendamento" :options="questionario" @setValue="setValueButton" />
     </div>
       
     <div class="form-group col-md-12">
@@ -45,11 +45,11 @@
     </div>
 
     <div class="form-group col-md-12">
-      <app-radio label="Realização de exames de laboratoriais" :selected="form.ta_exames" field="ta_exames" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Realização de exames laboratoriais" :selected="form.ta_exames" field="ta_exames" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div class="form-group col-md-12">
-      <app-radio label="Realização de exames de image" :selected="form.ta_realizacao_exame" field="ta_realizacao_exame" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Realização de exames de imagem" :selected="form.ta_realizacao_exame" field="ta_realizacao_exame" :options="questionario" @setValue="setValueButton" />
     </div>
 
   </div>
