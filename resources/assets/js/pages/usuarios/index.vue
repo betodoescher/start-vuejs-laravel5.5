@@ -94,8 +94,6 @@ export default {
         field: "id",
         type: "number",
         html: false,
-        filterable: true,
-        placeholder: "Filtro",
         thClass: "text-center",
         tdClass: "text-center",
         width: "5%"
@@ -103,26 +101,18 @@ export default {
       {
         label: "Nome",
         field: "name",
-        filterable: true,
-        placeholder: "Filtro"
       },
       {
         label: "Email",
         field: "email",
-        filterable: true,
-        placeholder: "Filtro"
       },
       {
         label: "CPF",
         field: "cpf",
-        filterable: true,
-        placeholder: "Filtro"
       },
       {
         label: "Tipo",
         field: "tipo_descricao",
-        filterable: true,
-        placeholder: "Filtro"
       },
       {
         label: "",

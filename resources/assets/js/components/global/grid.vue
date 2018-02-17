@@ -1,6 +1,29 @@
 <template>
     <div>
-        <vue-good-table
+      <div  class="good-table" width="50%">
+        <div  class="responsive">
+          <table  class="table table-bordered">
+            <thead >
+              <tr >
+                <td  colspan="6">
+                  <div  class="global-search">
+                    <span  class="global-search-icon">
+                      <div  class="magnifying-glass">
+                        <i class="fa fa-search fa-lg"></i>
+                      </div>
+                    </span> 
+                    <input  type="text" placeholder="Filtro" class="form-control global-search-input">
+                  </div>
+                </td>
+              </tr> 
+              <tr >
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+       
+       <vue-good-table
         :columns="columns"
         :rows="rows"
         width="50%"
@@ -17,9 +40,10 @@
           :perPage="store.per_page"
           :total="store.total"
           @page-changed="pageChanged"
+          
           nextText="Próximo"
           prevText="Anterior"
-          rowsPerPageText="Linhas por página"
+          rowsPerPageText="Linhas por página: "
           ofText="Nenhum"
           allText="Todos">
         </vue-good-pagination>
@@ -89,5 +113,23 @@ export default {
 };
 </script>
 <style>
-
+/* Global Search
+  **********************************************/
+  .global-search{
+    position:  relative;
+    padding-left: 40px;
+  }
+  .global-search-icon{
+    position:  absolute;
+    left:  0px;
+    max-width:  32px;
+  }
+  .global-search-icon > img{
+    max-width:  100%;
+    margin-top:  8px;
+    opacity: 0.5;
+  }
+  table .global-search-input{
+   width:  calc(100% - 30px);
+  }
 </style>
