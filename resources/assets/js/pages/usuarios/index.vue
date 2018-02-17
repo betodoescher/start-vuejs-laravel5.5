@@ -58,7 +58,7 @@
   <br>
   <card>
     <div>
-     <app-grid :columns="columns" :rows="rows" @populate="popular" @delete="excluir" />
+     <app-grid :columns="columns" :rows="rows" :store="store" @pageChanged="gridRefresh" @populate="popular" @delete="excluir" />
     </div>
   </card>
 </div>
@@ -133,7 +133,8 @@ export default {
         width: "20%"
       }
     ],
-    rows: []
+    rows: [],
+    store: {}
   }),
   created() {
     this.gridRefresh();
@@ -168,8 +169,9 @@ export default {
 
       this.gridRefresh();
     },
-    gridRefresh() {
-      Service.get().then(response => {
+    gridRefresh(pageChanged) {
+      Service.get(null, pageChanged).then(response => {
+        this.store = response.data;
         this.rows = response.data.data;
         for (var key in this.rows) {
           for (var opt in this.tipo_acessos) {

@@ -3,32 +3,42 @@
         <vue-good-table
         :columns="columns"
         :rows="rows"
-        nextText="Próximo"
-        prevText="Anterior"
         width="50%"
         globalSearchPlaceholder="Filtro"
-        rowsPerPageText="Linhas por página"
-        :paginate="true">
-
+        :paginate="false">
         <template slot="table-row-after" slot-scope="props">
             <td>
               <button class="btn btn-info" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> {{txtEditar}}</button>
               <button class="btn btn-danger" @click="onClick('delete-item', props.row)"><i class="fa fa-trash"></i> {{txtExcluir}}</button>
-              <!-- <button v-confirm="{ok: makeAdmin, cancel: doNothing, message: 'Deseja excluir esse registro?'}">Make Admin</button> -->
             </td>
         </template>
         </vue-good-table>
+        <vue-good-pagination
+          :perPage="store.per_page"
+          :total="store.total"
+          @page-changed="pageChanged"
+          nextText="Próximo"
+          prevText="Anterior"
+          rowsPerPageText="Linhas por página"
+          ofText="Nenhum"
+          allText="Todos">
+        </vue-good-pagination>
     </div>
 </template>
 <script>
 import Vue from "vue";
 import VueGoodTable from "vue-good-table";
+import VueGoodPagination from "../global/pagination";
+
 Vue.use(VueGoodTable);
 export default {
   name: "app-grid",
   excluir: false,
   data() {
     return {};
+  },
+  components: {
+    VueGoodPagination
   },
   props: {
     columns: {
@@ -44,7 +54,8 @@ export default {
     txtExcluir: {
       type: String,
       default: "Excluir"
-    }
+    },
+    store: {}
   },
   methods: {
     makeAdmin: function() {
@@ -70,6 +81,9 @@ export default {
           })
           .catch(() => {});
       }
+    },
+    pageChanged(param) {
+      this.$emit("pageChanged", param.currentPage);
     }
   }
 };
