@@ -15,4 +15,4 @@ yarn-error.log
 /public/*/manifest.*
 /public/mix-manifest.json
 phpunit.dusk.xml
-package.json
+package-lock.json
