@@ -40,6 +40,9 @@ trait ApiControllerTrait
           $like[1] = '%' . $like[1] . '%';
         }
 
+        $likeAll = $request->all()['likeall'] ?? false;
+        $columns = $this->model->getFillable();
+
         $result = $this->model->select(DB::raw($fields))
           ->where(function($query) use ($like) {
             if ($like) {
@@ -48,13 +51,28 @@ trait ApiControllerTrait
             return $query;
           })
           ->where($where)
-          ->with($this->relationships())
-          ->orderBy($order[0], $order[1]);
+          ->with($this->relationships());
 
-            if($groupBy)
-               $result = $result->groupBy($groupBy);
+          if($likeAll){
+            foreach($columns as $column)
+            {
+              $likeAll = '%' . $likeAll . '%';
 
-            $result = $result->paginate($limit);
+              $result->orWhere(function($query) use ($column, $likeAll) {
+                if ($likeAll) {
+                  return $query->where($column, 'like', $likeAll);
+                }
+                return $query;
+              });
+            }
+          }
+
+          $result->orderBy($order[0], $order[1]);
+
+          if($groupBy)
+             $result = $result->groupBy($groupBy);
+
+          $result = $result->paginate($limit);
 
         return response()->json($result);
     }

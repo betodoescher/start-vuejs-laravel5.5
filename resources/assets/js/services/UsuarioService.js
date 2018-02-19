@@ -18,5 +18,8 @@ export default {
   },
   post (data) {
     return api.request('post', this.url, data)
+  },
+  getLikeAll (param) {
+    return api.request('get', this.url + '?likeall=' + param)
   }
 }
