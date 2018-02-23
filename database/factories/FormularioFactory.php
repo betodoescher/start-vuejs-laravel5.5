@@ -4,6 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Formulario::class, function (Faker $faker) {
     return [
+        'atendimento_id' => $faker->numberBetween(1,99999999),
         'idetificacao' => $faker->numberBetween(1,3),
         'nome' => $faker->name(),
         'data_nascimento' => $faker->date(),
@@ -13,6 +14,11 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
         'andar' => $faker->numberBetween(1,10),
         'quarto' => $faker->numberBetween(1,20),
         'impediemntos' => $faker->numberBetween(1,2),
+
+        'escolha_observacao' => $faker->text(100),
+        'profissionais_observacao' => $faker->text(100),
+        'atendimento_observacao' => $faker->text(100),
+
         'preenchido_por' => $faker->numberBetween(1,3),
         'preenchido_por_nome' => $faker->name,
         'endereco' => $faker->address,
@@ -56,6 +62,7 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
         'if_roupa_cama' => $faker->numberBetween(1,5),
         'if_atendimento' => $faker->numberBetween(1,5),
         'if_conveniencia' => $faker->numberBetween(1,5),
+        'if_pastoral_saude' => $faker->numberBetween(1,5),
         'if_observacoes' => $faker->text(100),
         'nut_alimentos' => $faker->numberBetween(1,5),
         'nut_temperatura' => $faker->numberBetween(1,5),

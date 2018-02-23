@@ -30,15 +30,20 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('register', 'Auth\RegisterController@register');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-    
+
 });
 
 Route::get('translations/{locale}', 'TranslationController@show');
 
 Route::group(['middleware' => 'jwt'], function () {
     // Protected routes
-    Route::resource('formulario', 'FormularioController');
+
     Route::get('relatorio', 'RelatorioController@indexRelatorio');
  });
-
+Route::get('protocolo/{id}', 'ProtocoloController@show');
+Route::get('protocolo/formulario/{id}', 'ProtocoloController@showFormulario');
+Route::resource('formulario', 'FormularioController');
 Route::resource('usuario', 'UserController');
+Route::resource('atendimento', 'AtendimentoController');
+// Unidade
+Route::get('unidade', 'UnidadeController@index');
