@@ -50,6 +50,16 @@
           </div>
         </router-link>
       </div>
+      <div  class="col-lg-2 col-sm-6" style="display:block;" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
+        <router-link :to="{ name: 'relatorios.internacoes' }" class="wraper">
+          <div class="menuItem">
+            <div class="innerItem">
+              <i class="fa fa-list-alt iconMenuItem"></i>
+              <p class="titleMenuItem text-center">Relatórios</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
   </div>
 </template>
 
