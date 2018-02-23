@@ -48,8 +48,16 @@ export default {
     };
   },
   props: {
-    tipo: {
-      type: Number
+      tipo: {
+          type: Number
+      },
+      dadosPai: {
+          type: Object
+      }
+  },
+  watch: {
+    dadosPai: function(param) {
+      this.form = Object.assign({}, this.form, param);
     }
   },
   methods: {

@@ -299,6 +299,7 @@ import {
 from "../../services/store/ultima_internacao";
 
 import Service from "../../services/RelatorioService";
+import ServiceFormulario from "../../services/FormularioService";
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
@@ -379,12 +380,15 @@ export default {
         }
     },
     created() {
-      this.getTotais();
-      this.getValuesChartInternacao("tipo_pesquisa");
-        this.updateChats()
+
+      this.updateChats()
     },
     methods: {
             async  updateChats() {
+
+              this.getTotais();
+              this.getValuesChartInternacao("tipo_pesquisa");
+
               for (var key in this.dadosChart) {
 
                   this.dadosChart[key].value = []
@@ -398,21 +402,25 @@ export default {
                       field +
                       "&notnull=" +
                       field +
-                      "&where[tipo_pesquisa]=1";
+                      "&where[tipo_pesquisa]=1"+
+                      "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'"
 
-                  await  Service.getChart(query).then(response => {
-                      this.dadosChart[key].value = this.trataDadosChart(response.data, this.dadosChart[key].dadosParaTratar);
+                  await  ServiceFormulario.getChart(query).then(response => {
+                        this.dadosChart[key].value = this.trataDadosChart(response.data.data, this.dadosChart[key].dadosParaTratar);
                   })
-
               }
             },
             getTotais() {
 
                 var query =
-                    "?fields=count(*) as total&where[tipo_pesquisa]=2";
+                    "?fields=count(*) as total&where[tipo_pesquisa]=2"+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
-                    this.total = response.data[0].total
+                ServiceFormulario.getChart(query).then(response => {
+                  this.total = 0
+                  if(response.data.data.length > 0){
+                    this.total = response.data.data[0].total
+                  }
                 });
 
                 var field = "impediemntos"
@@ -423,11 +431,16 @@ export default {
                     field +
                     "&notnull=" +
                     field +
-                    "&where[tipo_pesquisa]=1";
+                    "&where[tipo_pesquisa]=1"+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
-                    this.restricoes = response.data[0].total
-                    this.permanencia = response.data[1].total
+                ServiceFormulario.getChart(query).then(response => {
+                  this.restricoes = 0
+                  this.permanencia = 0
+                  if(response.data.data.length > 0){
+                    this.restricoes = response.data.data[0].total
+                    this.permanencia = response.data.data[1].total
+                  }
                 });
             },
             trataDadosChart(ddBase, ddOptions) {
@@ -450,11 +463,12 @@ export default {
                     " as id&group=" +
                     field +
                     "&notnull=" +
-                    field;
+                    field+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
+                ServiceFormulario.getChart(query).then(response => {
                     this.totalTipoPesquisa = this.trataDadosChart(
-                        response.data,
+                        response.data.data,
                         tipo_pesquisa
                     );
                 });

@@ -7,32 +7,34 @@
                                 backButtonText="Voltar" finishButtonText="Concluir" color="#3498db">
 
           <tab-content title="Informações adicionais" :before-change="()=>validateStep('app-identificacao')">
-              <app-identificacao ref="app-identificacao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-identificacao>
+              <app-identificacao ref="app-identificacao" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-identificacao>
           </tab-content>
 
           <tab-content title="Sua escolha" :before-change="()=>validateStep('app-escolha')">
-              <app-escolha ref="app-escolha" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-escolha>
+              <app-escolha ref="app-escolha" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-escolha>
           </tab-content>
 
            <tab-content title="Atenção e interesse dos profissionais" :before-change="()=>validateStep('app-profissionais')">
-              <app-profissionais ref="app-profissionais" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-profissionais>
+              <app-profissionais ref="app-profissionais" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-profissionais>
           </tab-content>
 
           <tab-content title="Tempo de atendimento" :before-change="()=>validateStep('app-atendimento')">
-              <app-atendimento ref="app-atendimento" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-atendimento>
+              <app-atendimento ref="app-atendimento" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-atendimento>
           </tab-content>
 
           <tab-content title="Instalações físicas" :before-change="()=>validateStep('app-instalacoes')">
-              <app-instalacoes ref="app-instalacoes" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-instalacoes>
+              <app-instalacoes ref="app-instalacoes" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-instalacoes>
           </tab-content>
 
           <tab-content title="Conclusão" :before-change="()=>validateStep('app-conclusao')">
-              <app-conclusao ref="app-conclusao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-conclusao>
-          </tab-content> 
+              <app-conclusao ref="app-conclusao" :tipo="form.tipo_pesquisa" :dadosPai="form" @on-validate="mergePartialModels"></app-conclusao>
+          </tab-content>
 
       </form-wizard>
     </form>
   </card>
+
+  {{form}}
 </div>
 </template>
 <script>
@@ -63,6 +65,16 @@ export default {
       tipo_pesquisa: 1
     })
   }),
+  props:{
+    pesquisa: {
+      type: Object
+    }
+  },
+  watch: {
+    pesquisa: function(param) {
+      this.form = Object.assign({}, this.form, param);
+    }
+  },
   methods: {
     onComplete() {
 
@@ -70,7 +82,20 @@ export default {
 
       Service.post(this.form)
         .then(response => {
+
           this.$refs["alert"].showAlertSuccess();
+
+          this.$dialog
+              .confirm("Número do protocolo: " + response.data.protocolo.protocolo, {
+                  loader: true,
+                  okText: "Ok",
+                  cancelText: "Fechar"
+              }).then(dialog => {
+                  dialog.close();
+              })
+              .catch(() => {
+                  dialog.close();
+              });
         })
         .catch(e => {
           console.log(e);

@@ -31,46 +31,52 @@
         <div class="form-group col-md-6 text-center">
           <h4>Tipo de pessoas</h4>
           <br>
-          <column-chart :data="totalPessoaPreencheu"></column-chart>
+          <rise-loader v-if="dadosChart.idetificacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <column-chart v-if="dadosChart.idetificacao.value.length > 0" :data="dadosChart.idetificacao.value"></column-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <h4>Atendimento por tipo</h4>
           <br>
-          <pie-chart :data="totalTipoPesquisa"></pie-chart>
+          <rise-loader v-if="totalTipoPesquisa.length == 0" loading="loading" color="blue"></rise-loader>
+          <pie-chart v-if="totalTipoPesquisa.length > 0" :data="totalTipoPesquisa"></pie-chart>
         </div>
       </div>
   </card>
 
   <br>
 
-  <card title="Influência">
+   <card title="Influência">
       <div class="row chart">
         <div class="form-group col-md-6 text-center">
           <h4>Por fatores de influência</h4>
           <br>
-          <bar-chart :data="totalInfluencia"></bar-chart>
+          <rise-loader v-if="dadosChart.fator_escolha.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.fator_escolha.value.length > 0" :data="dadosChart.fator_escolha.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <h4>Já haviam utilizado nossos serviços</h4>
           <br>
-          <pie-chart :data="totalServicos"></pie-chart>
+          <rise-loader v-if="dadosChart.utilizou_servico_antes.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <pie-chart v-if="dadosChart.utilizou_servico_antes.value.length > 0" :data="dadosChart.utilizou_servico_antes.value"></pie-chart>
         </div>
       </div>
   </card>
 
   <br>
 
-  <card title="Continuidade">
+ <card title="Continuidade">
       <div class="row chart">
         <div class="form-group col-md-6 text-center">
           <h4>Desde a última internação</h4>
           <br>
-          <column-chart :data="totalContinuidade"></column-chart>
+          <rise-loader v-if="dadosChart.desde_ultima_visita.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <column-chart v-if="dadosChart.desde_ultima_visita.value.length > 0" :data="dadosChart.desde_ultima_visita.value"></column-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <h4>Recomendação</h4>
           <br>
-          <pie-chart :data="totalRecomentacao"></pie-chart>
+          <rise-loader v-if="dadosChart.recomendacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <pie-chart v-if="dadosChart.recomendacao.value.length > 0" :data="dadosChart.recomendacao.value"></pie-chart>
         </div>
       </div>
   </card>
@@ -82,37 +88,44 @@
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Central de agendamento</h4>
-          <bar-chart :data="totalProfAgendamentos"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_central_agendamento.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_central_agendamento.value.length > 0" :data="dadosChart.atp_central_agendamento.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Recepcionista</h4>
-          <bar-chart :data="totalProfRecepcionista"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_recepcionista.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_recepcionista.value.length > 0" :data="dadosChart.atp_recepcionista.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Segurança</h4>
-          <bar-chart :data="totalProfSeguranca"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_seguranca.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_seguranca.value.length > 0" :data="dadosChart.atp_seguranca.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Enfermagem</h4>
-          <bar-chart :data="totalProfEnfermagem"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_enfermagem.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_enfermagem.value.length > 0" :data="dadosChart.atp_enfermagem.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Equipe médica</h4>
-          <bar-chart :data="totalProfEqpMedica"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_equipe_medica.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_equipe_medica.value.length > 0" :data="dadosChart.atp_equipe_medica.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Técnicos</h4>
-          <bar-chart :data="totalProfTecnicos"></bar-chart>
+          <rise-loader v-if="dadosChart.atp_tec_imobilizacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atp_tec_imobilizacao.value.length > 0" :data="dadosChart.atp_tec_imobilizacao.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Orientações do agendamento </h4>
-          <bar-chart :data="totalProfOrientacoes"></bar-chart>
+          <rise-loader v-if="dadosChart.agendamento_orientacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.agendamento_orientacao.value.length > 0" :data="dadosChart.agendamento_orientacao.value"></bar-chart>
         </div>
       </div>
   </card>
@@ -124,47 +137,56 @@
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Central de agendamento</h4>
-          <bar-chart :data="totalAteAgendamentos"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_central_agendamento.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_central_agendamento.value.length > 0" :data="dadosChart.ta_central_agendamento.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Recepção</h4>
-          <bar-chart :data="totalAteRecepcionista"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_recepcionista.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_recepcionista.value.length > 0" :data="dadosChart.ta_recepcionista.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Enfermagem</h4>
-          <bar-chart :data="totalAteEnfermagem"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_enfermagem.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_enfermagem.value.length > 0" :data="dadosChart.ta_enfermagem.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Equipe médica</h4>
-          <bar-chart :data="totalAteEqpMedica"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_equipe_medica.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_equipe_medica.value.length > 0" :data="dadosChart.ta_equipe_medica.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Entrega de laudos</h4>
-          <bar-chart :data="totalAteLaudos"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_entrega_laudo.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_entrega_laudo.value.length > 0" :data="dadosChart.ta_entrega_laudo.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Administração da medicação </h4>
-          <bar-chart :data="totalAteMedicacao"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_administracao_medicacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_administracao_medicacao.value.length > 0" :data="dadosChart.ta_administracao_medicacao.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Imobilizações e curativos </h4>
-          <bar-chart :data="totalAteCurativos"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_imobilizacao_curativo.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_imobilizacao_curativo.value.length > 0" :data="dadosChart.ta_imobilizacao_curativo.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Realização de exames de laboratoriais </h4>
-          <bar-chart :data="totalAteExamesLab"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_exames.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_exames.value.length > 0" :data="dadosChart.ta_exames.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Realização de exames de image </h4>
-          <bar-chart :data="totalAteExamesImg"></bar-chart>
+          <rise-loader v-if="dadosChart.ta_realizacao_exame.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.ta_realizacao_exame.value.length > 0" :data="dadosChart.ta_realizacao_exame.value"></bar-chart>
         </div>
       </div>
   </card>
@@ -176,17 +198,20 @@
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Conforto</h4>
-          <bar-chart :data="totalIfConforto"></bar-chart>
+          <rise-loader v-if="dadosChart.if_conforto.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.if_conforto.value.length > 0" :data="dadosChart.if_conforto.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Limpeza</h4>
-          <bar-chart :data="totalIfLimpeza"></bar-chart>
+          <rise-loader v-if="dadosChart.if_limpeza.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.if_limpeza.value.length > 0" :data="dadosChart.if_limpeza.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Aparência e organização das instalações</h4>
-          <bar-chart :data="totalIfAparencia"></bar-chart>
+          <rise-loader v-if="dadosChart.if_aparencia.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.if_aparencia.value.length > 0" :data="dadosChart.if_aparencia.value"></bar-chart>
         </div>
 
       </div>
@@ -199,12 +224,14 @@
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Humanização e acolhimento</h4>
-          <bar-chart :data="totalFimAcolhimento"></bar-chart>
+          <rise-loader v-if="dadosChart.atendimento_humanizado.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.atendimento_humanizado.value.length > 0" :data="dadosChart.atendimento_humanizado.value"></bar-chart>
         </div>
         <div class="form-group col-md-6 text-center">
           <br>
           <h4>Satisfação com os serviços</h4>
-          <bar-chart :data="totalFimServicos"></bar-chart>
+          <rise-loader v-if="dadosChart.satisfeito.value.length == 0" loading="loading" color="blue"></rise-loader>
+          <bar-chart v-if="dadosChart.satisfeito.value.length > 0" :data="dadosChart.satisfeito.value"></bar-chart>
         </div>
       </div>
   </card>
@@ -219,6 +246,7 @@ import Vue from "vue";
 import Chartkick from "chartkick";
 import VueChartkick from "vue-chartkick";
 import Chart from "chart.js";
+import RiseLoader from 'vue-spinner/src/RiseLoader.vue'
 
 Vue.use(VueChartkick, { Chartkick });
 
@@ -234,6 +262,7 @@ import { simnao } from "../../services/store/simnao";
 import { ultima_internacao } from "../../services/store/ultima_internacao";
 
 import Service from "../../services/RelatorioService";
+import ServiceFormulario from "../../services/FormularioService";
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
@@ -242,10 +271,6 @@ Vue.use(VueMomentJS, moment);
 
 export default {
   data: () => ({
-    title:
-      "Totais referente ao mês e ano vigente. (" +
-      moment().format("M/YYYY") +
-      ")",
     total: 0,
     restricoes: 0,
     permanencia: 0,
@@ -259,43 +284,43 @@ export default {
     fatores,
     simnao,
     ultima_internacao,
-
-    totalPessoaPreencheu: [],
     totalTipoPesquisa: [],
+    dadosChart: {
+         idetificacao: { name: 'idetificacao', value: [], dadosParaTratar: tipo_pessoa},
+         fator_escolha: { name: 'fator_escolha', value: [], dadosParaTratar: fatores},
+         utilizou_servico_antes: { name: 'utilizou_servico_antes', value: [], dadosParaTratar: simnao},
+         desde_ultima_visita: { name: 'desde_ultima_visita', value: [], dadosParaTratar: ultima_internacao},
+         recomendacao: { name: 'recomendacao', value: [], dadosParaTratar: simnao},
+         atp_central_agendamento: { name: 'atp_central_agendamento', value: [], dadosParaTratar: questionario},
+         atp_recepcionista: { name: 'atp_recepcionista', value: [], dadosParaTratar: questionario},
+         atp_seguranca: { name: 'atp_seguranca', value: [], dadosParaTratar: questionario},
+         atp_enfermagem: { name: 'atp_enfermagem', value: [], dadosParaTratar: questionario},
+         atp_equipe_medica: { name: 'atp_equipe_medica', value: [], dadosParaTratar: questionario},
+         atp_tec_imobilizacao: { name: 'atp_tec_imobilizacao', value: [], dadosParaTratar: questionario},
+         agendamento_orientacao: { name: 'agendamento_orientacao', value: [], dadosParaTratar: questionario},
+         ta_central_agendamento: { name: 'ta_central_agendamento', value: [], dadosParaTratar: questionario},
+         ta_recepcionista: { name: 'ta_recepcionista', value: [], dadosParaTratar: questionario},
+         ta_enfermagem: { name: 'ta_enfermagem', value: [], dadosParaTratar: questionario},
+         ta_equipe_medica: { name: 'ta_equipe_medica', value: [], dadosParaTratar: questionario},
+         ta_entrega_laudo: { name: 'ta_entrega_laudo', value: [], dadosParaTratar: questionario},
+         ta_administracao_medicacao: { name: 'ta_administracao_medicacao', value: [], dadosParaTratar: questionario},
+         ta_imobilizacao_curativo: { name: 'ta_imobilizacao_curativo', value: [], dadosParaTratar: questionario},
+         ta_exames: { name: 'ta_exames', value: [], dadosParaTratar: questionario},
+         ta_realizacao_exame: { name: 'ta_realizacao_exame', value: [], dadosParaTratar: questionario},
+         if_conforto: { name: 'if_conforto', value: [], dadosParaTratar: questionario},
+         if_limpeza: { name: 'if_limpeza', value: [], dadosParaTratar: questionario},
+         if_aparencia: { name: 'if_aparencia', value: [], dadosParaTratar: questionario},
+         atendimento_humanizado: { name: 'atendimento_humanizado', value: [], dadosParaTratar: questionario},
+         satisfeito: { name: 'satisfeito', value: [], dadosParaTratar: questionario}
+    }
 
-    totalInfluencia: [],
-    totalServicos: [],
-
-    totalContinuidade: [],
-    totalRecomentacao: [],
-
-    totalProfAgendamentos: [],
-    totalProfRecepcionista: [],
-    totalProfSeguranca: [],
-    totalProfEnfermagem: [],
-    totalProfEqpMedica: [],
-    totalProfTecnicos: [],
-    totalProfOrientacoes: [],
-
-    totalAteAgendamentos: [],
-    totalAteRecepcionista: [],
-    totalAteEnfermagem: [],
-    totalAteEqpMedica: [],
-    totalAteLaudos: [],
-    totalAteMedicacao: [],
-    totalAteCurativos: [],
-    totalAteExamesLab: [],
-    totalAteExamesImg: [],
-
-    totalIfConforto: [],
-    totalIfLimpeza: [],
-    totalIfAparencia: [],
-
-    totalFimAcolhimento: [],
-    totalFimServicos: []
   }),
   created() {
+
       this.updateChats()
+  },
+  components: {
+      'rise-loader': RiseLoader
   },
   filters: {
     formatData: function (value) {
@@ -319,51 +344,43 @@ export default {
       }
   },
   methods: {
-    updateChats() {
-      this.getTotais();
+    async  updateChats() {
 
+      this.getTotais();
       this.getValuesChartInternacao("tipo_pesquisa");
 
-      this.getValuesChart("idetificacao");
+      for (var key in this.dadosChart) {
 
-      this.getValuesChart("fator_escolha");
-      this.getValuesChart("utilizou_servico_antes");
+          this.dadosChart[key].value = []
 
-      this.getValuesChart("desde_ultima_visita");
-      this.getValuesChart("recomendacao");
+          var field = this.dadosChart[key].name
 
-      this.getValuesChart("atp_central_agendamento");
-      this.getValuesChart("atp_recepcionista");
-      this.getValuesChart("atp_seguranca");
-      this.getValuesChart("atp_enfermagem");
-      this.getValuesChart("atp_equipe_medica");
-      this.getValuesChart("atp_tec_imobilizacao");
-      this.getValuesChart("agendamento_orientacao");
+          var query =
+              "?fields=count(*) as total," +
+              field +
+              " as id&group=" +
+              field +
+              "&notnull=" +
+              field +
+              "&where[tipo_pesquisa]=3"+
+              "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'"
 
-      this.getValuesChart("ta_central_agendamento");
-      this.getValuesChart("ta_recepcionista");
-      this.getValuesChart("ta_enfermagem");
-      this.getValuesChart("ta_equipe_medica");
-      this.getValuesChart("ta_entrega_laudo");
-      this.getValuesChart("ta_administracao_medicacao");
-      this.getValuesChart("ta_imobilizacao_curativo");
-      this.getValuesChart("ta_exames");
-      this.getValuesChart("ta_realizacao_exame");
-
-      this.getValuesChart("if_conforto");
-      this.getValuesChart("if_limpeza");
-      this.getValuesChart("if_aparencia");
-
-      this.getValuesChart("atendimento_humanizado");
-      this.getValuesChart("satisfeito");
+          await  ServiceFormulario.getChart(query).then(response => {
+                this.dadosChart[key].value = this.trataDadosChart(response.data.data, this.dadosChart[key].dadosParaTratar);
+          })
+      }
     },
     getTotais() {
 
       var query =
-        "?fields=count(*) as total&where[tipo_pesquisa]=2";
+        "?fields=count(*) as total&where[tipo_pesquisa]=2"+
+          "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-      Service.getChart(query).then(response => {
-        this.total = response.data[0].total
+      ServiceFormulario.getChart(query).then(response => {
+        this.total = 0
+        if(response.data.data.length > 0){
+          this.total = response.data.data[0].total
+        }
       });
 
       var field = "impediemntos"
@@ -374,11 +391,16 @@ export default {
         field +
         "&notnull=" +
         field +
-        "&where[tipo_pesquisa]=3";
+        "&where[tipo_pesquisa]=3"+
+        "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";;
 
-      Service.getChart(query).then(response => {
-        this.restricoes = response.data[0].total
-        this.permanencia = response.data[1].total
+      ServiceFormulario.getChart(query).then(response => {
+        this.restricoes = 0
+        this.permanencia = 0
+        if(response.data.data.length > 0){
+          this.restricoes = response.data.data[0].total
+          this.permanencia = response.data.data[1].total
+        }
       });
     },
     trataDadosChart(ddBase, ddOptions) {
@@ -401,181 +423,14 @@ export default {
         " as id&group=" +
         field +
         "&notnull=" +
-        field;
+        field+
+        "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-      Service.getChart(query).then(response => {
+      ServiceFormulario.getChart(query).then(response => {
         this.totalTipoPesquisa = this.trataDadosChart(
-          response.data,
+          response.data.data,
           tipo_pesquisa
         );
-      });
-    },
-    getValuesChart(field) {
-      var query =
-        "?fields=count(*) as total," +
-        field +
-        " as id&group=" +
-        field +
-        "&notnull=" +
-        field +
-        "&where[tipo_pesquisa]=3";
-
-      Service.getChart(query).then(response => {
-        switch (field) {
-          case "idetificacao":
-            this.totalPessoaPreencheu = this.trataDadosChart(response.data, tipo_pessoa);
-            break;
-
-          case "fator_escolha":
-            this.totalInfluencia = this.trataDadosChart(response.data, fatores);
-            break;
-          case "utilizou_servico_antes":
-            this.totalServicos = this.trataDadosChart(response.data, simnao);
-            break;
-
-          case "desde_ultima_visita":
-            this.totalContinuidade = this.trataDadosChart(
-              response.data,
-              ultima_internacao
-            );
-            break;
-          case "recomendacao":
-            this.totalRecomentacao = this.trataDadosChart(
-              response.data,
-              simnao
-            );
-            break;
-
-          case "atp_central_agendamento":
-            this.totalProfAgendamentos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "atp_recepcionista":
-            this.totalProfRecepcionista = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "atp_seguranca":
-            this.totalProfSeguranca = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "atp_enfermagem":
-            this.totalProfEnfermagem = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "atp_equipe_medica":
-            this.totalProfEqpMedica = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "atp_tec_imobilizacao":
-            this.totalProfTecnicos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "agendamento_orientacao":
-            this.totalProfOrientacoes = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-
-          case "ta_central_agendamento":
-            this.totalAteAgendamentos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_recepcionista":
-            this.totalAteRecepcionista = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_enfermagem":
-            this.totalAteEnfermagem = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_equipe_medica":
-            this.totalAteEqpMedica = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_entrega_laudo":
-            this.totalAteLaudos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_administracao_medicacao":
-            this.totalAteMedicacao = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_imobilizacao_curativo":
-            this.totalAteCurativos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_exames":
-            this.totalAteExamesLab = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "ta_realizacao_exame":
-            this.totalAteExamesImg = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-
-          case "if_conforto":
-            this.totalIfConforto = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "if_limpeza":
-            this.totalIfLimpeza = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "if_aparencia":
-            this.totalIfAparencia = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-
-          case "atendimento_humanizado":
-            this.totalFimAcolhimento = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-          case "satisfeito":
-            this.totalFimServicos = this.trataDadosChart(
-              response.data,
-              questionario
-            );
-            break;
-        }
       });
     }
   }

@@ -4,13 +4,13 @@ let url = '/api/usuario/'
 
 let tipo_acessos = [{
         text: "Adminstrador",
-        value: 1
+        value: '1'
     }, {
         text: "Pesquisa",
-        value: 2
+        value: '2'
     }, {
         text: "Dashboard",
-        value: 3
+        value: '3'
     }]
 
 export const state = {

@@ -37,6 +37,11 @@
                 Usuários
               </router-link>
             </li>
+            <li class="nav-item" v-if="user.tipo_usuario == 1 || user.tipo_usuario == 3">
+              <router-link :to="{ name: 'relatorios.internacoes' }" class="nav-link">
+                Relatórios
+              </router-link>
+            </li>
         </ul>
 
         <ul class="navbar-nav">

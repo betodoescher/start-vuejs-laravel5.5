@@ -2,12 +2,14 @@
 
 <template>
 
+
 <div>
+
     <div class="row">
         <div class="form-group col-md-3">
             <label class="required">Atendimento</label>
             <div class="input-group">
-                <input name="atendimento" v-model="form.atendimento" v-validate="'required'" :class="{'form-control': true, 'is-invalid': errors.has('atendimento') }" type="text" @keyup.stop="debounceInput" placeholder="Digite e aguarde ou clique em pesquisar">
+                <input name="atendimento" v-model="form.atendimento_id" v-validate="'required|numeric'" :class="{'form-control': true, 'is-invalid': errors.has('atendimento') }" type="integer" @keyup.stop="debounceInput" placeholder="Digite e aguarde ou clique em pesquisar">
                 <span class="input-group-btn">
               <button class="btn btn-default" title="Pesquisar atendimento" type="button" @click="buscaDadosAtendimento"><i class="fa fa-search"></i></button>
             </span>
@@ -57,8 +59,8 @@
         <div v-if="tipo == 2" class="form-group col-md-6">
             <label>Unidade de internação</label>
             <select v-model="form.unidade_internacao" class="form-control">
-                <option v-for="option in unidade" v-bind:value="option.value" v-bind:key="option.value">
-                    {{ option.text }}
+                <option v-for="option in unidade" v-bind:value="option.cd_unid_int" v-bind:key="option.cd_unid_int">
+                    {{ option.ds_unid_int }}
                 </option>
             </select>
         </div>
@@ -105,10 +107,6 @@ import debounce from "debounce"
 import Radio from "../../global/Radio"
 
 import {
-    unidade
-}
-from "../../../services/store/unidade";
-import {
     andar
 }
 from "../../../services/store/andar";
@@ -127,6 +125,8 @@ from "../../../services/store/impedimento";
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
+import Service from "../../../services/AtendimentoService"
+import UnidadeService from "../../../services/UnidadeService"
 
 Vue.use(VueMomentJS, moment);
 
@@ -134,13 +134,13 @@ export default {
     name: "app-identificacao",
     data() {
         return {
-            unidade,
+            unidade: {},
             andar,
             tipo_pessoa,
             tipo_acompanhante,
             impedimento,
             form: new Form({
-                atendimento: null,
+                atendimento_id: null,
                 idetificacao: null,
                 prenchido_por: null,
                 preenchido_por_nome: null,
@@ -158,10 +158,21 @@ export default {
             })
         };
     },
+    mounted() {
+      this.buscaUnidades()
+    },
     props: {
         tipo: {
             type: Number
+        },
+        dadosPai: {
+            type: Object
         }
+    },
+    watch: {
+      dadosPai: function(param) {
+        this.form = Object.assign({}, this.form, param);
+      }
     },
     methods: {
         validate() {
@@ -200,15 +211,68 @@ export default {
                     case "impedimentos":
                         this.form.impedimentos = key.value;
                         break;
-
                 }
             },
+            buscaUnidades() {
+                UnidadeService.getAll().then(response => {
+                    this.unidade = response.data.data
+                })
+            },
             buscaDadosAtendimento() {
-              this.form.nome = 'aqui'
+
+                this.$validator.validate('atendimento').then(result => {
+
+                    if (result) {
+                        Service.get(this.form.atendimento_id).then(response => {
+
+                            if (!response.data.data) {
+
+                                this.$dialog
+                                    .confirm("Número de atendimento não encontrado.", {
+                                        loader: true,
+                                        okText: "Ok",
+                                        cancelText: "Fechar"
+                                    }).then(dialog => {
+                                        this.form.atendimento_id = ''
+                                        dialog.close();
+                                    })
+                                    .catch(() => {
+                                        this.form.atendimento_id = ''
+                                        dialog.close();
+                                    });
+
+                                return
+                            }
+
+                            let dados = response.data.data
+
+                            this.form.nome = dados.usuario.nm_paciente
+
+                            if(dados.usuario.dt_nascimento)
+                              this.form.data_nascimento = moment(dados.usuario.dt_nascimento).format('YYYY-MM-DD')
+                            if(dados.dt_atendimento)
+                              this.form.data_inicio_internacao = moment(dados.dt_atendimento).format('YYYY-MM-DD')
+                            if(dados.dt_prevista_alta)
+                              this.form.dt_prevista_alta = moment(dados.dt_prevista_alta).format('YYYY-MM-DD')
+
+                            this.form.endereco = dados.usuario.ds_endereco + ', ' + dados.usuario.nr_endereco + ' - ' + dados.usuario.ds_complemento + ' - ' + dados.usuario.nm_bairro + ' - ' + dados.usuario.cd_cidade + ' - ' + dados.usuario.nr_cep
+
+                            if (dados.usuario.nr_ddd_celular || dados.usuario.nr_celular) {
+                                this.form.telefone = dados.usuario.nr_ddd_celular + dados.usuario.nr_celular
+                            } else {
+                                this.form.telefone = dados.usuario.nr_ddd_fone + dados.usuario.nr_fone
+                            }
+                            this.form.email = dados.usuario.email
+                        })
+
+                    }
+                })
+
             },
             debounceInput: debounce(function(e) {
                 this.buscaDadosAtendimento()
             }, 500)
+
     },
     components: {
         "app-datepicker": Datepicker

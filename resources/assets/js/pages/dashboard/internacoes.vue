@@ -32,12 +32,14 @@
             <div class="form-group col-md-6 text-center">
                 <h4>Totais por unidade</h4>
                 <br>
-                <column-chart :data="totalUnidade"></column-chart>
+                <rise-loader v-if="dadosChart.unidade_internacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <column-chart v-if="dadosChart.unidade_internacao.value.length > 0"  :data="dadosChart.unidade_internacao.value"></column-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Atendimento por tipo</h4>
                 <br>
-                <pie-chart :data="totalTipoPesquisa"></pie-chart>
+                <rise-loader v-if="totalTipoPesquisa.length == 0" loading="loading" color="blue"></rise-loader>
+                <pie-chart v-if="totalTipoPesquisa.length > 0" :data="totalTipoPesquisa"></pie-chart>
             </div>
         </div>
     </card>
@@ -49,12 +51,14 @@
             <div class="form-group col-md-6 text-center">
                 <h4>Por fatores de influência</h4>
                 <br>
-                <bar-chart :data="totalInfluencia"></bar-chart>
+                <rise-loader v-if="dadosChart.fator_escolha.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.fator_escolha.value.length > 0" :data="dadosChart.fator_escolha.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Já haviam utilizado nossos serviços</h4>
                 <br>
-                <pie-chart :data="totalServicos"></pie-chart>
+                <rise-loader v-if="dadosChart.utilizou_servico_antes.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <pie-chart v-if="dadosChart.utilizou_servico_antes.value.length > 0" :data="dadosChart.utilizou_servico_antes.value"></pie-chart>
             </div>
         </div>
     </card>
@@ -66,12 +70,14 @@
             <div class="form-group col-md-6 text-center">
                 <h4>Desde a última internação</h4>
                 <br>
-                <column-chart :data="totalContinuidade"></column-chart>
+                <rise-loader v-if="dadosChart.desde_ultima_visita.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <column-chart v-if="dadosChart.desde_ultima_visita.value.length > 0" :data="dadosChart.desde_ultima_visita.value"></column-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Recomendação</h4>
                 <br>
-                <pie-chart :data="totalRecomentacao"></pie-chart>
+                <rise-loader v-if="dadosChart.recomendacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <pie-chart v-if="dadosChart.recomendacao.value.length > 0" :data="dadosChart.recomendacao.value"></pie-chart>
             </div>
         </div>
     </card>
@@ -82,26 +88,31 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Estacionamento</h4>
-                <bar-chart :data="totalEstacionamento"></bar-chart>
+                <rise-loader v-if="dadosChart.if_estacionamento.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_estacionamento.value.length > 0" :data="dadosChart.if_estacionamento.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Recepção central</h4>
-                <bar-chart :data="totalRecepcao"></bar-chart>
+                <rise-loader v-if="dadosChart.if_recepcao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_recepcao.value.length > 0" :data="dadosChart.if_recepcao.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Setor de internação</h4>
-                <bar-chart :data="totalSetorInternacao"></bar-chart>
+                <rise-loader v-if="dadosChart.if_internacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_internacao.value.length > 0" :data="dadosChart.if_internacao.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Segurança</h4>
-                <bar-chart :data="totalSeguranca"></bar-chart>
+                <rise-loader v-if="dadosChart.if_seguranca.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_seguranca.value.length > 0" :data="dadosChart.if_seguranca.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Sinalização</h4>
-                <bar-chart :data="totalSinalizacao"></bar-chart>
+                <rise-loader v-if="dadosChart.if_sinalizacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_sinalizacao.value.length > 0" :data="dadosChart.if_sinalizacao.value"></bar-chart>
             </div>
         </div>
     </card>
@@ -112,31 +123,37 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Aparencia e organização </h4>
-                <bar-chart :data="totalAparencia"></bar-chart>
+                <rise-loader v-if="dadosChart.if_aparencia.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_aparencia.value.length > 0" :data="dadosChart.if_aparencia.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Conforto</h4>
-                <bar-chart :data="totalConforto"></bar-chart>
+                <rise-loader v-if="dadosChart.if_conforto.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_conforto.value.length > 0" :data="dadosChart.if_conforto.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Limpeza</h4>
-                <bar-chart :data="totalLimpeza"></bar-chart>
+                <rise-loader v-if="dadosChart.if_limpeza.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_limpeza.value.length > 0" :data="dadosChart.if_limpeza.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Roupa de cama/banho</h4>
-                <bar-chart :data="totalCama"></bar-chart>
+                <rise-loader v-if="dadosChart.if_roupa_cama.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_roupa_cama.value.length > 0" :data="dadosChart.if_roupa_cama.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Atendimento</h4>
-                <bar-chart :data="totalAtendimento"></bar-chart>
+                <rise-loader v-if="dadosChart.if_atendimento.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_atendimento.value.length > 0" :data="dadosChart.if_atendimento.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Conveniência</h4>
-                <bar-chart :data="totalConveniencia"></bar-chart>
+                <rise-loader v-if="dadosChart.if_conveniencia.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_conveniencia.value.length > 0" :data="dadosChart.if_conveniencia.value"></bar-chart>
             </div>
         </div>
     </card>
@@ -147,16 +164,19 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Qualidade dos alimentos </h4>
-                <bar-chart :data="totalAlimentos"></bar-chart>
+                <rise-loader v-if="dadosChart.nut_alimentos.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.nut_alimentos.value.length > 0" :data="dadosChart.nut_alimentos.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Sabor e temperatura</h4>
-                <bar-chart :data="totalTemperatura"></bar-chart>
+                <rise-loader v-if="dadosChart.nut_temperatura.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.nut_temperatura.value.length > 0" :data="dadosChart.nut_temperatura.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Entrega das refeições</h4>
-                <bar-chart :data="totalRefeicoes"></bar-chart>
+                <rise-loader v-if="dadosChart.nut_entrega_refeicao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.nut_entrega_refeicao.value.length > 0" :data="dadosChart.nut_entrega_refeicao.value"></bar-chart>
             </div>
         </div>
     </card>
@@ -167,21 +187,25 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Esclarecimentos </h4>
-                <bar-chart :data="totalEsclarecimentos"></bar-chart>
+                <rise-loader v-if="dadosChart.em_duvidas_esclarecidas.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.em_duvidas_esclarecidas.value.length > 0" :data="dadosChart.em_duvidas_esclarecidas.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Segurança no diagnóstico</h4>
-                <bar-chart :data="totalDiagnostico"></bar-chart>
+                <rise-loader v-if="dadosChart.em_seguranca_diagnostico.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.em_seguranca_diagnostico.value.length > 0" :data="dadosChart.em_seguranca_diagnostico.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Atenção</h4>
-                <bar-chart :data="totalAtenção"></bar-chart>
+                <rise-loader v-if="dadosChart.em_atencao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.em_atencao.value.length > 0" :data="dadosChart.em_atencao.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Entrega das refeições</h4>
-                <bar-chart :data="totalSimpatia"></bar-chart>
+                <rise-loader v-if="dadosChart.em_simpatia.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.em_simpatia.value.length > 0" :data="dadosChart.em_simpatia.value"></bar-chart>
             </div>
         </div>
     </card>
@@ -192,27 +216,32 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Clareza ma informação </h4>
-                <bar-chart :data="totalEnfClareza"></bar-chart>
+                <rise-loader v-if="dadosChart.enf_clareza.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.enf_clareza.value.length > 0" :data="dadosChart.enf_clareza.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Atendimento</h4>
-                <bar-chart :data="totalEnfAtendimento"></bar-chart>
+                <rise-loader v-if="dadosChart.enf_atendimento.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.enf_atendimento.value.length > 0" :data="dadosChart.enf_atendimento.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Atenção</h4>
-                <bar-chart :data="totalEnfAtenção"></bar-chart>
+                <rise-loader v-if="dadosChart.enf_atencao.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.enf_atencao.value.length > 0" :data="dadosChart.enf_atencao.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Simpatia</h4>
-                <bar-chart :data="totalEnfSimpatia"></bar-chart>
+                <rise-loader v-if="dadosChart.enf_simpatia.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.enf_simpatia.value.length > 0" :data="dadosChart.enf_simpatia.value"></bar-chart>
             </div>
-            <div class="form-group col-md-6 text-center">
+            <!-- <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Grau de ruído</h4>
-                <bar-chart :data="totalEnfRuido"></bar-chart>
-            </div>
+                <rise-loader v-if="dadosChart.enf_grau_ruido.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.enf_grau_ruido.value.length > 0" :data="dadosChart.enf_grau_ruido.value"></bar-chart>
+            </div> -->
         </div>
     </card>
 
@@ -222,17 +251,20 @@
         <div class="row chart">
             <div class="form-group col-md-6 text-center">
                 <h4>Atendimento as solicitações </h4>
-                <bar-chart :data="totalInfClareza"></bar-chart>
+                <rise-loader v-if="dadosChart.if_atendimento_solicitacoes.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_atendimento_solicitacoes.value.length > 0" :data="dadosChart.if_atendimento_solicitacoes.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <h4>Instalações do apartamento</h4>
-                <bar-chart :data="totalInfInstalacoes"></bar-chart>
+                <rise-loader v-if="dadosChart.if_instalacoes_apartamento.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_instalacoes_apartamento.value.length > 0" :data="dadosChart.if_instalacoes_apartamento.value"></bar-chart>
             </div>
-            <div class="form-group col-md-6 text-center">
+            <!-- <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Grau de ruído</h4>
-                <bar-chart :data="totalInfRuido"></bar-chart>
-            </div>
+                <rise-loader v-if="dadosChart.if_grau_ruido.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.if_grau_ruido.value.length > 0" :data="dadosChart.if_grau_ruido.value"></bar-chart>
+            </div> -->
         </div>
     </card>
 
@@ -243,17 +275,17 @@
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Humanização e acolhimento</h4>
-                <bar-chart :data="totalFimAcolhimento"></bar-chart>
+                <rise-loader v-if="dadosChart.atendimento_humanizado.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.atendimento_humanizado.value.length > 0" :data="dadosChart.atendimento_humanizado.value"></bar-chart>
             </div>
             <div class="form-group col-md-6 text-center">
                 <br>
                 <h4>Satisfação com os serviços</h4>
-                <bar-chart :data="totalFimServicos"></bar-chart>
+                <rise-loader v-if="dadosChart.satisfeito.value.length == 0" loading="loading" color="blue"></rise-loader>
+                <bar-chart v-if="dadosChart.satisfeito.value.length > 0" :data="dadosChart.satisfeito.value"></bar-chart>
             </div>
         </div>
     </card>
-
-
 
 </div>
 
@@ -265,6 +297,7 @@ import Vue from "vue";
 import Chartkick from "chartkick";
 import VueChartkick from "vue-chartkick";
 import Chart from "chart.js";
+import RiseLoader from 'vue-spinner/src/RiseLoader.vue'
 
 Vue.use(VueChartkick, {
     Chartkick
@@ -312,6 +345,7 @@ import {
 from "../../services/store/ultima_internacao";
 
 import Service from "../../services/RelatorioService";
+import ServiceFormulario from "../../services/FormularioService";
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
@@ -335,58 +369,54 @@ export default {
         fatores,
         simnao,
         ultima_internacao,
-
-        totalUnidade: [],
         totalTipoPesquisa: [],
-
-        totalInfluencia: [],
-        totalServicos: [],
-
-        totalContinuidade: [],
-        totalRecomentacao: [],
-
-        totalEstacionamento: [],
-        totalRecepcao: [],
-        totalSetorInternacao: [],
-        totalSeguranca: [],
-        totalSinalizacao: [],
-
-        totalAparencia: [],
-        totalConforto: [],
-        totalLimpeza: [],
-        totalCama: [],
-        totalAtendimento: [],
-        totalConveniencia: [],
-
-        totalAlimentos: [],
-        totalTemperatura: [],
-        totalRefeicoes: [],
-
-        totalEsclarecimentos: [],
-        totalDiagnostico: [],
-        totalAtenção: [],
-        totalSimpatia: [],
-
-        totalEnfClareza: [],
-        totalEnfAtendimento: [],
-        totalEnfAtenção: [],
-        totalEnfSimpatia: [],
-        totalEnfRuido: [],
-
-        totalInfClareza: [],
-        totalInfInstalacoes: [],
-        totalInfRuido: [],
-
-        totalFimAcolhimento: [],
-        totalFimServicos: []
+        dadosChart: {
+             unidade_internacao: { name: 'unidade_internacao', value: [], dadosParaTratar: unidade},
+             fator_escolha: { name: 'fator_escolha', value: [], dadosParaTratar: fatores},
+             utilizou_servico_antes: { name: 'utilizou_servico_antes', value: [], dadosParaTratar: simnao},
+             desde_ultima_visita: { name: 'desde_ultima_visita', value: [], dadosParaTratar: ultima_internacao},
+             recomendacao: { name: 'recomendacao', value: [], dadosParaTratar: simnao},
+             if_estacionamento: { name: 'if_estacionamento', value: [], dadosParaTratar: questionario},
+             if_recepcao: { name: 'if_recepcao', value: [], dadosParaTratar: questionario},
+             if_internacao: { name: 'if_internacao', value: [], dadosParaTratar: questionario},
+             if_seguranca: { name: 'if_seguranca', value: [], dadosParaTratar: questionario},
+             if_sinalizacao: { name: 'if_sinalizacao', value: [], dadosParaTratar: questionario},
+             if_aparencia: { name: 'if_aparencia', value: [], dadosParaTratar: questionario},
+             if_conforto: { name: 'if_conforto', value: [], dadosParaTratar: questionario},
+             if_limpeza: { name: 'if_limpeza', value: [], dadosParaTratar: questionario},
+             if_roupa_cama: { name: 'if_roupa_cama', value: [], dadosParaTratar: questionario},
+             if_atendimento: { name: 'if_atendimento', value: [], dadosParaTratar: questionario},
+             if_conveniencia: { name: 'if_conveniencia', value: [], dadosParaTratar: questionario},
+             nut_alimentos: { name: 'nut_alimentos', value: [], dadosParaTratar: questionario},
+             nut_temperatura: { name: 'nut_temperatura', value: [], dadosParaTratar: questionario},
+             nut_entrega_refeicao: { name: 'nut_entrega_refeicao', value: [], dadosParaTratar: questionario},
+             em_duvidas_esclarecidas: { name: 'em_duvidas_esclarecidas', value: [], dadosParaTratar: questionario},
+             em_seguranca_diagnostico: { name: 'em_seguranca_diagnostico', value: [], dadosParaTratar: questionario},
+             em_atencao: { name: 'em_atencao', value: [], dadosParaTratar: questionario},
+             em_simpatia: { name: 'em_simpatia', value: [], dadosParaTratar: questionario},
+             enf_clareza: { name: 'enf_clareza', value: [], dadosParaTratar: questionario},
+             enf_atendimento: { name: 'enf_atendimento', value: [], dadosParaTratar: questionario},
+             enf_atencao: { name: 'enf_atencao', value: [], dadosParaTratar: questionario},
+             enf_simpatia: { name: 'enf_simpatia', value: [], dadosParaTratar: questionario},
+             // enf_grau_ruido: { name: 'enf_grau_ruido', value: [], dadosParaTratar: questionario},
+             if_atendimento_solicitacoes: { name: 'if_atendimento_solicitacoes', value: [], dadosParaTratar: questionario},
+             if_instalacoes_apartamento: { name: 'if_instalacoes_apartamento', value: [], dadosParaTratar: questionario},
+             // if_grau_ruido: { name: 'if_grau_ruido', value: [], dadosParaTratar: questionario},
+             atendimento_humanizado: { name: 'atendimento_humanizado', value: [], dadosParaTratar: questionario},
+             satisfeito: { name: 'satisfeito', value: [], dadosParaTratar: questionario}
+          }
     }),
+    components: {
+        'rise-loader': RiseLoader
+    },
     filters: {
       formatData: function (value) {
       return moment(value).format("DD/MM/YYYY")
       }
     },
     created() {
-        this.updateChats()
+
+      this.updateChats()
     },
     computed: {
         inicio() {
@@ -405,61 +435,43 @@ export default {
         }
     },
     methods: {
-        updateChats() {
-                this.getTotais();
+            async  updateChats() {
 
-                this.getValuesChartInternacao("tipo_pesquisa");
+              this.getTotais();
+              this.getValuesChartInternacao("tipo_pesquisa");
 
-                this.getValuesChart("unidade_internacao");
+              for (var key in this.dadosChart) {
 
-                this.getValuesChart("fator_escolha");
-                this.getValuesChart("utilizou_servico_antes");
+                  this.dadosChart[key].value = []
 
-                this.getValuesChart("desde_ultima_visita");
-                this.getValuesChart("recomendacao");
+                  var field = this.dadosChart[key].name
 
-                this.getValuesChart("if_estacionamento");
-                this.getValuesChart("if_recepcao");
-                this.getValuesChart("if_internacao");
-                this.getValuesChart("if_seguranca");
-                this.getValuesChart("if_sinalizacao");
+                  var query =
+                      "?fields=count(*) as total," +
+                      field +
+                      " as id&group=" +
+                      field +
+                      "&notnull=" +
+                      field +
+                      "&where[tipo_pesquisa]=2"+
+                      "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'"
 
-                this.getValuesChart("if_aparencia");
-                this.getValuesChart("if_conforto");
-                this.getValuesChart("if_limpeza");
-                this.getValuesChart("if_roupa_cama");
-                this.getValuesChart("if_atendimento");
-                this.getValuesChart("if_conveniencia");
-
-                this.getValuesChart("nut_alimentos");
-                this.getValuesChart("nut_temperatura");
-                this.getValuesChart("nut_entrega_refeicao");
-
-                this.getValuesChart("em_duvidas_esclarecidas");
-                this.getValuesChart("em_seguranca_diagnostico");
-                this.getValuesChart("em_atencao");
-                this.getValuesChart("em_simpatia");
-
-                this.getValuesChart("enf_clareza");
-                this.getValuesChart("enf_atendimento");
-                this.getValuesChart("enf_atencao");
-                this.getValuesChart("enf_simpatia");
-                this.getValuesChart("enf_grau_ruido");
-
-                this.getValuesChart("if_atendimento_solicitacoes");
-                this.getValuesChart("if_instalacoes_apartamento");
-                this.getValuesChart("if_grau_ruido");
-
-                this.getValuesChart("atendimento_humanizado");
-                this.getValuesChart("satisfeito");
+                  await  ServiceFormulario.getChart(query).then(response => {
+                        this.dadosChart[key].value = this.trataDadosChart(response.data.data, this.dadosChart[key].dadosParaTratar);
+                  })
+              }
             },
             getTotais() {
 
                 var query =
-                    "?fields=count(*) as total&where[tipo_pesquisa]=2";
+                    "?fields=count(*) as total&where[tipo_pesquisa]=2"+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
-                    this.total = response.data[0].total
+                ServiceFormulario.getChart(query).then(response => {
+                  this.total = 0
+                  if(response.data.data.length > 0){
+                    this.total = response.data.data[0].total
+                  }
                 });
 
                 var field = "impediemntos"
@@ -470,11 +482,16 @@ export default {
                     field +
                     "&notnull=" +
                     field +
-                    "&where[tipo_pesquisa]=2";
+                    "&where[tipo_pesquisa]=2"+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
-                    this.restricoes = response.data[0].total
-                    this.permanencia = response.data[1].total
+                ServiceFormulario.getChart(query).then(response => {
+                  this.restricoes = 0
+                  this.permanencia = 0
+                  if(response.data.data.length > 0){
+                    this.restricoes = response.data.data[0].total
+                    this.permanencia = response.data.data[1].total
+                  }
                 });
             },
             trataDadosChart(ddBase, ddOptions) {
@@ -497,225 +514,16 @@ export default {
                     " as id&group=" +
                     field +
                     "&notnull=" +
-                    field;
+                    field+
+                    "&between='"+moment(this.inicio).format("YYYY-MM-DD")+"','"+moment(this.fim).format("YYYY-MM-DD")+"'";
 
-                Service.getChart(query).then(response => {
+                ServiceFormulario.getChart(query).then(response => {
                     this.totalTipoPesquisa = this.trataDadosChart(
-                        response.data,
+                        response.data.data,
                         tipo_pesquisa
                     );
                 });
             },
-            getValuesChart(field) {
-                var query =
-                    "?fields=count(*) as total," +
-                    field +
-                    " as id&group=" +
-                    field +
-                    "&notnull=" +
-                    field +
-                    "&where[tipo_pesquisa]=2";
-
-                Service.getChart(query).then(response => {
-                    switch (field) {
-                        case "unidade_internacao":
-                            this.totalUnidade = this.trataDadosChart(response.data, unidade);
-                            break;
-
-                        case "fator_escolha":
-                            this.totalInfluencia = this.trataDadosChart(response.data, fatores);
-                            break;
-                        case "utilizou_servico_antes":
-                            this.totalServicos = this.trataDadosChart(response.data, simnao);
-                            break;
-
-                        case "desde_ultima_visita":
-                            this.totalContinuidade = this.trataDadosChart(
-                                response.data,
-                                ultima_internacao
-                            );
-                            break;
-                        case "recomendacao":
-                            this.totalRecomentacao = this.trataDadosChart(
-                                response.data,
-                                simnao
-                            );
-                            break;
-
-                        case "if_estacionamento":
-                            this.totalEstacionamento = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_recepcao":
-                            this.totalRecepcao = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_internacao":
-                            this.totalSetorInternacao = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_seguranca":
-                            this.totalSeguranca = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_sinalizacao":
-                            this.totalSinalizacao = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "if_aparencia":
-                            this.totalAparencia = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_conforto":
-                            this.totalConforto = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_limpeza":
-                            this.totalLimpeza = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_roupa_cama":
-                            this.totalCama = this.trataDadosChart(response.data, questionario);
-                            break;
-                        case "if_atendimento":
-                            this.totalAtendimento = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_conveniencia":
-                            this.totalConveniencia = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "nut_alimentos":
-                            this.totalAlimentos = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "nut_temperatura":
-                            this.totalTemperatura = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "nut_entrega_refeicao":
-                            this.totalRefeicoes = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "em_duvidas_esclarecidas":
-                            this.totalEsclarecimentos = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "em_seguranca_diagnostico":
-                            this.totalDiagnostico = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "em_atencao":
-                            this.totalAtenção = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "em_simpatia":
-                            this.totalSimpatia = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "enf_clareza":
-                            this.totalEnfClareza = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "enf_atendimento":
-                            this.totalEnfAtendimento = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "enf_atencao":
-                            this.totalEnfAtenção = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "enf_simpatia":
-                            this.totalEnfSimpatia = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "enf_grau_ruido":
-                            this.totalEnfRuido = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "if_atendimento_solicitacoes":
-                            this.totalInfClareza = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_instalacoes_apartamento":
-                            this.totalInfInstalacoes = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "if_grau_ruido":
-                            this.totalInfRuido = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-
-                        case "atendimento_humanizado":
-                            this.totalFimAcolhimento = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                        case "satisfeito":
-                            this.totalFimServicos = this.trataDadosChart(
-                                response.data,
-                                questionario
-                            );
-                            break;
-                    }
-                });
-            }
     }
 };
 

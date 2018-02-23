@@ -14,5 +14,10 @@ export default {
   },
   post(data) {
     return api.request("post", this.url, data);
+  },
+  getChart(param) {
+    if (param) {
+      return api.request("get", this.url + param);
+    }
   }
 };

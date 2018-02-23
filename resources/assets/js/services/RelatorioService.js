@@ -6,5 +6,8 @@ export default {
     if (param) {
       return api.request("get", this.url + param);
     }
+  },
+  get() {
+      return api.request("get", this.url);
   }
 };

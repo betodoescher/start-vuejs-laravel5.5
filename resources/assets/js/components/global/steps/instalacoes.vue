@@ -8,6 +8,10 @@
   <div class="row">
 
     <div v-if="tipo == 2" class="form-group col-md-12">
+      <app-radio label="Pastoral da Saúde" :selected="form.if_pastoral_saude" field="if_pastoral_saude" :options="questionario" @setValue="setValueButton" />
+    </div>
+
+    <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Estacionamento" :selected="form.if_estacionamento" field="if_estacionamento" :options="questionario" @setValue="setValueButton" />
     </div>
 
@@ -81,6 +85,7 @@ export default {
     return {
       questionario,
       form: new Form({
+        if_pastoral_saude: null,
         if_estacionamento: null,
         if_recepcao: null,
         if_internacao: null,
@@ -99,8 +104,16 @@ export default {
     };
   },
   props: {
-    tipo: {
-      type: Number
+      tipo: {
+          type: Number
+      },
+      dadosPai: {
+          type: Object
+      }
+  },
+  watch: {
+    dadosPai: function(param) {
+      this.form = Object.assign({}, this.form, param);
     }
   },
   methods: {

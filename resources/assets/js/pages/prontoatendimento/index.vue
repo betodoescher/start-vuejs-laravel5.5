@@ -70,6 +70,17 @@ export default {
       Service.post(this.form)
         .then(response => {
           this.$refs["alert"].showAlertSuccess();
+          this.$dialog
+              .confirm("Número do protocolo: " + response.data.protocolo.protocolo, {
+                  loader: true,
+                  okText: "Ok",
+                  cancelText: "Fechar"
+              }).then(dialog => {
+                  dialog.close();
+              })
+              .catch(() => {
+                  dialog.close();
+              });
         })
         .catch(e => {
           console.log(e);

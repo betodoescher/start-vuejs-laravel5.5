@@ -42,6 +42,8 @@ trait ApiControllerTrait
 
         $where = $request->all()['where'] ?? [];
 
+        $notnull = $request->all()['notnull'] ?? false;
+
         $like = $request->all()['like'] ?? null;
         if ($like) {
           $like = explode(',', $like);
@@ -58,9 +60,11 @@ trait ApiControllerTrait
             }
             return $query;
           })
-          ->where($where)
           ->whereRaw($beteween)
           ->with($this->relationships());
+
+          if($notnull)
+            $result->whereNotNull($notnull);
 
           if($likeAll){
             foreach($columns as $column)

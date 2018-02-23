@@ -20,6 +20,12 @@ export default [
        { path: 'internacoes', name: 'dashboard.internacoes', component: require('~/pages/dashboard/internacoes') },
        { path: 'exames', name: 'dashboard.exames', component: require('~/pages/dashboard/exames') },
        { path: 'prontoatendimentos', name: 'dashboard.prontoatendimentos', component: require('~/pages/dashboard/prontoatendimentos') }
+     ] },
+     { path: '/relatorios', component: require('~/pages/relatorios/index'), children: [
+       { path: '', redirect: { name: 'relatorios.internacoes' }},
+       { path: 'internacoes', name: 'relatorios.internacoes', component: require('~/pages/relatorios/internacoes') },
+       { path: 'exames', name: 'relatorios.exames', component: require('~/pages/relatorios/exames') },
+       { path: 'prontoatendimentos', name: 'relatorios.prontoatendimentos', component: require('~/pages/relatorios/prontoatendimentos') }
      ] }
 
   ]),

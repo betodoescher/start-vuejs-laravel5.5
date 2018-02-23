@@ -19,10 +19,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    
+
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
-  
+
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
@@ -38,8 +38,9 @@ Route::get('translations/{locale}', 'TranslationController@show');
 Route::group(['middleware' => 'jwt'], function () {
     // Protected routes
 
-    Route::get('relatorio', 'RelatorioController@indexRelatorio');
+
  });
+ Route::get('relatorio', 'RelatorioController@indexRelatorio');
 Route::get('protocolo/{id}', 'ProtocoloController@show');
 Route::get('protocolo/formulario/{id}', 'ProtocoloController@showFormulario');
 Route::resource('formulario', 'FormularioController');

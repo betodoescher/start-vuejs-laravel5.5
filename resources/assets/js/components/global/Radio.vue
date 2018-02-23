@@ -1,17 +1,17 @@
 <template>
     <div>
       <b-form-group :label="label" label-size="sm">
-          <button type="button" 
-                v-for="(key, val) in options" 
-                @click="onClick(key, field)" 
-                :class="['btn', 
-                          { 
-                            'btn-outline-primary active': selected === key.value, 
+          <button type="button"
+                v-for="(key, val) in options"
+                @click="onClick(key, field)"
+                :class="['btn',
+                          {
+                            'btn-outline-primary active': selected === key.value,
                             'btn-outline-primary ': selected !== key.value  }]">
                 {{ key.text }}
-        </button>                      
+        </button>
       </b-form-group>
-        
+
     </div>
 </template>
 <script>
@@ -39,7 +39,7 @@ export default {
       type: String
     },
     selected: {
-      type: Number
+      
     }
   },
   methods: {

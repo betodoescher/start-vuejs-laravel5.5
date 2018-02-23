@@ -59,11 +59,16 @@ export default {
     };
   },
   props: {
-    tipo: {
-      type: Number
-    },
-    originalData: {
-      type: Object
+      tipo: {
+          type: Number
+      },
+      dadosPai: {
+          type: Object
+      }
+  },
+  watch: {
+    dadosPai: function(param) {
+      this.form = Object.assign({}, this.form, param);
     }
   },
   created () {
