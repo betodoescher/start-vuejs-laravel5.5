@@ -8,14 +8,19 @@ class Formulario extends Model
 {
     protected $fillable = [
         'id',
+        'atendimento_id',
         'idetificacao',
         'nome',
         'data_nascimento',
         'data_inicio_internacao',
         'data_fim_internacao',
 
+        'escolha_observacao',
+        'profissionais_observacao',
+        'atendimento_observacao',
+
         'unidade_internacao',
-        'andar',2,
+        'andar',
         'quarto',
         'impediemntos',
 
@@ -65,6 +70,7 @@ class Formulario extends Model
         'if_roupa_cama',
         'if_atendimento',
         'if_conveniencia',
+        'if_pastoral_saude',
         'if_observacoes',
 
         'nut_alimentos',

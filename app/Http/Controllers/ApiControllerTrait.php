@@ -25,6 +25,14 @@ trait ApiControllerTrait
 
         $order = $request->all()['order'] ?? null;
 
+        $beteween = $request->all()['between'] ?? null;
+
+        if($beteween != null ){
+            list($dataInicio, $dataFim) = explode(',', $beteween);
+            $beteween = "date(created_at) >= $dataInicio && date(created_at) <= $dataFim ";
+        }
+
+
         if ($order !== null) {
           $order = explode(',', $order);
         }
@@ -51,6 +59,7 @@ trait ApiControllerTrait
             return $query;
           })
           ->where($where)
+          ->whereRaw($beteween)
           ->with($this->relationships());
 
           if($likeAll){
@@ -66,6 +75,8 @@ trait ApiControllerTrait
               });
             }
           }
+
+
 
           $result->orderBy($order[0], $order[1]);
 
