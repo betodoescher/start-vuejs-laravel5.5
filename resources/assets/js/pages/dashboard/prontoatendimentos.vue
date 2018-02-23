@@ -1,6 +1,9 @@
 <template>
 <div>
-  <card :title="title">
+  <card>
+    <h4>Período de {{inicio | formatData}} a {{fim | formatData}}</h4>
+  </card>
+  <card>
     <table class="table">
         <thead class="thead-inverse">
           <tr>
@@ -56,7 +59,7 @@
   </card>
 
   <br>
-  
+
   <card title="Continuidade">
       <div class="row chart">
         <div class="form-group col-md-6 text-center">
@@ -185,7 +188,7 @@
           <h4>Aparência e organização das instalações</h4>
           <bar-chart :data="totalIfAparencia"></bar-chart>
         </div>
-        
+
       </div>
   </card>
 
@@ -291,47 +294,71 @@ export default {
     totalFimAcolhimento: [],
     totalFimServicos: []
   }),
-  mounted() {
-    this.getTotais();
-
-    this.getValuesChartInternacao("tipo_pesquisa");
-
-    this.getValuesChart("idetificacao");
-
-    this.getValuesChart("fator_escolha");
-    this.getValuesChart("utilizou_servico_antes");
-
-    this.getValuesChart("desde_ultima_visita");
-    this.getValuesChart("recomendacao");
-
-    this.getValuesChart("atp_central_agendamento");
-    this.getValuesChart("atp_recepcionista");
-    this.getValuesChart("atp_seguranca");
-    this.getValuesChart("atp_enfermagem");
-    this.getValuesChart("atp_equipe_medica");
-    this.getValuesChart("atp_tec_imobilizacao");
-    this.getValuesChart("agendamento_orientacao");
-
-    this.getValuesChart("ta_central_agendamento");
-    this.getValuesChart("ta_recepcionista");
-    this.getValuesChart("ta_enfermagem");
-    this.getValuesChart("ta_equipe_medica");
-    this.getValuesChart("ta_entrega_laudo");
-    this.getValuesChart("ta_administracao_medicacao");
-    this.getValuesChart("ta_imobilizacao_curativo");
-    this.getValuesChart("ta_exames");
-    this.getValuesChart("ta_realizacao_exame");
-
-    this.getValuesChart("if_conforto");
-    this.getValuesChart("if_limpeza");
-    this.getValuesChart("if_aparencia");
-
-    this.getValuesChart("atendimento_humanizado");
-    this.getValuesChart("satisfeito");
+  created() {
+      this.updateChats()
+  },
+  filters: {
+    formatData: function (value) {
+    return moment(value).format("DD/MM/YYYY")
+    }
+  },
+  computed: {
+      inicio() {
+              return this.$store.state.charts.inicio
+          },
+          fim() {
+              return this.$store.state.charts.fim
+          }
+  },
+  watch: {
+      inicio: function() {
+          this.updateChats()
+      },
+      fim: function() {
+          this.updateChats()
+      }
   },
   methods: {
+    updateChats() {
+      this.getTotais();
+
+      this.getValuesChartInternacao("tipo_pesquisa");
+
+      this.getValuesChart("idetificacao");
+
+      this.getValuesChart("fator_escolha");
+      this.getValuesChart("utilizou_servico_antes");
+
+      this.getValuesChart("desde_ultima_visita");
+      this.getValuesChart("recomendacao");
+
+      this.getValuesChart("atp_central_agendamento");
+      this.getValuesChart("atp_recepcionista");
+      this.getValuesChart("atp_seguranca");
+      this.getValuesChart("atp_enfermagem");
+      this.getValuesChart("atp_equipe_medica");
+      this.getValuesChart("atp_tec_imobilizacao");
+      this.getValuesChart("agendamento_orientacao");
+
+      this.getValuesChart("ta_central_agendamento");
+      this.getValuesChart("ta_recepcionista");
+      this.getValuesChart("ta_enfermagem");
+      this.getValuesChart("ta_equipe_medica");
+      this.getValuesChart("ta_entrega_laudo");
+      this.getValuesChart("ta_administracao_medicacao");
+      this.getValuesChart("ta_imobilizacao_curativo");
+      this.getValuesChart("ta_exames");
+      this.getValuesChart("ta_realizacao_exame");
+
+      this.getValuesChart("if_conforto");
+      this.getValuesChart("if_limpeza");
+      this.getValuesChart("if_aparencia");
+
+      this.getValuesChart("atendimento_humanizado");
+      this.getValuesChart("satisfeito");
+    },
     getTotais() {
-      
+
       var query =
         "?fields=count(*) as total&where[tipo_pesquisa]=2";
 
@@ -535,7 +562,7 @@ export default {
               questionario
             );
             break;
-            
+
           case "atendimento_humanizado":
             this.totalFimAcolhimento = this.trataDadosChart(
               response.data,

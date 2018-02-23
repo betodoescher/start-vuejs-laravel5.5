@@ -3,6 +3,7 @@
 <template>
 
 <div>
+
     <card title="Usuários" class="ui container">
         <form @submit.prevent="validateBeforeSubmit">
             <app-alert ref="alert"></app-alert>
@@ -61,7 +62,7 @@
     <br>
     <card>
         <div>
-            <app-grid :columns="columns" :rows="rows" :store="store" @pageChanged="gridRefresh" @searchTable="searchTable" @populate="popular" @delete="excluir" />
+            <app-grid :columns="columns" :store="users" @pageChanged="gridRefresh" @searchTable="searchTable" @populate="popular" @delete="excluir" />
         </div>
     </card>
 </div>
@@ -153,40 +154,31 @@ export default {
                 });
             },
             popular(id) {
-                Service.get(id).then(response => {
-                    this.form = new Form(Object.assign({}, this.form, response.data));
-                });
+                this.$store.dispatch('users/getUser', id)
+                this.form = new Form(Object.assign({}, this.form, this.$store.state.users.user));
             },
             excluir(id) {
-                var res = Service.del(id).then(response => {});
-
-                if (res) this.$refs["alert"].showAlertDelete();
-
+                this.$store.dispatch('users/deleteUser', id).then(response => {
+                    this.$refs["alert"].showAlertDelete();
+                })
                 this.gridRefresh();
             },
             gridRefresh(pageChanged) {
-                Service.get(null, pageChanged).then(response => {
-                    this.store = response.data;
-                    this.rows = response.data.data;
-                    this.trataDados()
-                });
+                this.$store.dispatch('users/getUsers', {
+                    page: pageChanged
+                })
             },
-            searchTable(param) {
-                Service.getLikeAll(param).then(response => {
-                    this.store = response.data;
-                    this.rows = response.data.data;
-                    this.trataDados()
-                });
-            },
-            trataDados() {
-                for (var key in this.rows) {
-                    for (var opt in this.tipo_acessos) {
-                        if (this.tipo_acessos[opt].value == this.rows[key].tipo_usuario) {
-                            this.rows[key].tipo_descricao = this.tipo_acessos[opt].text;
-                        }
-                    }
-                }
+            searchTable(term) {
+                this.$store.dispatch('users/getUsers', {
+                    term: term
+                }, term)
             }
+
+    },
+    computed: {
+        users() {
+            return this.$store.state.users.usersList
+        }
     }
 };
 

@@ -23,7 +23,12 @@
       <app-radio label="Desde a sua última internação na casa de Saúde São José a mesma se manteve?" :selected="form.desde_ultima_visita" field="desde_ultima_visita" :options="ultima_internacao" @setValue="setValueButton" />
     </div>
 
-     
+    <div class="form-group col-md-12">
+        <label>Observações</label>
+        <textarea v-model="form.conclusao_observacao" class="form-control" rows="4" id="comment"></textarea>
+    </div>
+
+
   </div>
 </div>
 </template>
@@ -45,7 +50,8 @@ export default {
         atendimento_humanizado: null,
         satisfeito: null,
         recomendacao: null,
-        desde_ultima_visita: null
+        desde_ultima_visita: null,
+        conclusao_observacao: null
       })
     };
   },

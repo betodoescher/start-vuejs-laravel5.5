@@ -11,16 +11,16 @@
     <div v-if="tipo == 1" class="form-group col-md-12">
       <app-radio label="Central de agendamento" :selected="form.ta_central_agendamento" field="ta_central_agendamento" :options="questionario" @setValue="setValueButton" />
     </div>
-      
-    <div class="form-group col-md-12">
+
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Recepção" :selected="form.ta_recepcionista" field="ta_recepcionista" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Enfermagem" :selected="form.ta_enfermagem" field="ta_enfermagem" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Equipe médica" :selected="form.ta_equipe_medica" field="ta_equipe_medica" :options="questionario" @setValue="setValueButton" />
     </div>
 
@@ -28,28 +28,33 @@
       <app-radio label="Entrega de laudos" :selected="form.ta_entrega_laudo" field="ta_entrega_laudo" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Administração da medicação" :selected="form.ta_administracao_medicacao" field="ta_administracao_medicacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Imobilizações e curativos" :selected="form.ta_imobilizacao_curativo" field="ta_imobilizacao_curativo" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 2" class="form-group col-md-12">
+    <!-- <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Emergência" :selected="form.ta_emergencia" field="ta_emergencia" :options="questionario" @setValue="setValueButton" />
-    </div>
+    </div> -->
 
     <div v-if="tipo == 2" class="form-group col-md-12">
-      <app-radio label="Internação" :selected="form.ta_internacao" field="ta_internacao" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="O atendimento e o tempo na admissão foram satisfatórios?" :selected="form.ta_internacao" field="ta_internacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Realização de exames laboratoriais" :selected="form.ta_exames" field="ta_exames" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <div v-if="tipo != 2" class="form-group col-md-12">
       <app-radio label="Realização de exames de imagem" :selected="form.ta_realizacao_exame" field="ta_realizacao_exame" :options="questionario" @setValue="setValueButton" />
+    </div>
+
+    <div class="form-group col-md-12">
+        <label>Observações</label>
+        <textarea v-model="form.atendimento_observacao" class="form-control" rows="4" id="comment"></textarea>
     </div>
 
   </div>
@@ -85,7 +90,8 @@ export default {
         ta_administracao_medicacao: null,
         ta_imobilizacao_curativo: null,
         ta_emergencia: null,
-        ta_internacao: null
+        ta_internacao: null,
+        atendimento_observacao: null
       })
     };
   },

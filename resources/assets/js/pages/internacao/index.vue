@@ -16,27 +16,27 @@
 
           <tab-content title="Tempo de atendimento" :before-change="()=>validateStep('app-atendimento')">
               <app-atendimento ref="app-atendimento" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-atendimento>
-          </tab-content> 
+          </tab-content>
 
-         <tab-content title="Instalações físicas" :before-change="()=>validateStep('app-instalacoes')">
+          <tab-content title="Acolhimento e hotelaria" :before-change="()=>validateStep('app-instalacoes')">
               <app-instalacoes ref="app-instalacoes" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-instalacoes>
-          </tab-content> 
-          
-          <tab-content title="Nutrição" :before-change="()=>validateStep('app-nutricao')">
-              <app-nutricao ref="app-nutricao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-nutricao>
-          </tab-content> 
+          </tab-content>
 
           <tab-content title="Equipe médica" :before-change="()=>validateStep('app-equipe')">
               <app-equipe ref="app-equipe" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-equipe>
-          </tab-content> 
-          
+          </tab-content>
+
           <tab-content title="Enfermaria" :before-change="()=>validateStep('app-enfermaria')">
               <app-enfermaria ref="app-enfermaria" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-enfermaria>
-          </tab-content> 
+          </tab-content>
+
+          <tab-content title="Nutrição" :before-change="()=>validateStep('app-nutricao')">
+              <app-nutricao ref="app-nutricao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-nutricao>
+          </tab-content>
 
           <tab-content title="Conclusão" :before-change="()=>validateStep('app-conclusao')">
               <app-conclusao ref="app-conclusao" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-conclusao>
-          </tab-content> 
+          </tab-content>
 
 
       </form-wizard>

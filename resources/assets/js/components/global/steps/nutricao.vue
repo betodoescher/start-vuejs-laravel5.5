@@ -19,7 +19,7 @@
       <app-radio label="Entrega das refeições" :selected="form.nut_entrega_refeicao" field="nut_entrega_refeicao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-     <div v-if="tipo == 2" class="form-group col-md-12">
+     <div class="form-group col-md-12">
         <label>Observações</label>
         <textarea v-model="form.nut_observacoes" class="form-control" rows="4" id="comment"></textarea>
     </div>

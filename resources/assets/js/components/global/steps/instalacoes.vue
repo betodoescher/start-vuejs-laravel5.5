@@ -26,11 +26,11 @@
     <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Sinalização" :selected="form.if_sinalizacao" field="if_sinalizacao" :options="questionario" @setValue="setValueButton" />
     </div>
-    
 
-    <div v-if="tipo == 2" class="form-group col-md-12">
+
+    <!-- <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Grau de ruído" :selected="form.if_grau_ruido" field="if_grau_ruido" :options="questionario" @setValue="setValueButton" />
-    </div>
+    </div> -->
 
     <div class="form-group col-md-12">
       <app-radio label="Conforto" :selected="form.if_conforto" field="if_conforto" :options="questionario" @setValue="setValueButton" />
@@ -44,9 +44,9 @@
       <app-radio label="Atendimento as solicitações" :selected="form.if_atendimento_solicitacoes" field="if_atendimento_solicitacoes" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 2" class="form-group col-md-12">
+    <!-- <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Instalações do apartamento" :selected="form.if_instalacoes_apartamento" field="if_instalacoes_apartamento" :options="questionario" @setValue="setValueButton" />
-    </div>
+    </div> -->
 
     <div class="form-group col-md-12">
       <app-radio label="Aparência e organização das instalações" :selected="form.if_aparencia" field="if_aparencia" :options="questionario" @setValue="setValueButton" />
@@ -55,16 +55,16 @@
     <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Roupa de cama e banho" :selected="form.if_roupa_cama" field="if_roupa_cama" :options="questionario" @setValue="setValueButton" />
     </div>
-    
+
     <div v-if="tipo == 2" class="form-group col-md-12">
       <app-radio label="Serviços de conveniência" :selected="form.if_conveniencia" field="if_conveniencia" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div v-if="tipo == 2" class="form-group col-md-12">
+    <div class="form-group col-md-12">
         <label>Observações</label>
         <textarea v-model="form.if_observacoes" class="form-control" rows="4" id="comment"></textarea>
     </div>
-     
+
   </div>
 </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <div>
-       <div class="row"> 
+       <div class="row">
 
         <div class="form-group col-md-12">
           <app-radio label="Que fatores lhe enfluenciaram na escolha pela Casa de Saúde São José?" :selected="form.fator_escolha" field="fator_escolha" :options="fatores" @setValue="setValueButton" />
           <!-- <b-form-group label="Que fatores lhe enfluenciaram na escolha pela Casa de Saúde São José?">
-            <b-form-checkbox-group plain v-model="form.fator_escolha" :options="fatores" /> 
+            <b-form-checkbox-group plain v-model="form.fator_escolha" :options="fatores" />
             <input v-if="buscaFator(6)"  name="qual_empresa" v-model="form.indicacao_qual_empresa" class="form-control" type="text" placeholder="Qual empresa?">
             <input v-if="buscaFator(7)"  name="outros" v-model="form.fator_escolha_outro" class="form-control" type="text" placeholder="Outros quais?">
            </b-form-group> -->
@@ -18,6 +18,11 @@
           <input v-if="form.utilizou_servico_antes == 1"  name="qual_servico" v-model="form.utilizou_servico_antes_qual" class="form-control" type="text" placeholder="Qual amigo ou familiar?">
         </div> -->
 
+        <div class="form-group col-md-12">
+            <label>Observações</label>
+            <textarea v-model="form.escolha_observacao" class="form-control" rows="4" id="comment"></textarea>
+        </div>
+
 
       </div>
   </div>
@@ -29,8 +34,8 @@ import { FormCheckbox } from "bootstrap-vue/es/components";
 import { FormRadio } from "bootstrap-vue/es/components";
 import { FormGroup } from "bootstrap-vue/es/components";
 
-import { fatores } from "../../../services/store/fatores" 
-import { simnao } from "../../../services/store/simnao" 
+import { fatores } from "../../../services/store/fatores"
+import { simnao } from "../../../services/store/simnao"
 
 Vue.use(FormRadio);
 Vue.use(FormGroup);
@@ -47,7 +52,8 @@ export default {
         indicacao_qual_empresa: null,
         fator_escolha_outro: null,
         utilizou_servico_antes: null,
-        utilizou_servico_antes_qual: null
+        utilizou_servico_antes_qual: null,
+        escolha_observacao: null
       }),
       originalForm: {}
     };
@@ -138,8 +144,8 @@ export default {
     visibility: hidden;
     &:checked + label:after {
       opacity: 1;
-    }   
-  } 
+    }
+  }
 } */
 
 </style>

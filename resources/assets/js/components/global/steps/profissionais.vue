@@ -39,7 +39,12 @@
       <app-radio label="No agendamento foram repassadas todas as orientações sobre preparo e convênio?" :selected="form.agendamento_orientacao" field="agendamento_orientacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
-     
+    <div class="form-group col-md-12">
+        <label>Observações</label>
+        <textarea v-model="form.profissionais_observacao" class="form-control" rows="4" id="comment"></textarea>
+    </div>
+
+
   </div>
   </div>
 </template>
@@ -63,7 +68,8 @@ export default {
         atp_equipe_medica: null,
         atp_laboratorio: null,
         atp_tec_imobilizacao: null,
-        agendamento_orientacao: null
+        agendamento_orientacao: null,
+        profissionais_observacao: null
       })
     };
   },

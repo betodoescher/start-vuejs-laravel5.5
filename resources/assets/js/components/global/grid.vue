@@ -88,9 +88,6 @@ export default {
         columns: {
             type: Array
         },
-        rows: {
-            type: Array
-        },
         txtEditar: {
             type: String,
             default: "Editar"
@@ -100,6 +97,14 @@ export default {
             default: "Excluir"
         },
         store: {}
+    },
+    computed: {
+        rows() {
+            if (this.store.data) {
+                return this.store.data
+            }
+            return {}
+        }
     },
     methods: {
         makeAdmin: function() {

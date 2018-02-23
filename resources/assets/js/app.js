@@ -20,7 +20,7 @@ Vue.use(VueTheMask)
 
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
- 
+
 Vue.use(VueMomentJS, moment);
 
 

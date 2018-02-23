@@ -27,7 +27,7 @@
       <app-radio label="Grau de ruído" :selected="form.enf_grau_ruido" field="enf_grau_ruido" :options="questionario" @setValue="setValueButton" />
     </div>
 
-     <div v-if="tipo == 2" class="form-group col-md-12">
+     <div class="form-group col-md-12">
         <label>Observações</label>
         <textarea v-model="form.enf_observacoes" class="form-control" rows="4" id="comment"></textarea>
     </div>
