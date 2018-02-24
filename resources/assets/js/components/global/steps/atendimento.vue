@@ -97,7 +97,7 @@ export default {
   },
   props: {
       tipo: {
-        
+
       },
       dadosPai: {
           type: Object
