@@ -303,10 +303,10 @@ Vue.use(VueChartkick, {
     Chartkick
 });
 
-import {
-    unidade
-}
-from "../../services/store/unidade";
+// import {
+//     unidade
+// }
+// from "../../services/store/unidade";
 import {
     andar
 }
@@ -359,7 +359,6 @@ export default {
         total: 0,
         restricoes: 0,
         permanencia: 0,
-        unidade,
         andar,
         tipo_pessoa,
         tipo_acompanhante,
@@ -371,7 +370,7 @@ export default {
         ultima_internacao,
         totalTipoPesquisa: [],
         dadosChart: {
-             unidade_internacao: { name: 'unidade_internacao', value: [], dadosParaTratar: unidade},
+             unidade_internacao: { name: 'unidade_internacao', value: [], dadosParaTratar: []},
              fator_escolha: { name: 'fator_escolha', value: [], dadosParaTratar: fatores},
              utilizou_servico_antes: { name: 'utilizou_servico_antes', value: [], dadosParaTratar: simnao},
              desde_ultima_visita: { name: 'desde_ultima_visita', value: [], dadosParaTratar: ultima_internacao},
@@ -415,7 +414,8 @@ export default {
       }
     },
     created() {
-
+      this.$store.dispatch('unidade/getAll')
+      console.log(this.dadosChart)
       this.updateChats()
     },
     computed: {
@@ -424,6 +424,9 @@ export default {
             },
             fim() {
                 return this.$store.state.charts.fim
+            },
+            unidades() {
+                return this.$store.state.unidade.unidades
             }
     },
     watch: {
@@ -432,7 +435,11 @@ export default {
         },
         fim: function() {
             this.updateChats()
+        },
+        unidades: function(dados) {
+            this.dadosChart.unidade_internacao.dadosParaTratar = dados
         }
+
     },
     methods: {
             async  updateChats() {

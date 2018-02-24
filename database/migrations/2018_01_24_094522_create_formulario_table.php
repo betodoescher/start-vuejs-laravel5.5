@@ -37,7 +37,7 @@ class CreateFormularioTable extends Migration
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();
-            $table->string('fator_escolha')->nullable();
+            $table->char('fator_escolha', 1)->nullable();
             $table->string('indicacao_qual_empresa')->nullable();
             $table->string('fator_escolha_outro')->nullable();
             $table->char('utilizou_servico_antes',1)->nullable();

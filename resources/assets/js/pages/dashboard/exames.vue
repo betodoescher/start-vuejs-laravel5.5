@@ -257,10 +257,10 @@ Vue.use(VueChartkick, {
     Chartkick
 });
 
-import {
-    unidade
-}
-from "../../services/store/unidade";
+// import {
+//     unidade
+// }
+// from "../../services/store/unidade";
 import {
     andar
 }
@@ -314,7 +314,7 @@ export default {
         total: 0,
         restricoes: 0,
         permanencia: 0,
-        unidade,
+        // unidade: [],
         andar,
         tipo_pessoa,
         tipo_acompanhante,

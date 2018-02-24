@@ -126,6 +126,7 @@ export default {
                         dados[key].created_at = moment(dados[key].created_at).format("DD/MM/YYYY H:mm")
                         dados[key].data_nascimento = moment(dados[key].data_nascimento).format("DD/MM/YYYY")
                         dados[key].data_inicio_internacao = moment(dados[key].data_inicio_internacao).format("DD/MM/YYYY")
+                          if(dados[key].data_fim_internacao)
                         dados[key].data_fim_internacao = moment(dados[key].data_fim_internacao).format("DD/MM/YYYY")
                     }
                     this.rows = dados

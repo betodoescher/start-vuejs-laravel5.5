@@ -78,7 +78,7 @@ export default {
   methods: {
     onComplete() {
 
-      this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
+      // this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
 
       Service.post(this.form)
         .then(response => {

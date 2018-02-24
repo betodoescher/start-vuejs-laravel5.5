@@ -3,11 +3,6 @@
     <app-alert ref="alert" @endCountDown="goFirstStep" :dismissSecs="dismissSecs"></app-alert>
 
     <form @submit.prevent="validateBeforeSubmit">
-
-      <!-- <pre>
-        {{form}}
-      </pre> -->
-
       <vue-good-wizard
         :steps="steps"
         :onNext="nextClicked" backClicked
