@@ -11,9 +11,21 @@
 <div class="row">
 
 
-    <div class="col-lg-3 col-sm-12">
+    <div class="col-lg-12 col-sm-12">
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li v-for="tab in tabs" class="nav-item">
+                        <router-link :to="{ name: tab.route }" class="nav-link" active-class="active">
+                            <fa :icon="tab.icon" fixed-width/> {{ tab.name }}
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-        <card title="Pesquisas" class="settings-card">
+
+        <!-- <card title="Pesquisas" class="settings-card">
             <ul class="nav flex-column nav-pills">
                 <li v-for="tab in tabs" class="nav-item">
                     <router-link :to="{ name: tab.route }" class="nav-link" active-class="active">
@@ -21,10 +33,10 @@
                     </router-link>
                 </li>
             </ul>
-        </card>
+        </card> -->
     </div>
     <br>
-    <div class="col-lg-9 col-sm-12">
+    <div class="col-lg-12 col-sm-12">
         <transition name="fade" mode="out-in">
             <router-view></router-view>
         </transition>
@@ -48,26 +60,26 @@ export default {
     },
     computed: {
         tabs() {
-            return [{
-                icon: "bed",
-                name: "Internações",
-                route: "relatorios.internacoes"
-            }, {
-                icon: "stethoscope",
-                name: "Exames",
-                route: "relatorios.exames"
-            }, {
-                icon: "ambulance",
-                name: "P.A.",
-                route: "relatorios.prontoatendimentos"
-            }];
-        },
-        inicio() {
-            return this.$store.state.charts.inicio
-        },
-        fim() {
-            return this.$store.state.charts.fim
-        }
+                return [{
+                    icon: "bed",
+                    name: "Internações",
+                    route: "relatorios.internacoes"
+                }, {
+                    icon: "stethoscope",
+                    name: "Exames",
+                    route: "relatorios.exames"
+                }, {
+                    icon: "ambulance",
+                    name: "P.A.",
+                    route: "relatorios.prontoatendimentos"
+                }];
+            },
+            inicio() {
+                return this.$store.state.charts.inicio
+            },
+            fim() {
+                return this.$store.state.charts.fim
+            }
     },
     methods: {
         changeInicio() {

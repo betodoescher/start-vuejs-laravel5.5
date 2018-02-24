@@ -105,7 +105,6 @@ export default {
   },
   props: {
       tipo: {
-          type: Number
       },
       dadosPai: {
           type: Object

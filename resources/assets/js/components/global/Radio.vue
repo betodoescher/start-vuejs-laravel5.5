@@ -6,8 +6,8 @@
                 @click="onClick(key, field)"
                 :class="['btn',
                           {
-                            'btn-outline-primary active': selected === key.value,
-                            'btn-outline-primary ': selected !== key.value  }]">
+                            'btn-outline-primary active': selected == key.value,
+                            'btn-outline-primary ': selected != key.value  }]">
                 {{ key.text }}
         </button>
       </b-form-group>
@@ -39,7 +39,7 @@ export default {
       type: String
     },
     selected: {
-      
+
     }
   },
   methods: {

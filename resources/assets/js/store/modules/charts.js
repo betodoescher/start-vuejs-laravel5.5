@@ -2,8 +2,6 @@ import Vue from "vue";
 import moment from "moment";
 import VueMomentJS from "vue-momentjs";
 
-console.log(moment().format('YYYY-MM-DD'))
-
 Vue.use(VueMomentJS, moment);
 export const state = {
   inicio: '01/01/'+moment().format('YYYY'),

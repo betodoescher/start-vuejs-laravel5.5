@@ -83,13 +83,12 @@
         </div>
 
         <div v-if="tipo == 2" class="form-group col-md-6">
-            <app-radio label="Preenchido por?" :selected="form.prenchido_por" field="prenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
-
-            <input v-if="form.prenchido_por == 3" name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="Quem está preenchendo?">
+            <app-radio label="Preenchido por?" :selected="form.preenchido_por" field="preenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
+            <input v-if="form.preenchido_por == 3" name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="Quem está preenchendo?">
         </div>
 
         <div v-if="tipo == 2" class="form-group col-md-6">
-            <app-radio label="Impedimento?" :selected="form.impedimentos" field="impedimentos" :options="impedimento" @setValue="setValueButton" />
+            <app-radio label="Impedimento?" :selected="form.impediemntos" field="impediemntos" :options="impedimento" @setValue="setValueButton" />
         </div>
 
     </div>
@@ -142,7 +141,7 @@ export default {
             form: new Form({
                 atendimento_id: null,
                 idetificacao: null,
-                prenchido_por: null,
+                preenchido_por: null,
                 preenchido_por_nome: null,
                 nome: null,
                 data_nascimento: null,
@@ -154,7 +153,7 @@ export default {
                 unidade_internacao: null,
                 andar: null,
                 quarto: null,
-                impedimentos: null
+                impediemntos: null
             })
         };
     },
@@ -163,7 +162,6 @@ export default {
     },
     props: {
         tipo: {
-            type: Number
         },
         dadosPai: {
             type: Object
@@ -192,7 +190,6 @@ export default {
                     );
                 }
 
-                console.log()
                 const isValid = this.$validator.validateAll().then((result) => {
                     return (result)
                 })
@@ -205,11 +202,11 @@ export default {
                     case "idetificacao":
                         this.form.idetificacao = key.value;
                         break;
-                    case "prenchido_por":
-                        this.form.prenchido_por = key.value;
+                    case "preenchido_por":
+                        this.form.preenchido_por = key.value;
                         break;
-                    case "impedimentos":
-                        this.form.impedimentos = key.value;
+                    case "impediemntos":
+                        this.form.impediemntos = key.value;
                         break;
                 }
             },

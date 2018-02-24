@@ -8,7 +8,7 @@
         {{form}}
       </pre> -->
 
-      <vue-good-wizard 
+      <vue-good-wizard
         :steps="steps"
         :onNext="nextClicked" backClicked
         :onBack="backClicked"
@@ -116,7 +116,6 @@ export default {
   }),
   methods: {
     async validateBeforeSubmit() {
-      console.log(this.form)
       this.$refs["alert"].showAlertSuccess()
     },
     nextClicked(currentPage) {
