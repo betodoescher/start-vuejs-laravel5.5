@@ -14,14 +14,14 @@
 
     <card>
         <div>
-            <app-grid :columns="columns" :rows="rows" txtEditar="Ver" @populate="popular" />
+            <app-gridPesquisa :columns="columns" :rows="rows" txtEditar="Ver" @populate="popular" />
         </div>
     </card>
   </div>
 </template>
 <script>
 import Vue from "vue";
-import Grid from "../../components/global/grid";
+import Grid from "../../components/global/gridPesquisas";
 import ServiceRelatorio from "../../services/RelatorioService"
 import ServiceFormulario from "../../services/FormularioService"
 import moment from "moment";

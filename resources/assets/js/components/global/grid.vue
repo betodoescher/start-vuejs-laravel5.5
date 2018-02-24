@@ -51,7 +51,7 @@ table .global-search-input {
             </table>
         </div>
     </div>
-    <vue-good-table :columns="columns" :rows="rows" width="50%" globalSearchPlaceholder="Filtro" :paginate="false">
+    <vue-good-table :columns="columns" :rows="store.data" width="50%" globalSearchPlaceholder="Filtro" :paginate="false">
         <template slot="table-row-after" slot-scope="props">
             <td>
                 <button class="btn btn-info" @click="onClick('edit-item', props.row)"><i class="fa fa-edit"></i> {{txtEditar}}</button>
@@ -59,7 +59,7 @@ table .global-search-input {
             </td>
         </template>
     </vue-good-table>
-    <vue-good-pagination :perPage="store.per_page" :total="store.total" @page-changed="pageChanged" nextText="Próximo" prevText="Anterior" rowsPerPageText="Linhas por página" ofText="Nenhum" allText="Todos">
+    <vue-good-pagination :perPage="store.per_page" :total="store.total" @page-changed="pageChanged" nextText="PrÃ³ximo" prevText="Anterior" rowsPerPageText="Linhas por pÃ¡gina" ofText="Nenhum" allText="Todos">
     </vue-good-pagination>
 </div>
 
@@ -88,6 +88,9 @@ export default {
         columns: {
             type: Array
         },
+        rows: {
+            type: Array
+        },
         txtEditar: {
             type: String,
             default: "Editar"
@@ -97,14 +100,6 @@ export default {
             default: "Excluir"
         },
         store: {}
-    },
-    computed: {
-        rows() {
-            if (this.store.data) {
-                return this.store.data
-            }
-            return {}
-        }
     },
     methods: {
         makeAdmin: function() {

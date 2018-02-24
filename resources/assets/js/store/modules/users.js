@@ -14,7 +14,11 @@ let tipo_acessos = [{
     }]
 
 export const state = {
-  usersList: [],
+  usersList: {
+    data:[],
+    per_page:20,
+    total:0
+  },
   user: []
 }
 export const mutations = {
@@ -27,6 +31,7 @@ export const mutations = {
 }
 export const actions = {
   getUsers (context, param) {
+
     let urlParam = url
     if(param){
       if(param.page){
@@ -36,20 +41,18 @@ export const actions = {
         urlParam = url + '?likeall=' + param.term
       }
     }
-
     api.request('get', urlParam).then(response => {
 
       let store = response.data
       let dados = trataDados(store.data)
 
       store.data = dados
-
       context.commit('updateUsersList', store)
     })
   },
   getUser (context, id) {
     api.request('get', url + id).then(response => {
-      context.commit('updateUserList', store.data)
+      context.commit('updateUserList', response.data)
     })
   },
   deleteUser (context, id) {

@@ -27,7 +27,7 @@ trait ApiControllerTrait
 
         $beteween = $request->all()['between'] ?? null;
 
-        if($beteween != null ){
+        if($beteween){
             list($dataInicio, $dataFim) = explode(',', $beteween);
             $beteween = "date(created_at) >= $dataInicio && date(created_at) <= $dataFim ";
         }
@@ -59,9 +59,12 @@ trait ApiControllerTrait
               return $query->where($like[0], 'like', $like[1]);
             }
             return $query;
-          })
-          ->whereRaw($beteween)
-          ->with($this->relationships());
+          });
+
+          if($beteween){
+            $result->whereRaw($beteween);
+          }
+          $result->with($this->relationships());
 
           if($notnull)
             $result->whereNotNull($notnull);
