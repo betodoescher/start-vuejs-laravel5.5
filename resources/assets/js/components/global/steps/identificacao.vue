@@ -78,11 +78,11 @@
             <input name="quarto" v-model="form.quarto" class="form-control" type="integer">
         </div>
 
-        <div v-if="tipo != 2" class="form-group col-md-6">
+        <!-- <div v-if="tipo != 2" class="form-group col-md-6">
             <app-radio label="Você é?" :selected="form.idetificacao" field="idetificacao" :options="tipo_pessoa" @setValue="setValueButton" />
-        </div>
+        </div> -->
 
-        <div v-if="tipo == 2" class="form-group col-md-6">
+        <div class="form-group col-md-6">
             <app-radio label="Preenchido por?" :selected="form.preenchido_por" field="preenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
             <input v-if="form.preenchido_por == 3" name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="Quem está preenchendo?">
         </div>
