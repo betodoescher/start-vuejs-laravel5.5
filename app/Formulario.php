@@ -26,6 +26,9 @@ class Formulario extends Model
 
         'preenchido_por',
         'preenchido_por_nome',
+        'preenchido_por_telefone',
+        'preenchido_por_parentesco',
+        
         'endereco',
         'telefone',
         'email',
@@ -98,5 +101,6 @@ class Formulario extends Model
         'desde_ultima_visita',
 
         'tipo_pesquisa',
+
     ];
 }

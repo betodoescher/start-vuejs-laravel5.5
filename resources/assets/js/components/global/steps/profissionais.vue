@@ -36,7 +36,7 @@
     </div>
 
     <div v-if="tipo == 1" class="form-group col-md-12">
-      <app-radio label="No agendamento foram repassadas todas as orientações sobre preparo e convênio?" :selected="form.agendamento_orientacao" field="agendamento_orientacao" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="No agendamento foram repassadas todas as orientações sobre preparo e convênio" :selected="form.agendamento_orientacao" field="agendamento_orientacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div class="form-group col-md-12">

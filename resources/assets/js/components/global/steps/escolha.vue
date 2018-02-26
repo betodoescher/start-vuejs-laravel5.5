@@ -3,14 +3,14 @@
        <div class="row">
 
         <div class="form-group col-md-12">
-          <app-radio label="Que fatores lhe enfluenciaram na escolha pela Casa de Saúde São José?" :selected="form.fator_escolha" field="fator_escolha" :options="fatores" @setValue="setValueButton" />
+          <app-radio label="Que fatores lhe enfluenciaram na escolha pela Casa de Saúde São José" :selected="form.fator_escolha" field="fator_escolha" :options="fatores" @setValue="setValueButton" />
           <!-- <b-form-group label="Que fatores lhe enfluenciaram na escolha pela Casa de Saúde São José?">
             <b-form-checkbox-group plain v-model="form.fator_escolha" :options="fatores" />
             <input v-if="buscaFator(6)"  name="qual_empresa" v-model="form.indicacao_qual_empresa" class="form-control" type="text" placeholder="Qual empresa?">
             <input v-if="buscaFator(7)"  name="outros" v-model="form.fator_escolha_outro" class="form-control" type="text" placeholder="Outros quais?">
            </b-form-group> -->
-            <input v-if="form.fator_escolha == 6"  name="qual_empresa" v-model="form.indicacao_qual_empresa" class="form-control" type="text" placeholder="Qual empresa?">
-            <input v-if="form.fator_escolha == 7"  name="outros" v-model="form.fator_escolha_outro" class="form-control" type="text" placeholder="Outros quais?">
+            <input v-if="form.fator_escolha == 6"  name="qual_empresa" v-model="form.indicacao_qual_empresa" class="form-control" type="text" placeholder="Qual empresa">
+            <input v-if="form.fator_escolha == 7"  name="outros" v-model="form.fator_escolha_outro" class="form-control" type="text" placeholder="Outros quais">
         </div>
 
         <!-- <div class="form-group col-md-12">

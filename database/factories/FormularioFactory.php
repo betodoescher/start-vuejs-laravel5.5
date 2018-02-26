@@ -21,6 +21,8 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
 
         'preenchido_por' => $faker->numberBetween(1,3),
         'preenchido_por_nome' => $faker->name,
+        'preenchido_por_telefone' => $faker->phoneNumber,
+        'preenchido_por_parentesco' => $faker->numberBetween(1,7),
         'endereco' => $faker->address,
         'telefone' => $faker->phoneNumber,
         'email' => $faker->email,

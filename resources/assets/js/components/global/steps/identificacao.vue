@@ -64,14 +64,14 @@
                 </option>
             </select>
         </div>
-        <div v-if="tipo == 2" class="form-group col-md-3">
+        <!-- <div v-if="tipo == 2" class="form-group col-md-3">
             <label>Andar</label>
             <select v-model="form.andar" class="form-control">
                 <option v-for="option in andar" v-bind:value="option.value" v-bind:key="option.value">
                     {{ option.text }}
                 </option>
             </select>
-        </div>
+        </div> -->
 
         <div v-if="tipo == 2" class="form-group col-md-3">
             <label>Quarto</label>
@@ -83,12 +83,30 @@
         </div> -->
 
         <div class="form-group col-md-6">
-            <app-radio label="Preenchido por?" :selected="form.preenchido_por" field="preenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
-            <input v-if="form.preenchido_por == 3" name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="Quem está preenchendo?">
+            <app-radio label="Preenchido por" :selected="form.preenchido_por" field="preenchido_por" :options="tipo_acompanhante" @setValue="setValueButton" />
+
+            <div v-if="form.preenchido_por == 2 || form.preenchido_por == 3" >
+
+              <label>Quem está preenchendo</label>
+              <input  name="outros" v-model="form.preenchido_por_nome" class="form-control" type="text" placeholder="">
+
+              <label>Telefone</label>
+              <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model.trim="form.preenchido_por_telefone" class="form-control" placeholder="( )" type="text" />
+
+              <label>Parentesco</label>
+              <select v-model="form.preenchido_por_parentesco" class="form-control">
+                  <option v-for="option in parentesco" v-bind:value="option.value" v-bind:key="option.value">
+                      {{ option.text }}
+                  </option>
+              </select>
+
+            </div>
         </div>
 
+
+
         <div v-if="tipo == 2" class="form-group col-md-6">
-            <app-radio label="Impedimento?" :selected="form.impediemntos" field="impediemntos" :options="impedimento" @setValue="setValueButton" />
+            <app-radio label="Impedimento" :selected="form.impediemntos" field="impediemntos" :options="impedimento" @setValue="setValueButton" />
         </div>
 
     </div>
@@ -105,6 +123,10 @@ import debounce from "debounce"
 
 import Radio from "../../global/Radio"
 
+import {
+    parentesco
+}
+from "../../../services/store/parentesco";
 import {
     andar
 }
@@ -135,6 +157,7 @@ export default {
         return {
             unidade: {},
             andar,
+            parentesco,
             tipo_pessoa,
             tipo_acompanhante,
             impedimento,
@@ -143,6 +166,8 @@ export default {
                 idetificacao: null,
                 preenchido_por: null,
                 preenchido_por_nome: null,
+                preenchido_por_telefone: null,
+                preenchido_por_parentesco: null,
                 nome: null,
                 data_nascimento: null,
                 data_inicio_internacao: null,

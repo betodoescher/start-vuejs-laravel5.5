@@ -34,6 +34,9 @@ class CreateFormularioTable extends Migration
 
             $table->integer('preenchido_por')->nullable();
             $table->string('preenchido_por_nome')->nullable();
+            $table->string('preenchido_por_telefone')->nullable();
+            $table->string('preenchido_por_parentesco')->nullable();
+            
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();

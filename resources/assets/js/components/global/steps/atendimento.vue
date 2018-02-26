@@ -41,7 +41,7 @@
     </div> -->
 
     <div v-if="tipo == 2" class="form-group col-md-12">
-      <app-radio label="O atendimento e o tempo na admissão foram satisfatórios?" :selected="form.ta_internacao" field="ta_internacao" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="O atendimento e o tempo na admissão foram satisfatórios" :selected="form.ta_internacao" field="ta_internacao" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div v-if="tipo != 2" class="form-group col-md-12">

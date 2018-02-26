@@ -8,7 +8,7 @@
   <div class="row">
 
     <div class="form-group col-md-12">
-      <app-radio label="Todas as suas dúvidas foram esclarecidas?" :selected="form.em_duvidas_esclarecidas" field="em_duvidas_esclarecidas" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Todas as suas dúvidas foram esclarecidas" :selected="form.em_duvidas_esclarecidas" field="em_duvidas_esclarecidas" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div class="form-group col-md-12">

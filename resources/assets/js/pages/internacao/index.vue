@@ -26,7 +26,7 @@
               <app-equipe ref="app-equipe" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-equipe>
           </tab-content>
 
-          <tab-content title="Enfermaria" :before-change="()=>validateStep('app-enfermaria')">
+          <tab-content title="Enfermagem" :before-change="()=>validateStep('app-enfermaria')">
               <app-enfermaria ref="app-enfermaria" :tipo="form.tipo_pesquisa" @on-validate="mergePartialModels"></app-enfermaria>
           </tab-content>
 

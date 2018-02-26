@@ -8,7 +8,7 @@
   <div class="row">
 
     <div class="form-group col-md-12">
-      <app-radio label="Clareza na transmissão da informação?" :selected="form.enf_clareza" field="enf_clareza" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Clareza na transmissão da informação" :selected="form.enf_clareza" field="enf_clareza" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div class="form-group col-md-12">
@@ -23,9 +23,9 @@
       <app-radio label="Simpatia" :selected="form.enf_simpatia" field="enf_simpatia" :options="questionario" @setValue="setValueButton" />
     </div>
 
-    <div class="form-group col-md-12">
+    <!-- <div class="form-group col-md-12">
       <app-radio label="Grau de ruído" :selected="form.enf_grau_ruido" field="enf_grau_ruido" :options="questionario" @setValue="setValueButton" />
-    </div>
+    </div> -->
 
      <div class="form-group col-md-12">
         <label>Observações</label>
