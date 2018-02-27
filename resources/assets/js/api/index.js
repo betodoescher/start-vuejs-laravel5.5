@@ -14,7 +14,7 @@ export default {
     }
 
     var url = config.serverURI + uri
-
+console.log(method)
   if(method == 'post'){
       return axios.post(url, {
         body: data
