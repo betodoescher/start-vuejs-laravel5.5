@@ -18,7 +18,7 @@ export default {
     if(method == 'post'){
       console.log('aki')
         let options = { emulateJSON: true };
-        onsole.log(this.$http.post(url, data, options))
+        console.log(this.$http.post(url, data, options))
         return
     }
     return axios({ method, url, data })
