@@ -1,6 +1,7 @@
+import Vue from "vue";
 import axios from 'axios'
 import config from './config'
-
+Vue.http.options.emulateJSON = true;
 export default {
   request (method, uri, data = null) {
     if (!method) {
@@ -17,8 +18,7 @@ export default {
   console.log(method)
     if(method == 'post'){
       console.log('aki')
-        let options = { emulateJSON: true };
-        console.log(this.$http.post(url, data, options))
+        console.log(this.$http.post(url, data))
         return
     }
     return axios({ method, url, data })
