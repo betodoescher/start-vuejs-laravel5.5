@@ -15,6 +15,12 @@ export default {
 
     var url = config.serverURI + uri
 
+  if(method == 'post'){
+      return axios.post(url, {
+        body: data
+      })
+
+    }
     return axios({ method, url, data })
   }
 }
