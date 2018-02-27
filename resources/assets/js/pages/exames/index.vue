@@ -79,7 +79,7 @@ export default {
 
       //this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
 
-      Service.post(this.form)
+      Service.salvar(this.form)
         .then(response => {
 
           this.$refs["alert"].showAlertSuccess();
