@@ -59,7 +59,7 @@ table .global-search-input {
             </td>
         </template>
     </vue-good-table>
-    <vue-good-pagination :perPage="store.per_page" :total="store.total" @page-changed="pageChanged" nextText="PrÃ³ximo" prevText="Anterior" rowsPerPageText="Linhas por pÃ¡gina" ofText="Nenhum" allText="Todos">
+    <vue-good-pagination :perPage="store.per_page" :total="store.total" @page-changed="pageChanged" nextText="Próximo" prevText="Anterior" rowsPerPageText="Linhas por página" ofText="Nenhum" allText="Todos">
     </vue-good-pagination>
 </div>
 
