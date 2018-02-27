@@ -4,7 +4,7 @@ export default {
   url: "/api/atendimento",
   get(id) {
     if (id) {
-      return api.request("get", this.url + id);
+      return api.request("get", this.url +'/'+ id);
     }
   }
 };
