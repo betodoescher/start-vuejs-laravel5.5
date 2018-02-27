@@ -51,12 +51,12 @@ export const actions = {
     })
   },
   getUser (context, id) {
-    api.request('get', url +'/'+ id).then(response => {
+    api.request('get', url + id).then(response => {
       context.commit('updateUserList', response.data)
     })
   },
   deleteUser (context, id) {
-    return api.request('delete', url +'/'+ id)
+    return api.request('delete', url + id)
   }
 }
 
