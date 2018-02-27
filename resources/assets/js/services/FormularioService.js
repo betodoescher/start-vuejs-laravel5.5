@@ -1,7 +1,7 @@
 import api from "../api";
 
 export default {
-  url: "/api/formulario/",
+  url: "/api/formulario",
   get(id) {
     if (id) {
       return api.request("get", this.url + id);
