@@ -51,6 +51,8 @@ import Conclusao from "../../components/global/steps/conclusao";
 
 import Service from "../../services/FormularioService";
 
+import axios from 'axios';
+
 Vue.use(VueFormWizard);
 
 export default {
@@ -79,27 +81,38 @@ export default {
 
       //this.form.fator_escolha = JSON.stringify(this.form.fator_escolha);
 
-      Service.salvar(this.form)
-        .then(response => {
 
-          this.$refs["alert"].showAlertSuccess();
+      axios.post(`http://10.6.4.28/api/formulario`, {
+      body: this.form
+    })
+    .then(response => {})
 
-          this.$dialog
-              .confirm("Número do protocolo: " + response.data.protocolo.protocolo, {
-                  loader: true,
-                  okText: "Ok",
-                  cancelText: "Fechar"
-              }).then(dialog => {
-                  dialog.close();
-              })
-              .catch(() => {
-                  dialog.close();
-              });
-        })
-        .catch(e => {
-          console.log(e);
-          this.$refs["alert"].showAlertErrorMsg("Erro ao salvar formulário!");
-        });
+    console.log(response)
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+      // Service.salvar(this.form)
+      //   .then(response => {
+      //
+      //     this.$refs["alert"].showAlertSuccess();
+      //
+      //     this.$dialog
+      //         .confirm("Número do protocolo: " + response.data.protocolo.protocolo, {
+      //             loader: true,
+      //             okText: "Ok",
+      //             cancelText: "Fechar"
+      //         }).then(dialog => {
+      //             dialog.close();
+      //         })
+      //         .catch(() => {
+      //             dialog.close();
+      //         });
+      //   })
+      //   .catch(e => {
+      //     console.log(e);
+      //     this.$refs["alert"].showAlertErrorMsg("Erro ao salvar formulário!");
+      //   });
 
     },
     validateStep(name) {
