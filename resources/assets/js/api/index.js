@@ -1,3 +1,4 @@
+import Vue from "vue";
 import axios from 'axios'
 import config from './config'
 
@@ -14,11 +15,12 @@ export default {
     }
 
     var url = config.serverURI + uri
-console.log(method)
+
   if(method == 'post'){
-      return axios.post(url, {
-        body: data
-      })
+
+let options = { emulateJSON: true };
+return this.$http.post(url, data, options)
+
 
     }
     return axios({ method, url, data })
