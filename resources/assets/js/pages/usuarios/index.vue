@@ -139,7 +139,7 @@ export default {
                     if (result) {
                         var retorno = false;
                         if (this.form.id) {
-                            retorno = this.form.put(Service.url + this.form.id);
+                            retorno = this.form.put(Service.url +'/'+ this.form.id);
                         } else {
                             retorno = this.form.post(Service.url);
                         }
