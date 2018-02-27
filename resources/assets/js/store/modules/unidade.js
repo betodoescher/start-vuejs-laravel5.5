@@ -1,6 +1,6 @@
 import api from "../../api";
 
-let url = '/api/unidade/'
+let url = '/api/unidade'
 
 export const state = {
   unidades: {}
