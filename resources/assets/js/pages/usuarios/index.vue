@@ -6,7 +6,7 @@
 
     <card title="Usuários" class="ui container">
         <form @submit.prevent="validateBeforeSubmit">
-            <app-alert ref="alert"></app-alert>
+            <app-alert ref="alert" @endCountDown="gridRefresh"></app-alert>
 
             <div class="row">
 
@@ -148,7 +148,7 @@ export default {
                         } = retorno;
                         this.form.reset();
                         this.$validator.reset();
-                        this.gridRefresh();
+                        //this.gridRefresh();
                         this.$refs["alert"].showAlertSuccess();
                     }
                 });
