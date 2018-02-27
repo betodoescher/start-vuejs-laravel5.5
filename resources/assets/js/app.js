@@ -29,9 +29,6 @@ import '~/components'
 
 Vue.config.productionTip = false
 
-Vue.http.options.emulateJSON = true;
-Vue.http.options.emulateHTTP = true;
-
 new Vue({
   i18n,
   store,

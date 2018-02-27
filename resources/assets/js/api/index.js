@@ -15,6 +15,12 @@ export default {
 
     var url = config.serverURI + uri
 
+    axios.config =  {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+
     return axios({ method, url, data })
   }
 }
