@@ -164,6 +164,9 @@ export default {
                 this.gridRefresh();
             },
             gridRefresh(pageChanged) {
+              if(!pageChanged){
+                let pageChanged = 1
+              }
                 this.$store.dispatch('users/getUsers', {
                     page: pageChanged
                 })
