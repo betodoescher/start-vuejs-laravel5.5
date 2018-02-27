@@ -1,5 +1,5 @@
 export default {
-    serverURI: 'http://10.6.4.28',
+    serverURI: window.location.protocol+'//'+window.location.host,
     fixedLayout: false,
     hideLogoOnMobile: false
   }
