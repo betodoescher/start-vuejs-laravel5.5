@@ -327,7 +327,7 @@ export default {
         totalTipoPesquisa: [],
         totalInfluencia: [],
         dadosChart: {
-             idetificacao: { name: 'idetificacao', value: [], dadosParaTratar: tipo_pessoa},
+               idetificacao: { name: 'preenchido_por', value: [], dadosParaTratar: tipo_acompanhante},
              fator_escolha: { name: 'fator_escolha', value: [], dadosParaTratar: fatores},
              utilizou_servico_antes: { name: 'utilizou_servico_antes', value: [], dadosParaTratar: simnao},
              desde_ultima_visita: { name: 'desde_ultima_visita', value: [], dadosParaTratar: ultima_internacao},

@@ -29,12 +29,18 @@
 
     <card title="Visão geral">
         <div class="row chart">
-            <div class="form-group col-md-6 text-center">
+          <div class="form-group col-md-6 text-center">
+              <h4>Tipo de pessoas</h4>
+              <br>
+              <rise-loader v-if="dadosChart.idetificacao.value.length == 0" loading="loading" color="blue"></rise-loader>
+              <column-chart v-if="dadosChart.idetificacao.value.length > 0" :data="dadosChart.idetificacao.value"></column-chart>
+          </div>
+            <!-- <div class="form-group col-md-6 text-center">
                 <h4>Totais por unidade</h4>
                 <br>
                 <rise-loader v-if="dadosChart.unidade_internacao.value.length == 0" loading="loading" color="blue"></rise-loader>
                 <column-chart v-if="dadosChart.unidade_internacao.value.length > 0"  :data="dadosChart.unidade_internacao.value"></column-chart>
-            </div>
+            </div> -->
             <div class="form-group col-md-6 text-center">
                 <h4>Atendimento por tipo</h4>
                 <br>
@@ -370,7 +376,7 @@ export default {
         ultima_internacao,
         totalTipoPesquisa: [],
         dadosChart: {
-             unidade_internacao: { name: 'unidade_internacao', value: [], dadosParaTratar: []},
+          idetificacao: { name: 'preenchido_por', value: [], dadosParaTratar: tipo_acompanhante},
              fator_escolha: { name: 'fator_escolha', value: [], dadosParaTratar: fatores},
              utilizou_servico_antes: { name: 'utilizou_servico_antes', value: [], dadosParaTratar: simnao},
              desde_ultima_visita: { name: 'desde_ultima_visita', value: [], dadosParaTratar: ultima_internacao},
@@ -402,6 +408,7 @@ export default {
              if_instalacoes_apartamento: { name: 'if_instalacoes_apartamento', value: [], dadosParaTratar: questionario},
              // if_grau_ruido: { name: 'if_grau_ruido', value: [], dadosParaTratar: questionario},
              atendimento_humanizado: { name: 'atendimento_humanizado', value: [], dadosParaTratar: questionario},
+             unidade_internacao: { name: 'unidade_internacao', value: [], dadosParaTratar: []},
              satisfeito: { name: 'satisfeito', value: [], dadosParaTratar: questionario}
           }
     }),

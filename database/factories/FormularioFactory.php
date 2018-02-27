@@ -81,6 +81,7 @@ $factory->define(\App\Formulario::class, function (Faker $faker) {
         'enf_simpatia' => $faker->numberBetween(1,5),
         'enf_grau_ruido' => $faker->numberBetween(1,5),
         'enf_observacoes' =>  $faker->text(100),
+        'conclusao_observacao' =>  $faker->text(100),
         'atendimento_humanizado' => $faker->numberBetween(1,5),
         'satisfeito' => $faker->numberBetween(1,5),
         'recomendacao' => $faker->numberBetween(1,5),

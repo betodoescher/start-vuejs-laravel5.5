@@ -28,7 +28,7 @@ class Formulario extends Model
         'preenchido_por_nome',
         'preenchido_por_telefone',
         'preenchido_por_parentesco',
-        
+
         'endereco',
         'telefone',
         'email',
@@ -97,6 +97,7 @@ class Formulario extends Model
         'atendimento_humanizado',
         'satisfeito',
         'recomendacao',
+        'conclusao_observacao',
 
         'desde_ultima_visita',
 

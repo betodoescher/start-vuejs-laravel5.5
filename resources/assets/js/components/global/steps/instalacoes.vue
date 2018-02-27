@@ -126,6 +126,9 @@ export default {
         case "if_estacionamento":
           this.form.if_estacionamento = key.value;
           break;
+        case "if_pastoral_saude":
+          this.form.if_pastoral_saude = key.value;
+          break;
         case "if_recepcao":
           this.form.if_recepcao = key.value;
           break;

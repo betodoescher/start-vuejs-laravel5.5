@@ -22,7 +22,7 @@ class CreateFormularioTable extends Migration
             $table->date('data_inicio_internacao')->nullable()->nullable();
             $table->date('data_fim_internacao')->nullable()->nullable();
 
-            $table->char('unidade_internacao',1)->nullable()->nullable();
+            $table->integer('unidade_internacao')->nullable()->nullable();
             $table->char('andar',2)->nullable()->nullable();
             $table->string('quarto')->nullable()->nullable();
             $table->integer('impediemntos')->nullable();
@@ -36,7 +36,7 @@ class CreateFormularioTable extends Migration
             $table->string('preenchido_por_nome')->nullable();
             $table->string('preenchido_por_telefone')->nullable();
             $table->string('preenchido_por_parentesco')->nullable();
-            
+
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
             $table->string('email')->nullable();
@@ -108,10 +108,12 @@ class CreateFormularioTable extends Migration
             $table->char('enf_grau_ruido',1)->nullable();
             $table->string('enf_observacoes')->nullable();
 
+
             // CONCLUSÃO
             $table->char('atendimento_humanizado',1)->nullable();
             $table->char('satisfeito',1)->nullable();
             $table->char('recomendacao',1)->nullable();
+            $table->string('conclusao_observacao')->nullable();
 
             $table->char('desde_ultima_visita',1)->nullable();
 
