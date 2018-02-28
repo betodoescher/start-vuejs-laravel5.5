@@ -6,7 +6,7 @@
 
     <card title="Usuários" class="ui container">
         <form @submit.prevent="validateBeforeSubmit">
-            <app-alert ref="alert" @endCountDown="gridRefresh"></app-alert>
+            <app-alert ref="alert" @endCountDown="gridRefresh" :dismissSecs="dismissSecs"></app-alert>
 
             <div class="row">
 
@@ -80,6 +80,7 @@ export default {
     scrollToTop: false,
     name: "app-usuarios",
     data: () => ({
+      dismissSecs: 5,
         tipo_acessos: [{
             text: "Adminstrador",
             value: '1'
@@ -148,7 +149,7 @@ export default {
                         } = retorno;
                         this.form.reset();
                         this.$validator.reset();
-                        //this.gridRefresh();
+                        this.gridRefresh();
                         this.$refs["alert"].showAlertSuccess();
                     }
                 });
