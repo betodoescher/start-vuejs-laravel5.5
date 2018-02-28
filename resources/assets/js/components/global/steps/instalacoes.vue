@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="tipo == 2" class="form-group col-md-12">
-      <app-radio label="Recepção central" :selected="form.if_recepcao" field="if_recepcao" :options="questionario" @setValue="setValueButton" />
+      <app-radio label="Recepção central/identificação" :selected="form.if_recepcao" field="if_recepcao" :options="questionario" @setValue="setValueButton" />
     </div>
 
     <div v-if="tipo == 2" class="form-group col-md-12">
