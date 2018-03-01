@@ -139,10 +139,11 @@ export default {
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         var retorno = false;
+
                         if (this.form.id) {
-                            retorno = this.form.put(Service.url +'/'+ this.form.id);
+                            retorno = this.form.put(window.config.api_url+Service.url +'/'+ this.form.id);
                         } else {
-                            retorno = this.form.post(Service.url);
+                            retorno = this.form.post(window.config.api_url+Service.url);
                         }
                         const {
                             data
