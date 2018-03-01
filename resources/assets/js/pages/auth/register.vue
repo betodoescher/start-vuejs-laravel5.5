@@ -83,10 +83,10 @@ export default {
   methods: {
     async register () {
       // Register the user.
-      const { data } = await this.form.post('/api/register')
+      const { data } = await this.form.post(window.config.api_url+'/api/register')
 
       // Log in the user.
-      const { data: { token }} = await this.form.post('/api/login')
+      const { data: { token }} = await this.form.post(window.config.api_url+'/api/login')
 
       // Save the token.
       this.$store.dispatch('auth/saveToken', { token })

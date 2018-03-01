@@ -1,5 +1,5 @@
 export default {
-    serverURI: window.location.protocol+'//'+window.location.host,
+    serverURI: window.config.api_url,
     fixedLayout: false,
     hideLogoOnMobile: false
   }

@@ -28,6 +28,7 @@ function make () {
   const router = new Router({
     scrollBehavior,
     mode: 'history',
+    base: window.location.pathname,
     routes: routes.map(beforeEnter)
   })
 

@@ -69,7 +69,7 @@ export default {
     async reset () {
       this.form.token = this.$route.params.token
 
-      const { data } = await this.form.post('/api/password/reset')
+      const { data } = await this.form.post(window.config.api_url+'/api/password/reset')
 
       this.status = data.status
 

@@ -32,7 +32,7 @@ export async function setLocale (locale) {
  */
 async function loadTranslations (locale) {
   if (Object.keys(i18n.getLocaleMessage(locale)).length === 0) {
-    const { data } = await axios.get(`/api/translations/${locale}`)
+    const { data } = await axios.get(window.config.api_url+`/api/translations/${locale}`)
 
     i18n.setLocaleMessage(locale, data)
   }
