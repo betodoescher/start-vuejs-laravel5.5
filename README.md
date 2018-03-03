@@ -1,8 +1,8 @@
 ## Features
 
-- Laravel 5.5 
+- Laravel 5.5
 - Vue + VueRouter + Vuex + VueI18n
-- Pages with custom layouts 
+- Pages with custom layouts
 - Login, register and password reset
 - Authentication with [JWT](https://github.com/tymondesigns/jwt-auth)
 - Socialite integration
@@ -36,4 +36,19 @@ npm run hot
 
 ```bash
 npm run production
+```
+```Paths case run in apache root/application
+APP_URL=http://localhost/application
+IMAGES_PATH=http://localhost/application/images/
+```
+
+#### DataBase Oracle Selects config .env
+
+```DB_CONNECTION_ORACLE=mysql
+DB_HOST_ORACLE=
+DB_PORT_ORACLE=1521
+DB_DATABASE_ORACLE=
+DB_USERNAME_ORACLE=
+DB_SERVICE_NAME_ORACLE=
+DB_PASSWORD_ORACLE=
 ```
