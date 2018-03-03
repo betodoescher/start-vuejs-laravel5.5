@@ -1,11 +1,3 @@
-# Laravel-Vue SPA Starter [![Build Status](https://img.shields.io/travis/cretueusebiu/laravel-vue-spa/master.svg?style=flat-square)](https://travis-ci.org/cretueusebiu/laravel-vue-spa)
-
-> A Laravel-Vue SPA starter project template.
-
-<p align="center">
-<img src="https://i.imgur.com/NHFTsGt.png">
-</p>
-
 ## Features
 
 - Laravel 5.5 
@@ -18,8 +10,8 @@
 
 ## Installation
 
-- `git clone https://github.com/cretueusebiu/laravel-vue-spa.git`
-- `cd laravel-vue-spa`
+- `git clone URL name_example`
+- `cd name_example`
 - `cp .env.example .env`
 - `composer install`
 - `php artisan key:generate`
@@ -45,8 +37,3 @@ npm run hot
 ```bash
 npm run production
 ```
-
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
