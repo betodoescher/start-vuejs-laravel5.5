@@ -1,6 +1,6 @@
 export default [
   // { path: '/', name: 'welcome', component: require('~/pages/welcome') },
- // { path: '/', name: 'login', component: require('~/pages/home') },
+  // { path: '/login', name: 'login', component: require('~/pages/auth/login') },
 
   // Authenticated routes.
   ...middleware('auth', [
@@ -15,18 +15,18 @@ export default [
       { path: 'profile', name: 'settings.profile', component: require('~/pages/settings/profile') },
       { path: 'password', name: 'settings.password', component: require('~/pages/settings/password') }
     ] },
-     { path: '/dashboard', component: require('~/pages/dashboard/index'), children: [
+    { path: '/dashboard', component: require('~/pages/dashboard/index'), children: [
        { path: '', redirect: { name: 'dashboard.internacoes' }},
        { path: 'internacoes', name: 'dashboard.internacoes', component: require('~/pages/dashboard/internacoes') },
        { path: 'exames', name: 'dashboard.exames', component: require('~/pages/dashboard/exames') },
        { path: 'prontoatendimentos', name: 'dashboard.prontoatendimentos', component: require('~/pages/dashboard/prontoatendimentos') }
-     ] },
-     { path: '/relatorios', component: require('~/pages/relatorios/index'), children: [
+    ] },
+    { path: '/relatorios', component: require('~/pages/relatorios/index'), children: [
        { path: '', redirect: { name: 'relatorios.internacoes' }},
        { path: 'internacoes', name: 'relatorios.internacoes', component: require('~/pages/relatorios/internacoes') },
        { path: 'exames', name: 'relatorios.exames', component: require('~/pages/relatorios/exames') },
        { path: 'prontoatendimentos', name: 'relatorios.prontoatendimentos', component: require('~/pages/relatorios/prontoatendimentos') }
-     ] }
+    ] }
 
   ]),
 

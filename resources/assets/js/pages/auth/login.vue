@@ -3,12 +3,12 @@
     <div class="col-lg-6 m-auto ">
       <card id="loginWraper">
           <div class="text-center row" style="width: 100%">
-            <div class="form-group col-md-6 col-xs-6">
+            <!-- <div class="form-group col-md-6 col-xs-6">
                   <img :src="logo" width="100%" alt="" style="margin:-5px 0  0 0" >
             </div>
             <div class="form-group col-md-6 col-xs-6">
                   <img :src="ico" width="35%" class="sistema" alt="">
-            </div>
+            </div> -->
           </div>
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <p></p>
@@ -24,7 +24,6 @@
               :class="{ 'is-invalid': form.errors.has('email') }">
             <has-error :form="form" field="email"></has-error>
           </div>
-
 
           <!-- Password -->
           <div class="input-group mb-3">
@@ -80,12 +79,11 @@ export default {
     logo: window.config.images_path + 'logo-cssj.png',
     ico: window.config.images_path + 'Imagem1.png',
     form: new Form({
-      username: "",
-      password: ""
+      email: "admin@admin.com",
+      password: "secret"
     }),
     remember: false
   }),
-
   methods: {
     async login() {
       // Submit the form.
